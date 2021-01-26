@@ -33,7 +33,7 @@ class PostgresTable(val name: String) extends SupportsRead with SupportsWrite {
 
   override def newScanBuilder(options: CaseInsensitiveStringMap): ScanBuilder = new PostgresScanBuilder(options)
 
-  override def newWriteBuilder(info: LogicalWriteInfo): WriteBuilder = new PostgresWriterBuilder(info.options)
+  override def newWriteBuilder(info: LogicalWriteInfo): WriteBuilder = new PostgresWriteBuilder(info.options)
 }
 
 object PostgresTable {
@@ -83,13 +83,13 @@ class PostgresPartitionReader(connectionProperties: ConnectionProperties) extend
 
 /** Write */
 
-class PostgresWriterBuilder(options: CaseInsensitiveStringMap) extends WriteBuilder {
-  override def buildForBatch(): BatchWrite = new PostgresBatchWriter(ConnectionProperties(
+class PostgresWriteBuilder(options: CaseInsensitiveStringMap) extends WriteBuilder {
+  override def buildForBatch(): BatchWrite = new PostgresBatchWrite(ConnectionProperties(
     options.get("url"), options.get("user"), options.get("password"), options.get("tableName")
   ))
 }
 
-class PostgresBatchWriter(connectionProperties: ConnectionProperties) extends BatchWrite {
+class PostgresBatchWrite(connectionProperties: ConnectionProperties) extends BatchWrite {
   override def createBatchWriterFactory(physicalWriteInfo: PhysicalWriteInfo): DataWriterFactory =
     new PostgresDataWriterFactory(connectionProperties)
 
@@ -125,6 +125,6 @@ class PostgresWriter(connectionProperties: ConnectionProperties) extends DataWri
 
   override def abort(): Unit = {}
 
-  override def close(): Unit = {}
+  override def close(): Unit = connection.close()
 }
 
