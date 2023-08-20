@@ -143,3 +143,5 @@ fabric.properties
 **/target/bg-jobs/
 **/project/project/
 **/project/target/
+
+lesson-07/data/train.csv
