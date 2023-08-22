@@ -1,7 +1,9 @@
 ﻿{
   "paragraphs": [
     {
+      "text": "import org.apache.spark.sql.functions._",
       "user": "anonymous",
+      "dateUpdated": "2023-08-22T18:35:20+0300",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -20,19 +22,6 @@
         "params": {},
         "forms": {}
       },
-      "apps": [],
-      "runtimeInfos": {},
-      "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1692530381329_1029331294",
-      "id": "paragraph_1692530381329_1029331294",
-      "dateCreated": "2023-08-20T14:19:41+0300",
-      "status": "FINISHED",
-      "focus": true,
-      "$$hashKey": "object:19774",
-      "text": "import org.apache.spark.sql._\nimport org.apache.spark.sql.functions._",
-      "dateUpdated": "2023-08-20T17:45:04+0300",
-      "dateFinished": "2023-08-20T17:45:04+0300",
-      "dateStarted": "2023-08-20T17:45:04+0300",
       "results": {
         "code": "SUCCESS",
         "msg": [
@@ -41,10 +30,23 @@
             "data": "import org.apache.spark.sql._\nimport org.apache.spark.sql.functions._\n"
           }
         ]
-      }
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1692530381329_1029331294",
+      "id": "paragraph_1692530381329_1029331294",
+      "dateCreated": "2023-08-20T14:19:41+0300",
+      "dateStarted": "2023-08-22T18:23:31+0300",
+      "dateFinished": "2023-08-22T18:23:45+0300",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:464"
     },
     {
+      "text": "val data = Seq(\n    (\"Jean-Georges\", \"Perrin\", \"NC\", 1, 300, 1551903533),\n    (\"Jean-Georges\", \"Perrin\", \"NC\", 2, 120, 1551903567),\n    (\"Jean-Georges\", \"Perrin\", \"CA\" ,4, 75, 1551903599),\n    (\"Holden\", \"Karau\", \"CA\" , 6, 37, 1551904299),\n    (\"Ginni\", \"Rometty\", \"NY\", 7, 91, 1551916792),\n    (\"Holden\", \"Karau\", \"CA\", 4, 153, 1552876129)\n).toDF(\"firstName\", \"lastName\", \"state\", \"quantity\", \"revenue\", \"timestamp\")\n\ndata.show()",
       "user": "anonymous",
+      "dateUpdated": "2023-08-22T18:32:37+0300",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -60,22 +62,17 @@
         "enabled": true
       },
       "settings": {
-        "params": {},
+        "params": {
+          "bdtMeta": {
+            "inlay": {
+              "size": {
+                "height": 349
+              }
+            }
+          }
+        },
         "forms": {}
       },
-      "apps": [],
-      "runtimeInfos": {},
-      "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1692542704570_1012243133",
-      "id": "paragraph_1692542704570_1012243133",
-      "dateCreated": "2023-08-20T17:45:04+0300",
-      "status": "FINISHED",
-      "focus": true,
-      "$$hashKey": "object:19842",
-      "text": "val data = Seq(\n    (\"Jean-Georges\", \"Perrin\", \"NC\", 1, 300, 1551903533),\n    (\"Jean-Georges\", \"Perrin\", \"NC\", 2, 120, 1551903567),\n    (\"Jean-Georges\", \"Perrin\", \"CA\" ,4, 75, 1551903599),\n    (\"Holden\", \"Karau\", \"CA\" , 6, 37, 1551904299),\n    (\"Ginni\", \"Rometty\", \"NY\", 7, 91, 1551916792),\n    (\"Holden\", \"Karau\", \"CA\", 4, 153, 1552876129)\n).toDF(\"firstName\", \"lastName\", \"state\", \"quantity\", \"revenue\", \"timestamp\")\n\ndata.show()",
-      "dateUpdated": "2023-08-20T17:45:16+0300",
-      "dateFinished": "2023-08-20T17:45:17+0300",
-      "dateStarted": "2023-08-20T17:45:16+0300",
       "results": {
         "code": "SUCCESS",
         "msg": [
@@ -84,10 +81,22 @@
             "data": "+------------+--------+-----+--------+-------+----------+\n|   firstName|lastName|state|quantity|revenue| timestamp|\n+------------+--------+-----+--------+-------+----------+\n|Jean-Georges|  Perrin|   NC|       1|    300|1551903533|\n|Jean-Georges|  Perrin|   NC|       2|    120|1551903567|\n|Jean-Georges|  Perrin|   CA|       4|     75|1551903599|\n|      Holden|   Karau|   CA|       6|     37|1551904299|\n|       Ginni| Rometty|   NY|       7|     91|1551916792|\n|      Holden|   Karau|   CA|       4|    153|1552876129|\n+------------+--------+-----+--------+-------+----------+\n\n\u001b[1m\u001b[34mdata\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [firstName: string, lastName: string ... 4 more fields]\n"
           }
         ]
-      }
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1692542704570_1012243133",
+      "id": "paragraph_1692542704570_1012243133",
+      "dateCreated": "2023-08-20T17:45:04+0300",
+      "dateStarted": "2023-08-22T18:23:45+0300",
+      "dateFinished": "2023-08-22T18:23:48+0300",
+      "status": "FINISHED",
+      "$$hashKey": "object:465"
     },
     {
+      "text": "data.printSchema",
       "user": "anonymous",
+      "dateUpdated": "2023-08-22T18:32:42+0300",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -104,22 +113,17 @@
         "enabled": true
       },
       "settings": {
-        "params": {},
+        "params": {
+          "bdtMeta": {
+            "inlay": {
+              "size": {
+                "height": 320
+              }
+            }
+          }
+        },
         "forms": {}
       },
-      "apps": [],
-      "runtimeInfos": {},
-      "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1692542716879_2143940182",
-      "id": "paragraph_1692542716879_2143940182",
-      "dateCreated": "2023-08-20T17:45:16+0300",
-      "status": "FINISHED",
-      "focus": true,
-      "$$hashKey": "object:19942",
-      "text": "data.printSchema",
-      "dateUpdated": "2023-08-20T17:45:54+0300",
-      "dateFinished": "2023-08-20T17:45:49+0300",
-      "dateStarted": "2023-08-20T17:45:49+0300",
       "results": {
         "code": "SUCCESS",
         "msg": [
@@ -128,10 +132,22 @@
             "data": "root\n |-- firstName: string (nullable = true)\n |-- lastName: string (nullable = true)\n |-- state: string (nullable = true)\n |-- quantity: integer (nullable = false)\n |-- revenue: integer (nullable = false)\n |-- timestamp: integer (nullable = false)\n\n"
           }
         ]
-      }
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1692542716879_2143940182",
+      "id": "paragraph_1692542716879_2143940182",
+      "dateCreated": "2023-08-20T17:45:16+0300",
+      "dateStarted": "2023-08-22T18:23:48+0300",
+      "dateFinished": "2023-08-22T18:23:48+0300",
+      "status": "FINISHED",
+      "$$hashKey": "object:466"
     },
     {
+      "text": "%md\n\n## Array Functions",
       "user": "anonymous",
+      "dateUpdated": "2023-08-22T18:23:48+0300",
       "progress": 0,
       "config": {
         "tableHide": false,
@@ -152,19 +168,6 @@
         "params": {},
         "forms": {}
       },
-      "apps": [],
-      "runtimeInfos": {},
-      "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1692542749533_1803168522",
-      "id": "paragraph_1692542749533_1803168522",
-      "dateCreated": "2023-08-20T17:45:49+0300",
-      "status": "FINISHED",
-      "focus": true,
-      "$$hashKey": "object:20036",
-      "text": "%md\n\n## Array Functions",
-      "dateUpdated": "2023-08-20T17:46:18+0300",
-      "dateFinished": "2023-08-20T17:46:18+0300",
-      "dateStarted": "2023-08-20T17:46:18+0300",
       "results": {
         "code": "SUCCESS",
         "msg": [
@@ -173,12 +176,22 @@
             "data": "<div class=\"markdown-body\">\n<h2>Array Functions</h2>\n\n</div>"
           }
         ]
-      }
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1692542749533_1803168522",
+      "id": "paragraph_1692542749533_1803168522",
+      "dateCreated": "2023-08-20T17:45:49+0300",
+      "dateStarted": "2023-08-22T18:23:48+0300",
+      "dateFinished": "2023-08-22T18:23:51+0300",
+      "status": "FINISHED",
+      "$$hashKey": "object:467"
     },
     {
       "text": "val datak2 = data\n                .withColumn(\"k2v\", array($\"firstName\", $\"lastName\", $\"state\"))\n                .withColumn(\"k2n\", array(lit(\"FirstName\"), lit(\"LastName\"), lit(\"State\")))\n\ndatak2.show(false)",
       "user": "anonymous",
-      "dateUpdated": "2023-08-20T17:46:40+0300",
+      "dateUpdated": "2023-08-22T18:32:46+0300",
       "progress": 0,
       "config": {
         "tableHide": false,
@@ -196,20 +209,17 @@
         "enabled": true
       },
       "settings": {
-        "params": {},
+        "params": {
+          "bdtMeta": {
+            "inlay": {
+              "size": {
+                "height": 349
+              }
+            }
+          }
+        },
         "forms": {}
       },
-      "apps": [],
-      "runtimeInfos": {},
-      "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1692542771743_1296142053",
-      "id": "paragraph_1692542771743_1296142053",
-      "dateCreated": "2023-08-20T17:46:11+0300",
-      "status": "FINISHED",
-      "focus": true,
-      "$$hashKey": "object:20151",
-      "dateFinished": "2023-08-20T17:46:40+0300",
-      "dateStarted": "2023-08-20T17:46:40+0300",
       "results": {
         "code": "SUCCESS",
         "msg": [
@@ -218,10 +228,22 @@
             "data": "+------------+--------+-----+--------+-------+----------+--------------------------+----------------------------+\n|firstName   |lastName|state|quantity|revenue|timestamp |k2v                       |k2n                         |\n+------------+--------+-----+--------+-------+----------+--------------------------+----------------------------+\n|Jean-Georges|Perrin  |NC   |1       |300    |1551903533|[Jean-Georges, Perrin, NC]|[FirstName, LastName, State]|\n|Jean-Georges|Perrin  |NC   |2       |120    |1551903567|[Jean-Georges, Perrin, NC]|[FirstName, LastName, State]|\n|Jean-Georges|Perrin  |CA   |4       |75     |1551903599|[Jean-Georges, Perrin, CA]|[FirstName, LastName, State]|\n|Holden      |Karau   |CA   |6       |37     |1551904299|[Holden, Karau, CA]       |[FirstName, LastName, State]|\n|Ginni       |Rometty |NY   |7       |91     |1551916792|[Ginni, Rometty, NY]      |[FirstName, LastName, State]|\n|Holden      |Karau   |CA   |4       |153    |1552876129|[Holden, Karau, CA]       |[FirstName, LastName, State]|\n+------------+--------+-----+--------+-------+----------+--------------------------+----------------------------+\n\n\u001b[1m\u001b[34mdatak2\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [firstName: string, lastName: string ... 6 more fields]\n"
           }
         ]
-      }
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1692542771743_1296142053",
+      "id": "paragraph_1692542771743_1296142053",
+      "dateCreated": "2023-08-20T17:46:11+0300",
+      "dateStarted": "2023-08-22T18:23:51+0300",
+      "dateFinished": "2023-08-22T18:23:51+0300",
+      "status": "FINISHED",
+      "$$hashKey": "object:468"
     },
     {
+      "text": "datak2.where(array_contains($\"k2v\", \"CA\")).show(false)",
       "user": "anonymous",
+      "dateUpdated": "2023-08-22T18:32:51+0300",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -238,22 +260,17 @@
         "enabled": true
       },
       "settings": {
-        "params": {},
+        "params": {
+          "bdtMeta": {
+            "inlay": {
+              "size": {
+                "height": 233
+              }
+            }
+          }
+        },
         "forms": {}
       },
-      "apps": [],
-      "runtimeInfos": {},
-      "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1692542793040_920577877",
-      "id": "paragraph_1692542793040_920577877",
-      "dateCreated": "2023-08-20T17:46:33+0300",
-      "status": "FINISHED",
-      "focus": true,
-      "$$hashKey": "object:20277",
-      "text": "datak2.where(array_contains($\"k2v\", \"CA\")).show(false)",
-      "dateUpdated": "2023-08-20T17:47:00+0300",
-      "dateFinished": "2023-08-20T17:46:56+0300",
-      "dateStarted": "2023-08-20T17:46:56+0300",
       "results": {
         "code": "SUCCESS",
         "msg": [
@@ -262,10 +279,22 @@
             "data": "+------------+--------+-----+--------+-------+----------+--------------------------+----------------------------+\n|firstName   |lastName|state|quantity|revenue|timestamp |k2v                       |k2n                         |\n+------------+--------+-----+--------+-------+----------+--------------------------+----------------------------+\n|Jean-Georges|Perrin  |CA   |4       |75     |1551903599|[Jean-Georges, Perrin, CA]|[FirstName, LastName, State]|\n|Holden      |Karau   |CA   |6       |37     |1551904299|[Holden, Karau, CA]       |[FirstName, LastName, State]|\n|Holden      |Karau   |CA   |4       |153    |1552876129|[Holden, Karau, CA]       |[FirstName, LastName, State]|\n+------------+--------+-----+--------+-------+----------+--------------------------+----------------------------+\n\n"
           }
         ]
-      }
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1692542793040_920577877",
+      "id": "paragraph_1692542793040_920577877",
+      "dateCreated": "2023-08-20T17:46:33+0300",
+      "dateStarted": "2023-08-22T18:23:51+0300",
+      "dateFinished": "2023-08-22T18:23:51+0300",
+      "status": "FINISHED",
+      "$$hashKey": "object:469"
     },
     {
+      "text": "%md\n\n## Map Functions",
       "user": "anonymous",
+      "dateUpdated": "2023-08-22T18:23:51+0300",
       "progress": 0,
       "config": {
         "tableHide": false,
@@ -286,19 +315,6 @@
         "params": {},
         "forms": {}
       },
-      "apps": [],
-      "runtimeInfos": {},
-      "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1692542816406_1783262231",
-      "id": "paragraph_1692542816406_1783262231",
-      "dateCreated": "2023-08-20T17:46:56+0300",
-      "status": "FINISHED",
-      "focus": true,
-      "$$hashKey": "object:20376",
-      "text": "%md\n\n## Map Functions",
-      "dateUpdated": "2023-08-20T17:47:32+0300",
-      "dateFinished": "2023-08-20T17:47:32+0300",
-      "dateStarted": "2023-08-20T17:47:32+0300",
       "results": {
         "code": "SUCCESS",
         "msg": [
@@ -307,43 +323,50 @@
             "data": "<div class=\"markdown-body\">\n<h2>Map Functions</h2>\n\n</div>"
           }
         ]
-      }
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1692542816406_1783262231",
+      "id": "paragraph_1692542816406_1783262231",
+      "dateCreated": "2023-08-20T17:46:56+0300",
+      "dateStarted": "2023-08-22T18:23:51+0300",
+      "dateFinished": "2023-08-22T18:23:51+0300",
+      "status": "FINISHED",
+      "$$hashKey": "object:470"
     },
     {
       "text": "val datak2m = data.withColumn(\"k2m\", map(lit(\"FirstName\"), $\"firstName\", lit(\"LastName\"), $\"lastName\", lit(\"State\"), $\"state\"))\n\ndatak2m.show(false)",
       "user": "anonymous",
-      "dateUpdated": "2023-08-20T17:47:55+0300",
+      "dateUpdated": "2023-08-22T18:32:56+0300",
       "progress": 0,
       "config": {
         "tableHide": false,
         "editorSetting": {
-          "language": "markdown",
-          "editOnDblClick": true,
+          "language": "scala",
+          "editOnDblClick": false,
           "completionKey": "TAB",
-          "completionSupport": false
+          "completionSupport": true
         },
         "colWidth": 12,
-        "editorMode": "ace/mode/markdown",
+        "editorMode": "ace/mode/scala",
         "fontSize": 9,
         "editorHide": false,
         "results": {},
         "enabled": true
       },
       "settings": {
-        "params": {},
+        "params": {
+          "bdtMeta": {
+            "inlay": {
+              "size": {
+                "height": 360
+              }
+            }
+          }
+        },
         "forms": {}
       },
-      "apps": [],
-      "runtimeInfos": {},
-      "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1692542852408_1600382709",
-      "id": "paragraph_1692542852408_1600382709",
-      "dateCreated": "2023-08-20T17:47:32+0300",
-      "status": "FINISHED",
-      "focus": true,
-      "$$hashKey": "object:20494",
-      "dateFinished": "2023-08-20T17:47:48+0300",
-      "dateStarted": "2023-08-20T17:47:48+0300",
       "results": {
         "code": "SUCCESS",
         "msg": [
@@ -352,10 +375,22 @@
             "data": "+------------+--------+-----+--------+-------+----------+------------------------------------------------------------+\n|firstName   |lastName|state|quantity|revenue|timestamp |k2m                                                         |\n+------------+--------+-----+--------+-------+----------+------------------------------------------------------------+\n|Jean-Georges|Perrin  |NC   |1       |300    |1551903533|{FirstName -> Jean-Georges, LastName -> Perrin, State -> NC}|\n|Jean-Georges|Perrin  |NC   |2       |120    |1551903567|{FirstName -> Jean-Georges, LastName -> Perrin, State -> NC}|\n|Jean-Georges|Perrin  |CA   |4       |75     |1551903599|{FirstName -> Jean-Georges, LastName -> Perrin, State -> CA}|\n|Holden      |Karau   |CA   |6       |37     |1551904299|{FirstName -> Holden, LastName -> Karau, State -> CA}       |\n|Ginni       |Rometty |NY   |7       |91     |1551916792|{FirstName -> Ginni, LastName -> Rometty, State -> NY}      |\n|Holden      |Karau   |CA   |4       |153    |1552876129|{FirstName -> Holden, LastName -> Karau, State -> CA}       |\n+------------+--------+-----+--------+-------+----------+------------------------------------------------------------+\n\n\u001b[1m\u001b[34mdatak2m\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [firstName: string, lastName: string ... 5 more fields]\n"
           }
         ]
-      }
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1692542852408_1600382709",
+      "id": "paragraph_1692542852408_1600382709",
+      "dateCreated": "2023-08-20T17:47:32+0300",
+      "dateStarted": "2023-08-22T18:23:52+0300",
+      "dateFinished": "2023-08-22T18:23:52+0300",
+      "status": "FINISHED",
+      "$$hashKey": "object:471"
     },
     {
+      "text": "val datak2ma = datak2.withColumn(\"k2m\", map_from_arrays($\"k2n\", $\"k2v\"))\n\ndatak2ma.show(false)",
       "user": "anonymous",
+      "dateUpdated": "2023-08-22T18:33:02+0300",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -371,22 +406,17 @@
         "enabled": true
       },
       "settings": {
-        "params": {},
+        "params": {
+          "bdtMeta": {
+            "inlay": {
+              "size": {
+                "height": 366
+              }
+            }
+          }
+        },
         "forms": {}
       },
-      "apps": [],
-      "runtimeInfos": {},
-      "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1692542868591_649771328",
-      "id": "paragraph_1692542868591_649771328",
-      "dateCreated": "2023-08-20T17:47:48+0300",
-      "status": "FINISHED",
-      "focus": true,
-      "$$hashKey": "object:20584",
-      "text": "val datak2ma = datak2.withColumn(\"k2m\", map_from_arrays($\"k2n\", $\"k2v\"))\n\ndatak2ma.show(false)",
-      "dateUpdated": "2023-08-20T17:48:09+0300",
-      "dateFinished": "2023-08-20T17:48:10+0300",
-      "dateStarted": "2023-08-20T17:48:09+0300",
       "results": {
         "code": "SUCCESS",
         "msg": [
@@ -395,10 +425,72 @@
             "data": "+------------+--------+-----+--------+-------+----------+--------------------------+----------------------------+------------------------------------------------------------+\n|firstName   |lastName|state|quantity|revenue|timestamp |k2v                       |k2n                         |k2m                                                         |\n+------------+--------+-----+--------+-------+----------+--------------------------+----------------------------+------------------------------------------------------------+\n|Jean-Georges|Perrin  |NC   |1       |300    |1551903533|[Jean-Georges, Perrin, NC]|[FirstName, LastName, State]|{FirstName -> Jean-Georges, LastName -> Perrin, State -> NC}|\n|Jean-Georges|Perrin  |NC   |2       |120    |1551903567|[Jean-Georges, Perrin, NC]|[FirstName, LastName, State]|{FirstName -> Jean-Georges, LastName -> Perrin, State -> NC}|\n|Jean-Georges|Perrin  |CA   |4       |75     |1551903599|[Jean-Georges, Perrin, CA]|[FirstName, LastName, State]|{FirstName -> Jean-Georges, LastName -> Perrin, State -> CA}|\n|Holden      |Karau   |CA   |6       |37     |1551904299|[Holden, Karau, CA]       |[FirstName, LastName, State]|{FirstName -> Holden, LastName -> Karau, State -> CA}       |\n|Ginni       |Rometty |NY   |7       |91     |1551916792|[Ginni, Rometty, NY]      |[FirstName, LastName, State]|{FirstName -> Ginni, LastName -> Rometty, State -> NY}      |\n|Holden      |Karau   |CA   |4       |153    |1552876129|[Holden, Karau, CA]       |[FirstName, LastName, State]|{FirstName -> Holden, LastName -> Karau, State -> CA}       |\n+------------+--------+-----+--------+-------+----------+--------------------------+----------------------------+------------------------------------------------------------+\n\n\u001b[1m\u001b[34mdatak2ma\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [firstName: string, lastName: string ... 7 more fields]\n"
           }
         ]
-      }
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1692542868591_649771328",
+      "id": "paragraph_1692542868591_649771328",
+      "dateCreated": "2023-08-20T17:47:48+0300",
+      "dateStarted": "2023-08-22T18:23:52+0300",
+      "dateFinished": "2023-08-22T18:23:52+0300",
+      "status": "FINISHED",
+      "$$hashKey": "object:472"
     },
     {
+      "text": "val names = data.columns.slice(0, 3)\nval datak2ma2 = data\n                    .withColumn(\"names\", lit(names))\n                    .withColumn(\"k2v\", array($\"firstName\", $\"lastName\", $\"state\"))\n                    .withColumn(\"k2m\", map_from_arrays($\"names\", $\"k2v\"))\n\ndatak2ma2.show(false)",
       "user": "anonymous",
+      "dateUpdated": "2023-08-22T18:33:08+0300",
+      "progress": 0,
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {
+          "bdtMeta": {
+            "inlay": {
+              "size": {
+                "height": 354
+              }
+            }
+          }
+        },
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+------------+--------+-----+--------+-------+----------+----------------------------+--------------------------+------------------------------------------------------------+\n|firstName   |lastName|state|quantity|revenue|timestamp |names                       |k2v                       |k2m                                                         |\n+------------+--------+-----+--------+-------+----------+----------------------------+--------------------------+------------------------------------------------------------+\n|Jean-Georges|Perrin  |NC   |1       |300    |1551903533|[firstName, lastName, state]|[Jean-Georges, Perrin, NC]|{firstName -> Jean-Georges, lastName -> Perrin, state -> NC}|\n|Jean-Georges|Perrin  |NC   |2       |120    |1551903567|[firstName, lastName, state]|[Jean-Georges, Perrin, NC]|{firstName -> Jean-Georges, lastName -> Perrin, state -> NC}|\n|Jean-Georges|Perrin  |CA   |4       |75     |1551903599|[firstName, lastName, state]|[Jean-Georges, Perrin, CA]|{firstName -> Jean-Georges, lastName -> Perrin, state -> CA}|\n|Holden      |Karau   |CA   |6       |37     |1551904299|[firstName, lastName, state]|[Holden, Karau, CA]       |{firstName -> Holden, lastName -> Karau, state -> CA}       |\n|Ginni       |Rometty |NY   |7       |91     |1551916792|[firstName, lastName, state]|[Ginni, Rometty, NY]      |{firstName -> Ginni, lastName -> Rometty, state -> NY}      |\n|Holden      |Karau   |CA   |4       |153    |1552876129|[firstName, lastName, state]|[Holden, Karau, CA]       |{firstName -> Holden, lastName -> Karau, state -> CA}       |\n+------------+--------+-----+--------+-------+----------+----------------------------+--------------------------+------------------------------------------------------------+\n\n\u001b[1m\u001b[34mnames\u001b[0m: \u001b[1m\u001b[32mArray[String]\u001b[0m = Array(firstName, lastName, state)\n\u001b[1m\u001b[34mdatak2ma2\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [firstName: string, lastName: string ... 7 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1692717946899_1528119625",
+      "id": "paragraph_1692717946899_1528119625",
+      "dateCreated": "2023-08-22T18:25:46+0300",
+      "dateStarted": "2023-08-22T18:31:53+0300",
+      "dateFinished": "2023-08-22T18:31:53+0300",
+      "status": "FINISHED",
+      "$$hashKey": "object:473"
+    },
+    {
+      "text": "%md\n\n## Date and Timestamp Functions",
+      "user": "anonymous",
+      "dateUpdated": "2023-08-22T18:23:52+0300",
       "progress": 0,
       "config": {
         "tableHide": false,
@@ -419,19 +511,6 @@
         "params": {},
         "forms": {}
       },
-      "apps": [],
-      "runtimeInfos": {},
-      "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1692542889927_317733757",
-      "id": "paragraph_1692542889927_317733757",
-      "dateCreated": "2023-08-20T17:48:09+0300",
-      "status": "FINISHED",
-      "focus": true,
-      "$$hashKey": "object:20700",
-      "text": "%md\n\n## Date and Timestamp Functions",
-      "dateUpdated": "2023-08-20T17:48:30+0300",
-      "dateFinished": "2023-08-20T17:48:30+0300",
-      "dateStarted": "2023-08-20T17:48:30+0300",
       "results": {
         "code": "SUCCESS",
         "msg": [
@@ -440,31 +519,58 @@
             "data": "<div class=\"markdown-body\">\n<h2>Date and Timestamp Functions</h2>\n\n</div>"
           }
         ]
-      }
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1692542889927_317733757",
+      "id": "paragraph_1692542889927_317733757",
+      "dateCreated": "2023-08-20T17:48:09+0300",
+      "dateStarted": "2023-08-22T18:23:52+0300",
+      "dateFinished": "2023-08-22T18:23:52+0300",
+      "status": "FINISHED",
+      "$$hashKey": "object:474"
     },
     {
       "text": "val datat = data\n                .withColumn(\"recordTimestamp\", to_timestamp($\"timestamp\"))\n                .withColumn(\"current\", current_timestamp)\n\ndatat.show(false)",
       "user": "anonymous",
-      "dateUpdated": "2023-08-20T17:48:50+0300",
+      "dateUpdated": "2023-08-22T18:33:12+0300",
       "progress": 0,
       "config": {
         "tableHide": false,
         "editorSetting": {
-          "language": "markdown",
-          "editOnDblClick": true,
+          "language": "scala",
+          "editOnDblClick": false,
           "completionKey": "TAB",
-          "completionSupport": false
+          "completionSupport": true
         },
         "colWidth": 12,
-        "editorMode": "ace/mode/markdown",
+        "editorMode": "ace/mode/scala",
         "fontSize": 9,
         "editorHide": false,
         "results": {},
         "enabled": true
       },
       "settings": {
-        "params": {},
+        "params": {
+          "bdtMeta": {
+            "inlay": {
+              "size": {
+                "height": 345
+              }
+            }
+          }
+        },
         "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+------------+--------+-----+--------+-------+----------+-------------------+-----------------------+\n|firstName   |lastName|state|quantity|revenue|timestamp |recordTimestamp    |current                |\n+------------+--------+-----+--------+-------+----------+-------------------+-----------------------+\n|Jean-Georges|Perrin  |NC   |1       |300    |1551903533|2019-03-06 23:18:53|2023-08-22 18:23:53.026|\n|Jean-Georges|Perrin  |NC   |2       |120    |1551903567|2019-03-06 23:19:27|2023-08-22 18:23:53.026|\n|Jean-Georges|Perrin  |CA   |4       |75     |1551903599|2019-03-06 23:19:59|2023-08-22 18:23:53.026|\n|Holden      |Karau   |CA   |6       |37     |1551904299|2019-03-06 23:31:39|2023-08-22 18:23:53.026|\n|Ginni       |Rometty |NY   |7       |91     |1551916792|2019-03-07 02:59:52|2023-08-22 18:23:53.026|\n|Holden      |Karau   |CA   |4       |153    |1552876129|2019-03-18 05:28:49|2023-08-22 18:23:53.026|\n+------------+--------+-----+--------+-------+----------+-------------------+-----------------------+\n\n\u001b[1m\u001b[34mdatat\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [firstName: string, lastName: string ... 6 more fields]\n"
+          }
+        ]
       },
       "apps": [],
       "runtimeInfos": {},
@@ -472,23 +578,15 @@
       "jobName": "paragraph_1692542910552_764117787",
       "id": "paragraph_1692542910552_764117787",
       "dateCreated": "2023-08-20T17:48:30+0300",
+      "dateStarted": "2023-08-22T18:23:52+0300",
+      "dateFinished": "2023-08-22T18:23:53+0300",
       "status": "FINISHED",
-      "focus": true,
-      "$$hashKey": "object:20800",
-      "dateFinished": "2023-08-20T17:48:45+0300",
-      "dateStarted": "2023-08-20T17:48:45+0300",
-      "results": {
-        "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "TEXT",
-            "data": "+------------+--------+-----+--------+-------+----------+-------------------+-----------------------+\n|firstName   |lastName|state|quantity|revenue|timestamp |recordTimestamp    |current                |\n+------------+--------+-----+--------+-------+----------+-------------------+-----------------------+\n|Jean-Georges|Perrin  |NC   |1       |300    |1551903533|2019-03-06 23:18:53|2023-08-20 17:48:45.944|\n|Jean-Georges|Perrin  |NC   |2       |120    |1551903567|2019-03-06 23:19:27|2023-08-20 17:48:45.944|\n|Jean-Georges|Perrin  |CA   |4       |75     |1551903599|2019-03-06 23:19:59|2023-08-20 17:48:45.944|\n|Holden      |Karau   |CA   |6       |37     |1551904299|2019-03-06 23:31:39|2023-08-20 17:48:45.944|\n|Ginni       |Rometty |NY   |7       |91     |1551916792|2019-03-07 02:59:52|2023-08-20 17:48:45.944|\n|Holden      |Karau   |CA   |4       |153    |1552876129|2019-03-18 05:28:49|2023-08-20 17:48:45.944|\n+------------+--------+-----+--------+-------+----------+-------------------+-----------------------+\n\n\u001b[1m\u001b[34mdatat\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [firstName: string, lastName: string ... 6 more fields]\n"
-          }
-        ]
-      }
+      "$$hashKey": "object:475"
     },
     {
+      "text": "datat.select($\"recordTimestamp\", $\"current\", datediff($\"current\", $\"recordTimestamp\").as(\"date_diff\")).show(false)",
       "user": "anonymous",
+      "dateUpdated": "2023-08-22T18:33:43+0300",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -505,8 +603,25 @@
         "enabled": true
       },
       "settings": {
-        "params": {},
+        "params": {
+          "bdtMeta": {
+            "inlay": {
+              "size": {
+                "height": 347
+              }
+            }
+          }
+        },
         "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-------------------+-----------------------+---------+\n|recordTimestamp    |current                |date_diff|\n+-------------------+-----------------------+---------+\n|2019-03-06 23:18:53|2023-08-22 18:33:36.822|1630     |\n|2019-03-06 23:19:27|2023-08-22 18:33:36.822|1630     |\n|2019-03-06 23:19:59|2023-08-22 18:33:36.822|1630     |\n|2019-03-06 23:31:39|2023-08-22 18:33:36.822|1630     |\n|2019-03-07 02:59:52|2023-08-22 18:33:36.822|1629     |\n|2019-03-18 05:28:49|2023-08-22 18:33:36.822|1618     |\n+-------------------+-----------------------+---------+\n\n"
+          }
+        ]
       },
       "apps": [],
       "runtimeInfos": {},
@@ -514,25 +629,15 @@
       "jobName": "paragraph_1692542925767_1256041709",
       "id": "paragraph_1692542925767_1256041709",
       "dateCreated": "2023-08-20T17:48:45+0300",
+      "dateStarted": "2023-08-22T18:33:36+0300",
+      "dateFinished": "2023-08-22T18:33:36+0300",
       "status": "FINISHED",
-      "focus": true,
-      "$$hashKey": "object:20887",
-      "text": "datat.select($\"recordTimestamp\", $\"current\", datediff($\"current\", $\"recordTimestamp\")).show(false)",
-      "dateUpdated": "2023-08-20T17:49:14+0300",
-      "dateFinished": "2023-08-20T17:49:09+0300",
-      "dateStarted": "2023-08-20T17:49:09+0300",
-      "results": {
-        "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "TEXT",
-            "data": "+-------------------+-----------------------+----------------------------------+\n|recordTimestamp    |current                |datediff(current, recordTimestamp)|\n+-------------------+-----------------------+----------------------------------+\n|2019-03-06 23:18:53|2023-08-20 17:49:09.731|1628                              |\n|2019-03-06 23:19:27|2023-08-20 17:49:09.731|1628                              |\n|2019-03-06 23:19:59|2023-08-20 17:49:09.731|1628                              |\n|2019-03-06 23:31:39|2023-08-20 17:49:09.731|1628                              |\n|2019-03-07 02:59:52|2023-08-20 17:49:09.731|1627                              |\n|2019-03-18 05:28:49|2023-08-20 17:49:09.731|1616                              |\n+-------------------+-----------------------+----------------------------------+\n\n"
-          }
-        ]
-      }
+      "$$hashKey": "object:476"
     },
     {
+      "text": "%md \n\n## JSON Functions",
       "user": "anonymous",
+      "dateUpdated": "2023-08-22T18:23:53+0300",
       "progress": 0,
       "config": {
         "tableHide": false,
@@ -553,19 +658,6 @@
         "params": {},
         "forms": {}
       },
-      "apps": [],
-      "runtimeInfos": {},
-      "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1692542949592_1067925904",
-      "id": "paragraph_1692542949592_1067925904",
-      "dateCreated": "2023-08-20T17:49:09+0300",
-      "status": "FINISHED",
-      "focus": true,
-      "$$hashKey": "object:20997",
-      "text": "%md \n\n## JSON Functions",
-      "dateUpdated": "2023-08-20T17:49:47+0300",
-      "dateFinished": "2023-08-20T17:49:47+0300",
-      "dateStarted": "2023-08-20T17:49:47+0300",
       "results": {
         "code": "SUCCESS",
         "msg": [
@@ -574,43 +666,50 @@
             "data": "<div class=\"markdown-body\">\n<h2>JSON Functions</h2>\n\n</div>"
           }
         ]
-      }
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1692542949592_1067925904",
+      "id": "paragraph_1692542949592_1067925904",
+      "dateCreated": "2023-08-20T17:49:09+0300",
+      "dateStarted": "2023-08-22T18:23:53+0300",
+      "dateFinished": "2023-08-22T18:23:53+0300",
+      "status": "FINISHED",
+      "$$hashKey": "object:477"
     },
     {
       "text": "val datak2j = datak2m.withColumn(\"k2j\", to_json($\"k2m\"))\n\ndatak2j.show(false)",
       "user": "anonymous",
-      "dateUpdated": "2023-08-20T17:50:06+0300",
+      "dateUpdated": "2023-08-22T18:34:10+0300",
       "progress": 0,
       "config": {
         "tableHide": false,
         "editorSetting": {
-          "language": "markdown",
-          "editOnDblClick": true,
+          "language": "scala",
+          "editOnDblClick": false,
           "completionKey": "TAB",
-          "completionSupport": false
+          "completionSupport": true
         },
         "colWidth": 12,
-        "editorMode": "ace/mode/markdown",
+        "editorMode": "ace/mode/scala",
         "fontSize": 9,
         "editorHide": false,
         "results": {},
         "enabled": true
       },
       "settings": {
-        "params": {},
+        "params": {
+          "bdtMeta": {
+            "inlay": {
+              "size": {
+                "height": 358
+              }
+            }
+          }
+        },
         "forms": {}
       },
-      "apps": [],
-      "runtimeInfos": {},
-      "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1692542987765_834029350",
-      "id": "paragraph_1692542987765_834029350",
-      "dateCreated": "2023-08-20T17:49:47+0300",
-      "status": "FINISHED",
-      "focus": true,
-      "$$hashKey": "object:21112",
-      "dateFinished": "2023-08-20T17:50:01+0300",
-      "dateStarted": "2023-08-20T17:50:01+0300",
       "results": {
         "code": "SUCCESS",
         "msg": [
@@ -619,10 +718,22 @@
             "data": "+------------+--------+-----+--------+-------+----------+------------------------------------------------------------+-------------------------------------------------------------+\n|firstName   |lastName|state|quantity|revenue|timestamp |k2m                                                         |k2j                                                          |\n+------------+--------+-----+--------+-------+----------+------------------------------------------------------------+-------------------------------------------------------------+\n|Jean-Georges|Perrin  |NC   |1       |300    |1551903533|{FirstName -> Jean-Georges, LastName -> Perrin, State -> NC}|{\"FirstName\":\"Jean-Georges\",\"LastName\":\"Perrin\",\"State\":\"NC\"}|\n|Jean-Georges|Perrin  |NC   |2       |120    |1551903567|{FirstName -> Jean-Georges, LastName -> Perrin, State -> NC}|{\"FirstName\":\"Jean-Georges\",\"LastName\":\"Perrin\",\"State\":\"NC\"}|\n|Jean-Georges|Perrin  |CA   |4       |75     |1551903599|{FirstName -> Jean-Georges, LastName -> Perrin, State -> CA}|{\"FirstName\":\"Jean-Georges\",\"LastName\":\"Perrin\",\"State\":\"CA\"}|\n|Holden      |Karau   |CA   |6       |37     |1551904299|{FirstName -> Holden, LastName -> Karau, State -> CA}       |{\"FirstName\":\"Holden\",\"LastName\":\"Karau\",\"State\":\"CA\"}       |\n|Ginni       |Rometty |NY   |7       |91     |1551916792|{FirstName -> Ginni, LastName -> Rometty, State -> NY}      |{\"FirstName\":\"Ginni\",\"LastName\":\"Rometty\",\"State\":\"NY\"}      |\n|Holden      |Karau   |CA   |4       |153    |1552876129|{FirstName -> Holden, LastName -> Karau, State -> CA}       |{\"FirstName\":\"Holden\",\"LastName\":\"Karau\",\"State\":\"CA\"}       |\n+------------+--------+-----+--------+-------+----------+------------------------------------------------------------+-------------------------------------------------------------+\n\n\u001b[1m\u001b[34mdatak2j\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [firstName: string, lastName: string ... 6 more fields]\n"
           }
         ]
-      }
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1692542987765_834029350",
+      "id": "paragraph_1692542987765_834029350",
+      "dateCreated": "2023-08-20T17:49:47+0300",
+      "dateStarted": "2023-08-22T18:23:53+0300",
+      "dateFinished": "2023-08-22T18:23:53+0300",
+      "status": "FINISHED",
+      "$$hashKey": "object:478"
     },
     {
+      "text": "%md\n\n## Generator Functions",
       "user": "anonymous",
+      "dateUpdated": "2023-08-22T18:23:53+0300",
       "progress": 0,
       "config": {
         "tableHide": false,
@@ -643,19 +754,6 @@
         "params": {},
         "forms": {}
       },
-      "apps": [],
-      "runtimeInfos": {},
-      "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1692543001311_1158893645",
-      "id": "paragraph_1692543001311_1158893645",
-      "dateCreated": "2023-08-20T17:50:01+0300",
-      "status": "FINISHED",
-      "focus": true,
-      "$$hashKey": "object:21199",
-      "text": "%md\n\n## Generator Functions",
-      "dateUpdated": "2023-08-20T17:50:25+0300",
-      "dateFinished": "2023-08-20T17:50:25+0300",
-      "dateStarted": "2023-08-20T17:50:25+0300",
       "results": {
         "code": "SUCCESS",
         "msg": [
@@ -664,43 +762,50 @@
             "data": "<div class=\"markdown-body\">\n<h2>Generator Functions</h2>\n\n</div>"
           }
         ]
-      }
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1692543001311_1158893645",
+      "id": "paragraph_1692543001311_1158893645",
+      "dateCreated": "2023-08-20T17:50:01+0300",
+      "dateStarted": "2023-08-22T18:23:53+0300",
+      "dateFinished": "2023-08-22T18:23:53+0300",
+      "status": "FINISHED",
+      "$$hashKey": "object:479"
     },
     {
       "text": "val data2 = data\n                .withColumn(\"a1\", array(lit(1), lit(2), lit(3), lit(4), lit(5)))\n                .withColumn(\"a2\", lit((1 to 5).toArray))\n\ndata2.show(false)",
       "user": "anonymous",
-      "dateUpdated": "2023-08-20T17:50:44+0300",
+      "dateUpdated": "2023-08-22T18:34:20+0300",
       "progress": 0,
       "config": {
         "tableHide": false,
         "editorSetting": {
-          "language": "markdown",
-          "editOnDblClick": true,
+          "language": "scala",
+          "editOnDblClick": false,
           "completionKey": "TAB",
-          "completionSupport": false
+          "completionSupport": true
         },
         "colWidth": 12,
-        "editorMode": "ace/mode/markdown",
+        "editorMode": "ace/mode/scala",
         "fontSize": 9,
         "editorHide": false,
         "results": {},
         "enabled": true
       },
       "settings": {
-        "params": {},
+        "params": {
+          "bdtMeta": {
+            "inlay": {
+              "size": {
+                "height": 346
+              }
+            }
+          }
+        },
         "forms": {}
       },
-      "apps": [],
-      "runtimeInfos": {},
-      "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1692543025486_659920498",
-      "id": "paragraph_1692543025486_659920498",
-      "dateCreated": "2023-08-20T17:50:25+0300",
-      "status": "FINISHED",
-      "focus": true,
-      "$$hashKey": "object:21324",
-      "dateFinished": "2023-08-20T17:50:39+0300",
-      "dateStarted": "2023-08-20T17:50:38+0300",
       "results": {
         "code": "SUCCESS",
         "msg": [
@@ -709,10 +814,22 @@
             "data": "+------------+--------+-----+--------+-------+----------+---------------+---------------+\n|firstName   |lastName|state|quantity|revenue|timestamp |a1             |a2             |\n+------------+--------+-----+--------+-------+----------+---------------+---------------+\n|Jean-Georges|Perrin  |NC   |1       |300    |1551903533|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|\n|Jean-Georges|Perrin  |NC   |2       |120    |1551903567|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|\n|Jean-Georges|Perrin  |CA   |4       |75     |1551903599|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|\n|Holden      |Karau   |CA   |6       |37     |1551904299|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|\n|Ginni       |Rometty |NY   |7       |91     |1551916792|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|\n|Holden      |Karau   |CA   |4       |153    |1552876129|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|\n+------------+--------+-----+--------+-------+----------+---------------+---------------+\n\n\u001b[1m\u001b[34mdata2\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [firstName: string, lastName: string ... 6 more fields]\n"
           }
         ]
-      }
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1692543025486_659920498",
+      "id": "paragraph_1692543025486_659920498",
+      "dateCreated": "2023-08-20T17:50:25+0300",
+      "dateStarted": "2023-08-22T18:23:53+0300",
+      "dateFinished": "2023-08-22T18:23:54+0300",
+      "status": "FINISHED",
+      "$$hashKey": "object:480"
     },
     {
+      "text": "data2.withColumn(\"dummy\", explode($\"a1\")).show(false)",
       "user": "anonymous",
+      "dateUpdated": "2023-08-22T18:34:44+0300",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -729,8 +846,25 @@
         "enabled": true
       },
       "settings": {
-        "params": {},
+        "params": {
+          "bdtMeta": {
+            "inlay": {
+              "size": {
+                "height": 702
+              }
+            }
+          }
+        },
         "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+------------+--------+-----+--------+-------+----------+---------------+---------------+-----+\n|firstName   |lastName|state|quantity|revenue|timestamp |a1             |a2             |dummy|\n+------------+--------+-----+--------+-------+----------+---------------+---------------+-----+\n|Jean-Georges|Perrin  |NC   |1       |300    |1551903533|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|1    |\n|Jean-Georges|Perrin  |NC   |1       |300    |1551903533|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|2    |\n|Jean-Georges|Perrin  |NC   |1       |300    |1551903533|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|3    |\n|Jean-Georges|Perrin  |NC   |1       |300    |1551903533|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|4    |\n|Jean-Georges|Perrin  |NC   |1       |300    |1551903533|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|5    |\n|Jean-Georges|Perrin  |NC   |2       |120    |1551903567|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|1    |\n|Jean-Georges|Perrin  |NC   |2       |120    |1551903567|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|2    |\n|Jean-Georges|Perrin  |NC   |2       |120    |1551903567|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|3    |\n|Jean-Georges|Perrin  |NC   |2       |120    |1551903567|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|4    |\n|Jean-Georges|Perrin  |NC   |2       |120    |1551903567|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|5    |\n|Jean-Georges|Perrin  |CA   |4       |75     |1551903599|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|1    |\n|Jean-Georges|Perrin  |CA   |4       |75     |1551903599|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|2    |\n|Jean-Georges|Perrin  |CA   |4       |75     |1551903599|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|3    |\n|Jean-Georges|Perrin  |CA   |4       |75     |1551903599|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|4    |\n|Jean-Georges|Perrin  |CA   |4       |75     |1551903599|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|5    |\n|Holden      |Karau   |CA   |6       |37     |1551904299|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|1    |\n|Holden      |Karau   |CA   |6       |37     |1551904299|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|2    |\n|Holden      |Karau   |CA   |6       |37     |1551904299|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|3    |\n|Holden      |Karau   |CA   |6       |37     |1551904299|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|4    |\n|Holden      |Karau   |CA   |6       |37     |1551904299|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|5    |\n+------------+--------+-----+--------+-------+----------+---------------+---------------+-----+\nonly showing top 20 rows\n\n"
+          }
+        ]
       },
       "apps": [],
       "runtimeInfos": {
@@ -741,12 +875,12 @@
           "group": "spark",
           "values": [
             {
-              "jobUrl": "http://192.168.88.21:4043/jobs/job?id=25",
-              "$$hashKey": "object:21666"
+              "jobUrl": "http://192.168.88.21:4040/jobs/job?id=0",
+              "$$hashKey": "object:2064"
             },
             {
-              "jobUrl": "http://192.168.88.21:4043/jobs/job?id=26",
-              "$$hashKey": "object:21667"
+              "jobUrl": "http://192.168.88.21:4040/jobs/job?id=1",
+              "$$hashKey": "object:2065"
             }
           ],
           "interpreterSettingId": "spark"
@@ -756,25 +890,15 @@
       "jobName": "paragraph_1692543038743_1050448273",
       "id": "paragraph_1692543038743_1050448273",
       "dateCreated": "2023-08-20T17:50:38+0300",
+      "dateStarted": "2023-08-22T18:23:54+0300",
+      "dateFinished": "2023-08-22T18:23:55+0300",
       "status": "FINISHED",
-      "focus": true,
-      "$$hashKey": "object:21411",
-      "text": "data2.withColumn(\"dummy\", explode($\"a1\")).show(false)",
-      "dateUpdated": "2023-08-20T17:51:08+0300",
-      "dateFinished": "2023-08-20T17:51:05+0300",
-      "dateStarted": "2023-08-20T17:51:04+0300",
-      "results": {
-        "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "TEXT",
-            "data": "+------------+--------+-----+--------+-------+----------+---------------+---------------+-----+\n|firstName   |lastName|state|quantity|revenue|timestamp |a1             |a2             |dummy|\n+------------+--------+-----+--------+-------+----------+---------------+---------------+-----+\n|Jean-Georges|Perrin  |NC   |1       |300    |1551903533|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|1    |\n|Jean-Georges|Perrin  |NC   |1       |300    |1551903533|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|2    |\n|Jean-Georges|Perrin  |NC   |1       |300    |1551903533|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|3    |\n|Jean-Georges|Perrin  |NC   |1       |300    |1551903533|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|4    |\n|Jean-Georges|Perrin  |NC   |1       |300    |1551903533|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|5    |\n|Jean-Georges|Perrin  |NC   |2       |120    |1551903567|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|1    |\n|Jean-Georges|Perrin  |NC   |2       |120    |1551903567|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|2    |\n|Jean-Georges|Perrin  |NC   |2       |120    |1551903567|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|3    |\n|Jean-Georges|Perrin  |NC   |2       |120    |1551903567|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|4    |\n|Jean-Georges|Perrin  |NC   |2       |120    |1551903567|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|5    |\n|Jean-Georges|Perrin  |CA   |4       |75     |1551903599|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|1    |\n|Jean-Georges|Perrin  |CA   |4       |75     |1551903599|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|2    |\n|Jean-Georges|Perrin  |CA   |4       |75     |1551903599|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|3    |\n|Jean-Georges|Perrin  |CA   |4       |75     |1551903599|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|4    |\n|Jean-Georges|Perrin  |CA   |4       |75     |1551903599|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|5    |\n|Holden      |Karau   |CA   |6       |37     |1551904299|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|1    |\n|Holden      |Karau   |CA   |6       |37     |1551904299|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|2    |\n|Holden      |Karau   |CA   |6       |37     |1551904299|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|3    |\n|Holden      |Karau   |CA   |6       |37     |1551904299|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|4    |\n|Holden      |Karau   |CA   |6       |37     |1551904299|[1, 2, 3, 4, 5]|[1, 2, 3, 4, 5]|5    |\n+------------+--------+-----+--------+-------+----------+---------------+---------------+-----+\nonly showing top 20 rows\n\n"
-          }
-        ]
-      }
+      "$$hashKey": "object:481"
     },
     {
+      "text": "%md\n\n## Window Functions",
       "user": "anonymous",
+      "dateUpdated": "2023-08-22T18:23:55+0300",
       "progress": 0,
       "config": {
         "tableHide": false,
@@ -795,19 +919,6 @@
         "params": {},
         "forms": {}
       },
-      "apps": [],
-      "runtimeInfos": {},
-      "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1692543064845_1283786805",
-      "id": "paragraph_1692543064845_1283786805",
-      "dateCreated": "2023-08-20T17:51:04+0300",
-      "status": "FINISHED",
-      "focus": true,
-      "$$hashKey": "object:21521",
-      "text": "%md\n\n## Window Functions",
-      "dateUpdated": "2023-08-20T17:51:36+0300",
-      "dateFinished": "2023-08-20T17:51:36+0300",
-      "dateStarted": "2023-08-20T17:51:36+0300",
       "results": {
         "code": "SUCCESS",
         "msg": [
@@ -816,23 +927,33 @@
             "data": "<div class=\"markdown-body\">\n<h2>Window Functions</h2>\n\n</div>"
           }
         ]
-      }
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1692543064845_1283786805",
+      "id": "paragraph_1692543064845_1283786805",
+      "dateCreated": "2023-08-20T17:51:04+0300",
+      "dateStarted": "2023-08-22T18:23:55+0300",
+      "dateFinished": "2023-08-22T18:23:55+0300",
+      "status": "FINISHED",
+      "$$hashKey": "object:482"
     },
     {
       "text": "import org.apache.spark.sql.expressions.Window\n\nval windowSpec  = Window.partitionBy(\"firstName\", \"lastName\").orderBy(\"state\")",
       "user": "anonymous",
-      "dateUpdated": "2023-08-20T17:51:57+0300",
+      "dateUpdated": "2023-08-22T18:23:55+0300",
       "progress": 0,
       "config": {
         "tableHide": false,
         "editorSetting": {
-          "language": "markdown",
-          "editOnDblClick": true,
+          "language": "scala",
+          "editOnDblClick": false,
           "completionKey": "TAB",
-          "completionSupport": false
+          "completionSupport": true
         },
         "colWidth": 12,
-        "editorMode": "ace/mode/markdown",
+        "editorMode": "ace/mode/scala",
         "fontSize": 9,
         "editorHide": false,
         "results": {},
@@ -842,30 +963,31 @@
         "params": {},
         "forms": {}
       },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import org.apache.spark.sql.expressions.Window\n\u001b[1m\u001b[34mwindowSpec\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.expressions.WindowSpec\u001b[0m = org.apache.spark.sql.expressions.WindowSpec@3693c74e\n"
+          }
+        ]
+      },
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
       "jobName": "paragraph_1692543096555_266229459",
       "id": "paragraph_1692543096555_266229459",
       "dateCreated": "2023-08-20T17:51:36+0300",
+      "dateStarted": "2023-08-22T18:23:55+0300",
+      "dateFinished": "2023-08-22T18:23:55+0300",
       "status": "FINISHED",
-      "focus": true,
-      "$$hashKey": "object:21685",
-      "dateFinished": "2023-08-20T17:51:50+0300",
-      "dateStarted": "2023-08-20T17:51:50+0300",
-      "results": {
-        "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "TEXT",
-            "data": "import org.apache.spark.sql.expressions.Window\n\u001b[1m\u001b[34mwindowSpec\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.expressions.WindowSpec\u001b[0m = org.apache.spark.sql.expressions.WindowSpec@11c774aa\n"
-          }
-        ]
-      }
+      "$$hashKey": "object:483"
     },
     {
+      "text": "val dataw = data.withColumn(\"row_number\", row_number.over(windowSpec))\n\ndataw.show",
       "user": "anonymous",
-      "progress": 0,
+      "dateUpdated": "2023-08-22T18:35:00+0300",
+      "progress": 100,
       "config": {
         "editorSetting": {
           "language": "scala",
@@ -880,8 +1002,25 @@
         "enabled": true
       },
       "settings": {
-        "params": {},
+        "params": {
+          "bdtMeta": {
+            "inlay": {
+              "size": {
+                "height": 351
+              }
+            }
+          }
+        },
         "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+------------+--------+-----+--------+-------+----------+----------+\n|   firstName|lastName|state|quantity|revenue| timestamp|row_number|\n+------------+--------+-----+--------+-------+----------+----------+\n|       Ginni| Rometty|   NY|       7|     91|1551916792|         1|\n|      Holden|   Karau|   CA|       6|     37|1551904299|         1|\n|      Holden|   Karau|   CA|       4|    153|1552876129|         2|\n|Jean-Georges|  Perrin|   CA|       4|     75|1551903599|         1|\n|Jean-Georges|  Perrin|   NC|       1|    300|1551903533|         2|\n|Jean-Georges|  Perrin|   NC|       2|    120|1551903567|         3|\n+------------+--------+-----+--------+-------+----------+----------+\n\n\u001b[1m\u001b[34mdataw\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [firstName: string, lastName: string ... 5 more fields]\n"
+          }
+        ]
       },
       "apps": [],
       "runtimeInfos": {
@@ -892,12 +1031,12 @@
           "group": "spark",
           "values": [
             {
-              "jobUrl": "http://192.168.88.21:4043/jobs/job?id=27",
-              "$$hashKey": "object:21995"
+              "jobUrl": "http://192.168.88.21:4040/jobs/job?id=2",
+              "$$hashKey": "object:2195"
             },
             {
-              "jobUrl": "http://192.168.88.21:4043/jobs/job?id=28",
-              "$$hashKey": "object:21996"
+              "jobUrl": "http://192.168.88.21:4040/jobs/job?id=3",
+              "$$hashKey": "object:2196"
             }
           ],
           "interpreterSettingId": "spark"
@@ -907,25 +1046,15 @@
       "jobName": "paragraph_1692543110061_1869286445",
       "id": "paragraph_1692543110061_1869286445",
       "dateCreated": "2023-08-20T17:51:50+0300",
+      "dateStarted": "2023-08-22T18:23:55+0300",
+      "dateFinished": "2023-08-22T18:23:56+0300",
       "status": "FINISHED",
-      "focus": true,
-      "$$hashKey": "object:21772",
-      "text": "val dataw = data.withColumn(\"row_number\", row_number.over(windowSpec))\n\ndataw.show",
-      "dateUpdated": "2023-08-20T17:52:11+0300",
-      "dateFinished": "2023-08-20T17:52:12+0300",
-      "dateStarted": "2023-08-20T17:52:11+0300",
-      "results": {
-        "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "TEXT",
-            "data": "+------------+--------+-----+--------+-------+----------+----------+\n|   firstName|lastName|state|quantity|revenue| timestamp|row_number|\n+------------+--------+-----+--------+-------+----------+----------+\n|       Ginni| Rometty|   NY|       7|     91|1551916792|         1|\n|      Holden|   Karau|   CA|       6|     37|1551904299|         1|\n|      Holden|   Karau|   CA|       4|    153|1552876129|         2|\n|Jean-Georges|  Perrin|   CA|       4|     75|1551903599|         1|\n|Jean-Georges|  Perrin|   NC|       1|    300|1551903533|         2|\n|Jean-Georges|  Perrin|   NC|       2|    120|1551903567|         3|\n+------------+--------+-----+--------+-------+----------+----------+\n\n\u001b[1m\u001b[34mdataw\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [firstName: string, lastName: string ... 5 more fields]\n"
-          }
-        ]
-      }
+      "$$hashKey": "object:484"
     },
     {
+      "text": "dataw.where($\"row_number\" === 1).show",
       "user": "anonymous",
+      "dateUpdated": "2023-08-22T18:35:05+0300",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -942,8 +1071,25 @@
         "enabled": true
       },
       "settings": {
-        "params": {},
+        "params": {
+          "bdtMeta": {
+            "inlay": {
+              "size": {
+                "height": 237
+              }
+            }
+          }
+        },
         "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+------------+--------+-----+--------+-------+----------+----------+\n|   firstName|lastName|state|quantity|revenue| timestamp|row_number|\n+------------+--------+-----+--------+-------+----------+----------+\n|       Ginni| Rometty|   NY|       7|     91|1551916792|         1|\n|      Holden|   Karau|   CA|       6|     37|1551904299|         1|\n|Jean-Georges|  Perrin|   CA|       4|     75|1551903599|         1|\n+------------+--------+-----+--------+-------+----------+----------+\n\n"
+          }
+        ]
       },
       "apps": [],
       "runtimeInfos": {
@@ -954,12 +1100,12 @@
           "group": "spark",
           "values": [
             {
-              "jobUrl": "http://192.168.88.21:4043/jobs/job?id=29",
-              "$$hashKey": "object:22150"
+              "jobUrl": "http://192.168.88.21:4040/jobs/job?id=4",
+              "$$hashKey": "object:2246"
             },
             {
-              "jobUrl": "http://192.168.88.21:4043/jobs/job?id=30",
-              "$$hashKey": "object:22151"
+              "jobUrl": "http://192.168.88.21:4040/jobs/job?id=5",
+              "$$hashKey": "object:2247"
             }
           ],
           "interpreterSettingId": "spark"
@@ -969,25 +1115,15 @@
       "jobName": "paragraph_1692543131521_57166390",
       "id": "paragraph_1692543131521_57166390",
       "dateCreated": "2023-08-20T17:52:11+0300",
+      "dateStarted": "2023-08-22T18:23:57+0300",
+      "dateFinished": "2023-08-22T18:23:57+0300",
       "status": "FINISHED",
-      "focus": true,
-      "$$hashKey": "object:21885",
-      "text": "dataw.where($\"row_number\" === 1).show",
-      "dateUpdated": "2023-08-20T17:52:37+0300",
-      "dateFinished": "2023-08-20T17:52:33+0300",
-      "dateStarted": "2023-08-20T17:52:32+0300",
-      "results": {
-        "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "TEXT",
-            "data": "+------------+--------+-----+--------+-------+----------+----------+\n|   firstName|lastName|state|quantity|revenue| timestamp|row_number|\n+------------+--------+-----+--------+-------+----------+----------+\n|       Ginni| Rometty|   NY|       7|     91|1551916792|         1|\n|      Holden|   Karau|   CA|       6|     37|1551904299|         1|\n|Jean-Georges|  Perrin|   CA|       4|     75|1551903599|         1|\n+------------+--------+-----+--------+-------+----------+----------+\n\n"
-          }
-        ]
-      }
+      "$$hashKey": "object:485"
     },
     {
+      "text": "dataw.withColumn(\"revenue2\", nth_value($\"revenue\", 2).over(windowSpec)).show",
       "user": "anonymous",
+      "dateUpdated": "2023-08-22T18:35:10+0300",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -1004,8 +1140,25 @@
         "enabled": true
       },
       "settings": {
-        "params": {},
+        "params": {
+          "bdtMeta": {
+            "inlay": {
+              "size": {
+                "height": 352
+              }
+            }
+          }
+        },
         "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+------------+--------+-----+--------+-------+----------+----------+--------+\n|   firstName|lastName|state|quantity|revenue| timestamp|row_number|revenue2|\n+------------+--------+-----+--------+-------+----------+----------+--------+\n|       Ginni| Rometty|   NY|       7|     91|1551916792|         1|    null|\n|      Holden|   Karau|   CA|       6|     37|1551904299|         1|     153|\n|      Holden|   Karau|   CA|       4|    153|1552876129|         2|     153|\n|Jean-Georges|  Perrin|   CA|       4|     75|1551903599|         1|    null|\n|Jean-Georges|  Perrin|   NC|       1|    300|1551903533|         2|     300|\n|Jean-Georges|  Perrin|   NC|       2|    120|1551903567|         3|     300|\n+------------+--------+-----+--------+-------+----------+----------+--------+\n\n"
+          }
+        ]
       },
       "apps": [],
       "runtimeInfos": {
@@ -1016,12 +1169,12 @@
           "group": "spark",
           "values": [
             {
-              "jobUrl": "http://192.168.88.21:4043/jobs/job?id=31",
-              "$$hashKey": "object:22308"
+              "jobUrl": "http://192.168.88.21:4040/jobs/job?id=6",
+              "$$hashKey": "object:2297"
             },
             {
-              "jobUrl": "http://192.168.88.21:4043/jobs/job?id=32",
-              "$$hashKey": "object:22309"
+              "jobUrl": "http://192.168.88.21:4040/jobs/job?id=7",
+              "$$hashKey": "object:2298"
             }
           ],
           "interpreterSettingId": "spark"
@@ -1031,25 +1184,15 @@
       "jobName": "paragraph_1692543152944_1632149846",
       "id": "paragraph_1692543152944_1632149846",
       "dateCreated": "2023-08-20T17:52:32+0300",
+      "dateStarted": "2023-08-22T18:23:57+0300",
+      "dateFinished": "2023-08-22T18:23:57+0300",
       "status": "FINISHED",
-      "focus": true,
-      "$$hashKey": "object:22005",
-      "text": "dataw.withColumn(\"revenue2\", nth_value($\"revenue\", 2).over(windowSpec)).show",
-      "dateUpdated": "2023-08-20T17:53:11+0300",
-      "dateFinished": "2023-08-20T17:53:07+0300",
-      "dateStarted": "2023-08-20T17:53:07+0300",
-      "results": {
-        "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "TEXT",
-            "data": "+------------+--------+-----+--------+-------+----------+----------+--------+\n|   firstName|lastName|state|quantity|revenue| timestamp|row_number|revenue2|\n+------------+--------+-----+--------+-------+----------+----------+--------+\n|       Ginni| Rometty|   NY|       7|     91|1551916792|         1|    null|\n|      Holden|   Karau|   CA|       6|     37|1551904299|         1|     153|\n|      Holden|   Karau|   CA|       4|    153|1552876129|         2|     153|\n|Jean-Georges|  Perrin|   CA|       4|     75|1551903599|         1|    null|\n|Jean-Georges|  Perrin|   NC|       1|    300|1551903533|         2|     300|\n|Jean-Georges|  Perrin|   NC|       2|    120|1551903567|         3|     300|\n+------------+--------+-----+--------+-------+----------+----------+--------+\n\n"
-          }
-        ]
-      }
+      "$$hashKey": "object:486"
     },
     {
+      "text": "",
       "user": "anonymous",
+      "dateUpdated": "2023-08-22T18:23:58+0300",
       "progress": 0,
       "config": {
         "colWidth": 12,
@@ -1074,9 +1217,8 @@
       "jobName": "paragraph_1692543187061_1253326282",
       "id": "paragraph_1692543187061_1253326282",
       "dateCreated": "2023-08-20T17:53:07+0300",
-      "status": "READY",
-      "focus": true,
-      "$$hashKey": "object:22160"
+      "status": "FINISHED",
+      "$$hashKey": "object:487"
     }
   ],
   "name": "1 Functions",
@@ -1091,6 +1233,8 @@
     "looknfeel": "default",
     "personalizedMode": "false"
   },
-  "info": {},
+  "info": {
+    "isRunning": false
+  },
   "path": "/otus/spark/07/1 Functions"
 }
