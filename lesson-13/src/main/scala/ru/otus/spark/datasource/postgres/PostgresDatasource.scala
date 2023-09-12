@@ -1,4 +1,4 @@
-package org.example.datasource.postgres
+package ru.otus.spark.datasource.postgres
 
 import org.apache.spark.sql.catalyst.InternalRow
 import org.apache.spark.sql.connector.catalog.{SupportsRead, SupportsWrite, Table, TableCapability, TableProvider}
