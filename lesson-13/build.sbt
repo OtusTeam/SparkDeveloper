@@ -13,6 +13,8 @@ libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "3.2.2" % "test",
   "com.dimafeng" %% "testcontainers-scala-scalatest" % testcontainersScalaVersion % "test",
   "com.dimafeng" %% "testcontainers-scala-postgresql" % testcontainersScalaVersion % "test",
+  "org.apache.spark" %% "spark-sql-kafka-0-10" % "3.0.1",
+  "com.github.housepower" % "clickhouse-native-jdbc" % "2.7.0"
 )
 
 Test / fork := true
