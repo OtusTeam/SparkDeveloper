@@ -120,3 +120,28 @@ fabric.properties
 
 .DS_Store
 
+*.class
+*.log
+**/.history3
+**/.bloop/
+**/.bsp/
+**/.idea/
+**/.metals/
+**/.vscode/
+**/global-logging/
+**/target/scala-2.13/classes/
+**/target/scala-2.13/update/
+**/target/scala-2.13/zinc/
+**/target/scala-2.13/sync/
+**/target/scala-2.13/test-sync/
+**/target/scala-2.12/classes/
+**/target/scala-2.12/update/
+**/target/scala-2.12/zinc/
+**/target/scala-2.12/sync/
+**/target/scala-2.12/test-sync/
+**/target/streams/
+**/target/bg-jobs/
+**/project/project/
+**/project/target/
+
+lesson-07/data/train.csv
