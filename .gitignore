@@ -143,5 +143,6 @@ fabric.properties
 **/target/bg-jobs/
 **/project/project/
 **/project/target/
+**/.ipynb_checkpoints
 
 lesson-07/data/train.csv
