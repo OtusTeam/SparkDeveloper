@@ -1,0 +1,17 @@
+{
+	"ulid": "01G750K60PHCYYSW17QMV8MC5S",
+	"minTime": 1642608000000,
+	"maxTime": 1642615200000,
+	"stats": {
+		"numSamples": 264716,
+		"numSeries": 1900,
+		"numChunks": 3578
+	},
+	"compaction": {
+		"level": 1,
+		"sources": [
+			"01G750K60PHCYYSW17QMV8MC5S"
+		]
+	},
+	"version": 1
+}
