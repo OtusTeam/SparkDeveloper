@@ -1,0 +1,68 @@
+version: '3.1'
+
+networks:
+    net:
+
+services:
+    # Grafana Service
+    grafana:
+        image: grafana/grafana:latest
+        container_name: grafana
+        restart: unless-stopped
+        ports:
+            - 3000:3000
+        env_file:
+            - ./Grafana/login_config
+        volumes:
+            - ./Grafana/grafana_db:/var/lib/grafana:rw #needs command 'sudo chmod -R 777 Grafana/*'
+            - ./Grafana/provisioning/datasource:/etc/grafana/provisioning/datasources
+            - ./Grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards 
+        depends_on:
+            - prometheus
+        networks:
+            - net
+    
+    # Prometheus Service   
+    prometheus:
+        image: prom/prometheus:v2.20.1
+        container_name: prometheus
+        restart: unless-stopped
+        ports: 
+            - 9090:9090
+        command:
+            - '--config.file=/etc/prometheus/prometheus.yml'
+        volumes:
+            - ./Prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+            - ./Prometheus/prometheus_db:/prometheus/data:rw #needs command 'sudo chmod -R 777 Prometheus/prometheus_db'
+        depends_on:
+            - node-exporter
+        networks:
+            - net
+
+    # Node-Exporter Service  
+    node-exporter:
+        image: prom/node-exporter:v1.0.1
+        container_name: node-exporter
+        ports:
+            - 9100:9100
+        restart: unless-stopped
+        networks:
+            - net
+
+    # Spark
+    spark-master:
+        # image: nikoshet/spark-hadoop:latest
+        build:
+            context: ./Spark
+            dockerfile: Dockerfile
+        container_name: spark
+        hostname: master
+        ports:
+            - 8080:8080 # Master
+            - 8081:8081 # Worker
+            - 4040:4040 # Driver
+            - 9870:9870 # Hadoop Site
+        environment:
+            - PYTHONUNBUFFERED=1
+        networks:
+            - net
