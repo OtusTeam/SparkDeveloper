@@ -48,7 +48,7 @@
 4. Вставить код:
 ```scala
 
-    val another_customer_data = spark.read.format("json")
+   val another_customer_data = spark.read.format("json")
       .option("mode", "FAILFAST")
       .load("/var/data/customer_data.json")
 
