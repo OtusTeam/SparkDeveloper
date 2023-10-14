@@ -9,3 +9,4 @@
 - **14** [Structured Streaming](lesson-14)
 - **20** [Мониторинг Spark приложений](lesson-20)
 - **21** [Методы оптимизации приложений Spark](lesson-21)
+- **23** [Spark ML](lesson-23)
