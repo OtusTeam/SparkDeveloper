@@ -1,0 +1,57 @@
+{
+  "Id": "1",
+  "Name": "John",
+  "Surname": "Doe",
+  "Accounts": [
+    {
+      "AccountId": 111,
+      "AccountType": "private",
+      "InteractionGroups": [
+        {
+          "Id": 222,
+          "date": "20220102",
+          "interactions": [
+            {
+              "Id": "1",
+              "type": "WEBSITE"
+            },
+            {
+              "Id": "2",
+              "type": "INSTAGRAM"
+            }
+          ]
+        },
+        {
+          "Id": 223,
+          "date": "20220103",
+          "interactions": [
+            {
+              "Id": "4",
+              "type": "TWITTER"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "AccountId": 112,
+      "AccountType": "public",
+      "InteractionGroups": [
+        {
+          "Id": 333,
+          "date": "20220105",
+          "interactions": [
+            {
+              "Id": "6",
+              "type": "TWITTER"
+            },
+            {
+              "Id": "7",
+              "type": "INSTAGRAM"
+              }
+          ]
+        }
+      ]
+    }
+  ]
+}
