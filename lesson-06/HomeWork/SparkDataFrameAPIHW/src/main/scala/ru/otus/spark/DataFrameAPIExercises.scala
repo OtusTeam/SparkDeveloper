@@ -116,9 +116,7 @@ object DataFrameAPIExercises extends SparkSessionWrapper {
 
     val orderData = spark.createDataFrame(data).toDF("order_id", "order_date", "customer_info", "order_items")
 
-    // НАПИШИТЕ СВОЕ РЕШЕНИЕ ЗДЕСЬ
     val resDf = orderData
-    resDf.printSchema()
     resDf.show()
 
   }

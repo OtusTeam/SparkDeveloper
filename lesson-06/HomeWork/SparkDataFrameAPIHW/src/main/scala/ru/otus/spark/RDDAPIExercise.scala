@@ -33,7 +33,6 @@ object RDDAPIExercise extends SparkSessionWrapper {
     //НАПИШИТЕ ВАШЕ РЕШЕНИЕ ЗДЕСЬ
 
 
-
   }
 
 
