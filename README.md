@@ -2,6 +2,7 @@
 
 Материалы для курса [Spark Developer](https://otus.ru/lessons/spark/)
 
+- **01** [Что такое Spark](lesson-01)
 - **05** [RDD](lesson-05)
 - **06** [DataFrame](lesson-06)
 - **07** [UDF и UDAF](lesson-07)
