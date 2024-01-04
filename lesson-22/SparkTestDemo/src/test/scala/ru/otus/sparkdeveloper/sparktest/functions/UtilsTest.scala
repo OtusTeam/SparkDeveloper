@@ -4,10 +4,11 @@ import Utils._
 import com.github.mrpowers.spark.fast.tests.DataFrameComparer
 import org.apache.logging.log4j.scala.Logging
 import org.apache.spark.sql.DataFrame
-import org.scalatest.{BeforeAndAfter, FlatSpec}
+import org.scalatest.BeforeAndAfter
+import org.scalatest.flatspec.AnyFlatSpec
 import ru.otus.sparkdeveloper.sparktest.SparkSessionTestWrapper
 
-class UtilsTest extends FlatSpec with SparkSessionTestWrapper
+class UtilsTest extends AnyFlatSpec with SparkSessionTestWrapper
   with Logging with BeforeAndAfter with DataFrameComparer {
 
   var testDf: DataFrame = _
@@ -21,7 +22,6 @@ class UtilsTest extends FlatSpec with SparkSessionTestWrapper
       .option("multiline", true)
       .load("src/test/resources/customer-data.json")
 
-
   }
 
   it should "print testDf schema and show" in {
@@ -29,11 +29,16 @@ class UtilsTest extends FlatSpec with SparkSessionTestWrapper
     testDf.show
   }
 
+  it should "contain all necessary columns" in {
+    val necessaryCols = Seq("Accounts", "Name")
+    assert(necessaryCols.forall(testDf.columns.contains))
+  }
+
   it should "return correct interaction list" in {
 
     import spark.implicits._
 
-    val expectedDf = Seq("WEBSITE", "TWITTER", "INSTAGRAM").toDF("type")
+    val expectedDf = Seq("WEBSITE", "TWITTER", "INSTAGRAM", "INSTAGRAM").toDF("type")
 
     val resultDf = getAllInteractionTypes(testDf)
 

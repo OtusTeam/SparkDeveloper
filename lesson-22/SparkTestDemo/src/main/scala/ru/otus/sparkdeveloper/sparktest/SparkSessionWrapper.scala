@@ -4,7 +4,7 @@ import org.apache.spark.sql.SparkSession
 
 trait SparkSessionWrapper {
 
-  lazy val spark = SparkSession.builder()
+   lazy val spark = SparkSession.builder()
     .appName("SparkProdApp")
     .master("yarn")
     .getOrCreate
