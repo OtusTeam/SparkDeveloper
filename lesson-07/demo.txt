@@ -1,0 +1,62 @@
+1) Запускаем Kubernetes
+minikube start --cpus='max' --memory='no-limit'
+kubectl cluster-info
+kubectl get pod -A
+minikube dashboard
+
+2) Spark в Kubernetes
+
+2.1) Создаём образ Spark для Docker и отправляем его в репозиторий
+cd $SPARK_HOME
+./bin/docker-image-tool.sh -r <repo> -t <tag> build
+./bin/docker-image-tool.sh -r <repo> -t <tag> -p ./kubernetes/dockerfiles/spark/bindings/python/Dockerfile build
+./bin/docker-image-tool.sh -r <repo> -t <tag> -R ./kubernetes/dockerfiles/spark/bindings/R/Dockerfile build
+docker login -u <'myusername'> -p <'mypassword'> docker.io
+./bin/docker-image-tool.sh -r <repo> -t <tag> push
+
+2.2) Создаём namespace и account
+kubectl create namespace spark
+kubectl create serviceaccount spark --namespace=spark
+kubectl create clusterrolebinding spark-role --clusterrole=edit --serviceaccount=spark:spark --namespace=spark
+
+2.3) Пример без доступа к данным
+
+2.3.1) В режиме "клиент"
+spark-submit \
+    --master k8s://https://<k8s-apiserver-host>:<k8s-apiserver-port> \
+    --deploy-mode client \
+    --name spark-pi \
+    --class org.apache.spark.examples.SparkPi \
+    --conf spark.executor.instances=3 \
+    --conf spark.executor.cores=1 \
+    --conf spark.executor.memory=1G \
+    --conf spark.kubernetes.container.image=spark \
+    --conf spark.kubernetes.namespace=spark \
+    --conf spark.kubernetes.authenticate.driver.serviceAccountName=spark \
+    local:///opt/spark/examples/jars/spark-examples_2.12-3.5.0.jar \
+    10000
+
+2.3.2) В режиме "кластер"
+spark-submit \
+    --master k8s://https://<k8s-apiserver-host>:<k8s-apiserver-port> \
+    --deploy-mode cluster \
+    --name spark-pi \
+    --class org.apache.spark.examples.SparkPi \
+    --conf spark.driver.memory=1G \
+    --conf spark.executor.instances=3 \
+    --conf spark.executor.cores=1 \
+    --conf spark.executor.memory=1G \
+    --conf spark.kubernetes.container.image=spark \
+    --conf spark.kubernetes.namespace=spark \
+    --conf spark.kubernetes.authenticate.driver.serviceAccountName=spark \
+    local:///opt/spark/examples/jars/spark-examples_2.12-3.5.0.jar \
+    10000
+
+2.3.3) Как попасть на Spark UI?
+kubectl get pod -n spark
+kubectl port-forward <driver-pod-name> 4040:4040 -n spark
+
+2.3.4) Как узнать результат?
+kubectl get pod -n spark
+kubectl logs -f <driver-pod-name> -n spark
+
