@@ -7,6 +7,7 @@
 - **10** [DataFrame](lesson-10)
 - **12** [RDD](lesson-12)
 - **13** [UDF и UDAF](lesson-13)
+- **17** [Базы данных, Hive](lesson-17)
 - **18** [Собственный источник данных](lesson-18)
 - **19** [Structured Streaming](lesson-19)
 - **21** [Spark ML](lesson-21)
