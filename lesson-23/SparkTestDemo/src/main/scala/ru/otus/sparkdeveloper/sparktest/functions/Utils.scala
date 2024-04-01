@@ -7,7 +7,6 @@ import ru.otus.sparkdeveloper.sparktest.SparkSessionWrapper
 
 object Utils extends SparkSessionWrapper with Logging {
 
-
   def getAllInteractionTypes(df: DataFrame): DataFrame = {
 
     df.select(col("Accounts.InteractionGroups"))
@@ -18,19 +17,4 @@ object Utils extends SparkSessionWrapper with Logging {
       .distinct
 
   }
-
-/**
-  implicit class ImplicitFunctions(df: DataFrame) {
-    def getAllInteractionTypes: DataFrame = {
-      df.select(col("Accounts.InteractionGroups"))
-        .select(explode(col("InteractionGroups")) as "groups")
-        .select(explode(col("groups")))
-        .select(explode(col("col.interactions")))
-        .select("col.type")
-        .distinct
-    }
-
-  }
-  **/
-
 }

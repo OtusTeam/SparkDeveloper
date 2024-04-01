@@ -8,8 +8,12 @@ import org.scalatest.BeforeAndAfter
 import org.scalatest.flatspec.AnyFlatSpec
 import ru.otus.sparkdeveloper.sparktest.SparkSessionTestWrapper
 
-class UtilsTest extends AnyFlatSpec with SparkSessionTestWrapper
-  with Logging with BeforeAndAfter with DataFrameComparer {
+class UtilsTest
+    extends AnyFlatSpec
+    with SparkSessionTestWrapper
+    with Logging
+    with BeforeAndAfter
+    with DataFrameComparer {
 
   var testDf: DataFrame = _
   var studentDf: DataFrame = _
@@ -17,11 +21,11 @@ class UtilsTest extends AnyFlatSpec with SparkSessionTestWrapper
 
   before {
 
-    testDf = spark.read.format("json")
+    testDf = spark.read
+      .format("json")
       .option("mode", "FAILFAST")
-      .option("multiline", true)
+      .option("multiline", value = true)
       .load("src/test/resources/customer-data.json")
-
   }
 
   it should "print testDf schema and show" in {
@@ -38,14 +42,11 @@ class UtilsTest extends AnyFlatSpec with SparkSessionTestWrapper
 
     import spark.implicits._
 
-    val expectedDf = Seq("WEBSITE", "TWITTER", "INSTAGRAM", "INSTAGRAM").toDF("type")
+    val expectedDf =
+      Seq("INSTAGRAM", "TWITTER", "WEBSITE").toDF("type")
 
     val resultDf = getAllInteractionTypes(testDf)
 
-    //val resultDf = testDf.getAllInteractionTypes getAllInteractionTypes(testDf)
-
     assertSmallDatasetEquality(expectedDf, resultDf, orderedComparison = false)
-
   }
-
 }
