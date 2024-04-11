@@ -1,0 +1,2492 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n### Creating GraphFrames",
+      "user": "anonymous",
+      "dateUpdated": "2024-04-11 19:19:24.666",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003eCreating GraphFrames\u003c/h3\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1711531700482_779446169",
+      "id": "paragraph_1711531700482_779446169",
+      "dateCreated": "2024-03-27 12:28:20.483",
+      "dateStarted": "2024-04-11 19:19:24.666",
+      "dateFinished": "2024-04-11 19:19:27.033",
+      "status": "FINISHED"
+    },
+    {
+      "text": "import org.graphframes.GraphFrame\n\n// Vertex DataFrame\nval v \u003d spark.createDataFrame(List(\n  (\"a\", \"Alice\", 34),\n  (\"b\", \"Bob\", 36),\n  (\"c\", \"Charlie\", 30),\n  (\"d\", \"David\", 29),\n  (\"e\", \"Esther\", 32),\n  (\"f\", \"Fanny\", 36),\n  (\"g\", \"Gabby\", 60)\n)).toDF(\"id\", \"name\", \"age\")\n\n// Edge DataFrame\nval e \u003d spark.createDataFrame(List(\n  (\"a\", \"b\", \"friend\"),\n  (\"b\", \"c\", \"follow\"),\n  (\"c\", \"b\", \"follow\"),\n  (\"f\", \"c\", \"follow\"),\n  (\"e\", \"f\", \"follow\"),\n  (\"e\", \"d\", \"friend\"),\n  (\"d\", \"a\", \"friend\"),\n  (\"a\", \"e\", \"friend\")\n)).toDF(\"src\", \"dst\", \"relationship\")\n\n// Create a GraphFrame\nval g \u003d GraphFrame(v, e)",
+      "user": "anonymous",
+      "dateUpdated": "2024-03-27 12:27:18.442",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import org.graphframes.GraphFrame\n\u001b[1m\u001b[34mv\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [id: string, name: string ... 1 more field]\n\u001b[1m\u001b[34me\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [src: string, dst: string ... 1 more field]\n\u001b[1m\u001b[34mg\u001b[0m: \u001b[1m\u001b[32morg.graphframes.GraphFrame\u001b[0m \u003d GraphFrame(v:[id: string, name: string ... 1 more field], e:[src: string, dst: string ... 1 more field])\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1711531534353_1096786942",
+      "id": "paragraph_1711531534353_1096786942",
+      "dateCreated": "2024-03-27 12:25:34.353",
+      "dateStarted": "2024-03-27 12:27:09.696",
+      "dateFinished": "2024-03-27 12:27:10.929",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n### Basic graph and DataFrame queries",
+      "user": "anonymous",
+      "dateUpdated": "2024-04-11 19:19:37.573",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003eBasic graph and DataFrame queries\u003c/h3\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1711531725498_988913210",
+      "id": "paragraph_1711531725498_988913210",
+      "dateCreated": "2024-03-27 12:28:45.498",
+      "dateStarted": "2024-04-11 19:19:37.573",
+      "dateFinished": "2024-04-11 19:19:37.580",
+      "status": "FINISHED"
+    },
+    {
+      "text": "import org.graphframes.{examples,GraphFrame}\nval g: GraphFrame \u003d examples.Graphs.friends\n\n// Display the vertex and edge DataFrames\ng.vertices.show()\n\ng.edges.show()",
+      "user": "anonymous",
+      "dateUpdated": "2024-03-27 12:44:30.198",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---+-------+---+\n| id|   name|age|\n+---+-------+---+\n|  a|  Alice| 34|\n|  b|    Bob| 36|\n|  c|Charlie| 30|\n|  d|  David| 29|\n|  e| Esther| 32|\n|  f|  Fanny| 36|\n|  g|  Gabby| 60|\n+---+-------+---+\n\n+---+---+------------+\n|src|dst|relationship|\n+---+---+------------+\n|  a|  b|      friend|\n|  b|  c|      follow|\n|  c|  b|      follow|\n|  f|  c|      follow|\n|  e|  f|      follow|\n|  e|  d|      friend|\n|  d|  a|      friend|\n|  a|  e|      friend|\n+---+---+------------+\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1711531647442_1878379803",
+      "id": "paragraph_1711531647442_1878379803",
+      "dateCreated": "2024-03-27 12:27:27.442",
+      "dateStarted": "2024-03-27 12:31:44.028",
+      "dateFinished": "2024-03-27 12:31:44.250",
+      "status": "FINISHED"
+    },
+    {
+      "text": "import org.apache.spark.sql.DataFrame\n\n// Get a DataFrame with columns \"id\" and \"inDeg\" (in-degree)\nval vertexInDegrees: DataFrame \u003d g.inDegrees\n\nvertexInDegrees.show()",
+      "user": "anonymous",
+      "dateUpdated": "2024-03-27 12:32:32.565",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---+--------+\n| id|inDegree|\n+---+--------+\n|  b|       2|\n|  c|       2|\n|  f|       1|\n|  d|       1|\n|  a|       1|\n|  e|       1|\n+---+--------+\n\nimport org.apache.spark.sql.DataFrame\n\u001b[1m\u001b[34mvertexInDegrees\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [id: string, inDegree: int]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d86"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d87"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1711531838581_1053619540",
+      "id": "paragraph_1711531838581_1053619540",
+      "dateCreated": "2024-03-27 12:30:38.581",
+      "dateStarted": "2024-03-27 12:32:32.567",
+      "dateFinished": "2024-03-27 12:32:33.480",
+      "status": "FINISHED"
+    },
+    {
+      "text": "// Find the youngest user\u0027s age in the graph.\n// This queries the vertex DataFrame.\ng.vertices.groupBy().min(\"age\").show()",
+      "user": "anonymous",
+      "dateUpdated": "2024-03-27 12:34:56.380",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+--------+\n|min(age)|\n+--------+\n|      29|\n+--------+\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d88"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d89"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1711531937644_1617502821",
+      "id": "paragraph_1711531937644_1617502821",
+      "dateCreated": "2024-03-27 12:32:17.644",
+      "dateStarted": "2024-03-27 12:34:56.381",
+      "dateFinished": "2024-03-27 12:34:56.825",
+      "status": "FINISHED"
+    },
+    {
+      "text": "// Count the number of \"follows\" in the graph.\n// This queries the edge DataFrame.\nval numFollows \u003d g.edges.filter(\"relationship \u003d \u0027follow\u0027\").count()",
+      "user": "anonymous",
+      "dateUpdated": "2024-03-27 12:35:15.508",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mnumFollows\u001b[0m: \u001b[1m\u001b[32mLong\u001b[0m \u003d 4\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d90"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d91"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1711532107784_1222910431",
+      "id": "paragraph_1711532107784_1222910431",
+      "dateCreated": "2024-03-27 12:35:07.784",
+      "dateStarted": "2024-03-27 12:35:15.510",
+      "dateFinished": "2024-03-27 12:35:15.918",
+      "status": "FINISHED"
+    },
+    {
+      "text": "import org.apache.spark.sql.Column\nimport org.apache.spark.sql.functions.{col, when}\nimport org.graphframes.{examples,GraphFrame}\n\nval g: GraphFrame \u003d examples.Graphs.friends\n\n// Find chains of 4 vertices.\nval chain4 \u003d g.find(\"(a)-[ab]-\u003e(b); (b)-[bc]-\u003e(c); (c)-[cd]-\u003e(d)\")\n\n// Query on sequence, with state (cnt)\n//  (a) Define method for updating state given the next element of the motif.\ndef sumFriends(cnt: Column, relationship: Column): Column \u003d {\n  when(relationship \u003d\u003d\u003d \"friend\", cnt + 1).otherwise(cnt)\n}\n//  (b) Use sequence operation to apply method to sequence of elements in motif.\n//      In this case, the elements are the 3 edges.\nval condition \u003d { Seq(\"ab\", \"bc\", \"cd\")\n  .foldLeft(lit(0))((cnt, e) \u003d\u003e sumFriends(cnt, col(e)(\"relationship\"))) }\n//  (c) Apply filter to DataFrame.\nval chainWith2Friends2 \u003d chain4.where(condition \u003e\u003d 2)\nchainWith2Friends2.show()",
+      "user": "anonymous",
+      "dateUpdated": "2024-03-27 21:20:30.768",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---------------+--------------+---------------+--------------+---------------+--------------+----------------+\n|              a|            ab|              b|            bc|              c|            cd|               d|\n+---------------+--------------+---------------+--------------+---------------+--------------+----------------+\n|{e, Esther, 32}|{e, d, friend}| {d, David, 29}|{d, a, friend}| {a, Alice, 34}|{a, e, friend}| {e, Esther, 32}|\n|{e, Esther, 32}|{e, d, friend}| {d, David, 29}|{d, a, friend}| {a, Alice, 34}|{a, b, friend}|    {b, Bob, 36}|\n| {d, David, 29}|{d, a, friend}| {a, Alice, 34}|{a, e, friend}|{e, Esther, 32}|{e, d, friend}|  {d, David, 29}|\n| {d, David, 29}|{d, a, friend}| {a, Alice, 34}|{a, e, friend}|{e, Esther, 32}|{e, f, follow}|  {f, Fanny, 36}|\n| {d, David, 29}|{d, a, friend}| {a, Alice, 34}|{a, b, friend}|   {b, Bob, 36}|{b, c, follow}|{c, Charlie, 30}|\n| {a, Alice, 34}|{a, e, friend}|{e, Esther, 32}|{e, d, friend}| {d, David, 29}|{d, a, friend}|  {a, Alice, 34}|\n+---------------+--------------+---------------+--------------+---------------+--------------+----------------+\n\nimport org.apache.spark.sql.Column\nimport org.apache.spark.sql.functions.{col, when}\nimport org.graphframes.{examples, GraphFrame}\n\u001b[1m\u001b[34mg\u001b[0m: \u001b[1m\u001b[32morg.graphframes.GraphFrame\u001b[0m \u003d GraphFrame(v:[id: string, name: string ... 1 more field], e:[src: string, dst: string ... 1 more field])\n\u001b[1m\u001b[34mchain4\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [a: struct\u003cid: string, name: string ... 1 more field\u003e, ab: struct\u003csrc: string, dst: string ... 1 more field\u003e ... 5 more fields]\n\u001b[1m\u001b[34msumFriends\u001b[0m: \u001b[1m\u001b[32m(cnt: org.apache.spark.sql.Column, relationship: org.apache.spark.sql.Column)org.apache.spark.sql.Column\u001b[0m\n\u001b[1m\u001b[34mcondition\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Column\u001b[0m \u003d CASE WHEN (cd[relationship] \u003d friend) THEN (CASE WHEN (bc[relationship] \u003d friend) THEN (CASE WHEN ...\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d164"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d165"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d166"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d167"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d168"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1711532134800_35777632",
+      "id": "paragraph_1711532134800_35777632",
+      "dateCreated": "2024-03-27 12:35:34.800",
+      "dateStarted": "2024-03-27 21:20:30.770",
+      "dateFinished": "2024-03-27 21:20:35.060",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n### Subgraphs",
+      "user": "anonymous",
+      "dateUpdated": "2024-04-11 19:19:53.854",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003eSubgraphs\u003c/h3\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1711532702214_20269842",
+      "id": "paragraph_1711532702214_20269842",
+      "dateCreated": "2024-03-27 12:45:02.214",
+      "dateStarted": "2024-04-11 19:19:53.854",
+      "dateFinished": "2024-04-11 19:19:53.860",
+      "status": "FINISHED"
+    },
+    {
+      "text": "import org.graphframes.{examples,GraphFrame}\nval g: GraphFrame \u003d examples.Graphs.friends\n\n// Select subgraph of users older than 30, and relationships of type \"friend\".\n// Drop isolated vertices (users) which are not contained in any edges (relationships).\nval g1 \u003d g.filterVertices(\"age \u003e 30\").filterEdges(\"relationship \u003d \u0027friend\u0027\").dropIsolatedVertices()",
+      "user": "anonymous",
+      "dateUpdated": "2024-03-27 21:26:27.155",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import org.graphframes.{examples, GraphFrame}\n\u001b[1m\u001b[34mg\u001b[0m: \u001b[1m\u001b[32morg.graphframes.GraphFrame\u001b[0m \u003d GraphFrame(v:[id: string, name: string ... 1 more field], e:[src: string, dst: string ... 1 more field])\n\u001b[1m\u001b[34mg1\u001b[0m: \u001b[1m\u001b[32morg.graphframes.GraphFrame\u001b[0m \u003d GraphFrame(v:[id: string, name: string ... 1 more field], e:[src: string, dst: string ... 1 more field])\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1711532708219_501279602",
+      "id": "paragraph_1711532708219_501279602",
+      "dateCreated": "2024-03-27 12:45:08.219",
+      "dateStarted": "2024-03-27 21:26:27.158",
+      "dateFinished": "2024-03-27 21:26:27.603",
+      "status": "FINISHED"
+    },
+    {
+      "text": "import org.graphframes.{examples,GraphFrame}\nval g: GraphFrame \u003d examples.Graphs.friends\n\n// Select subgraph based on edges \"e\" of type \"follow\"\n// pointing from a younger user \"a\" to an older user \"b\".\nval paths \u003d { g.find(\"(a)-[e]-\u003e(b)\")\n  .filter(\"e.relationship \u003d \u0027follow\u0027\")\n  .filter(\"a.age \u003c b.age\") }\n\n// \"paths\" contains vertex info. Extract the edges.\nval e2 \u003d paths.select(\"e.src\", \"e.dst\", \"e.relationship\")\n// In Spark 1.5+, the user may simplify this call:\n//  val e2 \u003d paths.select(\"e.*\")\n\n// Construct the subgraph\nval g2 \u003d GraphFrame(g.vertices, e2).dropIsolatedVertices()",
+      "user": "anonymous",
+      "dateUpdated": "2024-03-27 21:29:04.953",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import org.graphframes.{examples, GraphFrame}\n\u001b[1m\u001b[34mg\u001b[0m: \u001b[1m\u001b[32morg.graphframes.GraphFrame\u001b[0m \u003d GraphFrame(v:[id: string, name: string ... 1 more field], e:[src: string, dst: string ... 1 more field])\n\u001b[1m\u001b[34mpaths\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[org.apache.spark.sql.Row]\u001b[0m \u003d [a: struct\u003cid: string, name: string ... 1 more field\u003e, e: struct\u003csrc: string, dst: string ... 1 more field\u003e ... 1 more field]\n\u001b[1m\u001b[34me2\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [src: string, dst: string ... 1 more field]\n\u001b[1m\u001b[34mg2\u001b[0m: \u001b[1m\u001b[32morg.graphframes.GraphFrame\u001b[0m \u003d GraphFrame(v:[id: string, name: string ... 1 more field], e:[src: string, dst: string ... 1 more field])\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1711532746241_698807453",
+      "id": "paragraph_1711532746241_698807453",
+      "dateCreated": "2024-03-27 12:45:46.241",
+      "dateStarted": "2024-03-27 21:29:04.956",
+      "dateFinished": "2024-03-27 21:29:05.352",
+      "status": "FINISHED"
+    },
+    {
+      "text": "g2.vertices.show()\n\ng2.edges.show()",
+      "user": "anonymous",
+      "dateUpdated": "2024-03-27 21:29:12.996",
+      "progress": 100,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---+-------+---+\n| id|   name|age|\n+---+-------+---+\n|  b|    Bob| 36|\n|  c|Charlie| 30|\n|  e| Esther| 32|\n|  f|  Fanny| 36|\n+---+-------+---+\n\n+---+---+------------+\n|src|dst|relationship|\n+---+---+------------+\n|  c|  b|      follow|\n|  e|  f|      follow|\n+---+---+------------+\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d173"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d174"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d175"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d176"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d177"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d178"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d179"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d180"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1711564019584_493898447",
+      "id": "paragraph_1711564019584_493898447",
+      "dateCreated": "2024-03-27 21:26:59.584",
+      "dateStarted": "2024-03-27 21:29:12.998",
+      "dateFinished": "2024-03-27 21:29:13.948",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n### Graph algorithms",
+      "user": "anonymous",
+      "dateUpdated": "2024-04-11 19:20:10.395",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003eGraph algorithms\u003c/h3\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1711533232653_914584212",
+      "id": "paragraph_1711533232653_914584212",
+      "dateCreated": "2024-03-27 12:53:52.653",
+      "dateStarted": "2024-04-11 19:20:10.396",
+      "dateFinished": "2024-04-11 19:20:10.401",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n#### Breadth-first search (BFS)",
+      "user": "anonymous",
+      "dateUpdated": "2024-04-11 19:20:21.119",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch4\u003eBreadth-first search (BFS)\u003c/h4\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1711533246660_718464496",
+      "id": "paragraph_1711533246660_718464496",
+      "dateCreated": "2024-03-27 12:54:06.660",
+      "dateStarted": "2024-04-11 19:20:21.119",
+      "dateFinished": "2024-04-11 19:20:21.124",
+      "status": "FINISHED"
+    },
+    {
+      "text": "import org.graphframes.{examples,GraphFrame}\nval g: GraphFrame \u003d examples.Graphs.friends\n\n// Search from \"Esther\" for users of age \u003c 32.\nval paths \u003d g.bfs.fromExpr(\"name \u003d \u0027Esther\u0027\").toExpr(\"age \u003c 32\").run()\npaths.show()\n\n// Specify edge filters or max path lengths.\n{ g.bfs.fromExpr(\"name \u003d \u0027Esther\u0027\").toExpr(\"age \u003c 32\")\n  .edgeFilter(\"relationship !\u003d \u0027friend\u0027\")\n  .maxPathLength(3).run() }",
+      "user": "anonymous",
+      "dateUpdated": "2024-03-27 12:57:33.107",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---------------+--------------+--------------+\n|           from|            e0|            to|\n+---------------+--------------+--------------+\n|{e, Esther, 32}|{e, d, friend}|{d, David, 29}|\n+---------------+--------------+--------------+\n\nimport org.graphframes.{examples, GraphFrame}\n\u001b[1m\u001b[34mg\u001b[0m: \u001b[1m\u001b[32morg.graphframes.GraphFrame\u001b[0m \u003d GraphFrame(v:[id: string, name: string ... 1 more field], e:[src: string, dst: string ... 1 more field])\n\u001b[1m\u001b[34mpaths\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [from: struct\u003cid: string, name: string ... 1 more field\u003e, e0: struct\u003csrc: string, dst: string ... 1 more field\u003e ... 1 more field]\n\u001b[1m\u001b[34mres44\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [from: struct\u003cid: string, name: string ... 1 more field\u003e, e0: struct\u003csrc: string, dst: string ... 1 more field\u003e ... 3 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d102"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d103"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d104"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d105"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d106"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d107"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d108"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d109"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d110"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d111"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d112"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d113"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d114"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d115"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d116"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d117"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d118"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d119"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d120"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1711533220643_426313635",
+      "id": "paragraph_1711533220643_426313635",
+      "dateCreated": "2024-03-27 12:53:40.643",
+      "dateStarted": "2024-03-27 12:54:19.681",
+      "dateFinished": "2024-03-27 12:54:21.393",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n#### Connected components",
+      "user": "anonymous",
+      "dateUpdated": "2024-04-11 19:20:27.417",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch4\u003eConnected components\u003c/h4\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1711533279681_629703925",
+      "id": "paragraph_1711533279681_629703925",
+      "dateCreated": "2024-03-27 12:54:39.681",
+      "dateStarted": "2024-04-11 19:20:27.417",
+      "dateFinished": "2024-04-11 19:20:27.422",
+      "status": "FINISHED"
+    },
+    {
+      "text": "import org.graphframes.{examples,GraphFrame}\nval g: GraphFrame \u003d examples.Graphs.friends\n\nspark.sparkContext.setCheckpointDir(\"checkpoint\")\n\nval result \u003d g.connectedComponents.run()\nresult.select(\"id\", \"component\").orderBy(\"component\").show()",
+      "user": "anonymous",
+      "dateUpdated": "2024-03-27 12:57:27.838",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---+---------+\n| id|component|\n+---+---------+\n|  a|        0|\n|  c|        0|\n|  e|        0|\n|  d|        0|\n|  b|        0|\n|  f|        0|\n|  g|        6|\n+---+---------+\n\nimport org.graphframes.{examples, GraphFrame}\n\u001b[1m\u001b[34mg\u001b[0m: \u001b[1m\u001b[32morg.graphframes.GraphFrame\u001b[0m \u003d GraphFrame(v:[id: string, name: string ... 1 more field], e:[src: string, dst: string ... 1 more field])\n\u001b[1m\u001b[34mresult\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [id: string, name: string ... 2 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d121"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d122"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d123"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d124"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d125"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d126"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d127"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d128"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d129"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d130"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d131"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d132"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d133"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d134"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d135"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d136"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d137"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d138"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d139"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d140"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d141"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d142"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d143"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d144"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d145"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d146"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d147"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d148"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d149"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d150"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d151"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d152"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d153"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d154"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d155"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d156"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d157"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d158"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d159"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d160"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d161"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d162"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d163"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1711533286684_174635908",
+      "id": "paragraph_1711533286684_174635908",
+      "dateCreated": "2024-03-27 12:54:46.684",
+      "dateStarted": "2024-03-27 12:56:33.176",
+      "dateFinished": "2024-03-27 12:56:42.351",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n#### Strongly connected components",
+      "user": "anonymous",
+      "dateUpdated": "2024-04-11 19:20:34.807",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch4\u003eStrongly connected components\u003c/h4\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1711533423788_651799814",
+      "id": "paragraph_1711533423788_651799814",
+      "dateCreated": "2024-03-27 12:57:03.789",
+      "dateStarted": "2024-04-11 19:20:34.807",
+      "dateFinished": "2024-04-11 19:20:34.812",
+      "status": "FINISHED"
+    },
+    {
+      "text": "import org.graphframes.{examples,GraphFrame}\nval g: GraphFrame \u003d examples.Graphs.friends\n\nval result \u003d g.stronglyConnectedComponents.maxIter(10).run()\nresult.select(\"id\", \"component\").orderBy(\"component\").show()",
+      "user": "anonymous",
+      "dateUpdated": "2024-03-27 12:57:22.813",
+      "progress": 2,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---+---------+\n| id|component|\n+---+---------+\n|  e|        0|\n|  a|        0|\n|  d|        0|\n|  b|        1|\n|  c|        1|\n|  f|        5|\n|  g|        6|\n+---+---------+\n\nimport org.graphframes.{examples, GraphFrame}\n\u001b[1m\u001b[34mg\u001b[0m: \u001b[1m\u001b[32morg.graphframes.GraphFrame\u001b[0m \u003d GraphFrame(v:[id: string, name: string ... 1 more field], e:[src: string, dst: string ... 1 more field])\n\u001b[1m\u001b[34mresult\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [id: string, name: string ... 2 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d164"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d165"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d166"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d167"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d168"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d169"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d170"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d171"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d172"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d173"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d174"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d175"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d176"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d177"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d178"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d179"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d180"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d181"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d182"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d183"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d184"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d185"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d186"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d187"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d188"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d189"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d190"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d191"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d192"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d193"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d194"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d195"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d196"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d197"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d198"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d199"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d200"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d201"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d202"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d203"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d204"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d205"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d206"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d207"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d208"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d209"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d210"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d211"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d212"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d213"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d214"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d215"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d216"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d217"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d218"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d219"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d220"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d221"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d222"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d223"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d224"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d225"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d226"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d227"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d228"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1711533435793_1409036222",
+      "id": "paragraph_1711533435793_1409036222",
+      "dateCreated": "2024-03-27 12:57:15.793",
+      "dateStarted": "2024-03-27 12:57:16.482",
+      "dateFinished": "2024-03-27 12:57:20.881",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n### Label Propagation Algorithm (LPA)",
+      "user": "anonymous",
+      "dateUpdated": "2024-04-11 19:20:41.180",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003eLabel Propagation Algorithm (LPA)\u003c/h3\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1711533494834_180104524",
+      "id": "paragraph_1711533494834_180104524",
+      "dateCreated": "2024-03-27 12:58:14.834",
+      "dateStarted": "2024-04-11 19:20:41.180",
+      "dateFinished": "2024-04-11 19:20:41.185",
+      "status": "FINISHED"
+    },
+    {
+      "text": "import org.graphframes.{examples,GraphFrame}\nval g: GraphFrame \u003d examples.Graphs.friends\n\nval result \u003d g.labelPropagation.maxIter(5).run()\nresult.select(\"id\", \"label\").show()",
+      "user": "anonymous",
+      "dateUpdated": "2024-03-27 12:58:29.616",
+      "progress": 1,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---+-----+\n| id|label|\n+---+-----+\n|  a|    2|\n|  b|    2|\n|  c|    1|\n|  d|    2|\n|  e|    5|\n|  f|    2|\n|  g|    6|\n+---+-----+\n\nimport org.graphframes.{examples, GraphFrame}\n\u001b[1m\u001b[34mg\u001b[0m: \u001b[1m\u001b[32morg.graphframes.GraphFrame\u001b[0m \u003d GraphFrame(v:[id: string, name: string ... 1 more field], e:[src: string, dst: string ... 1 more field])\n\u001b[1m\u001b[34mresult\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [id: string, name: string ... 2 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d229"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d230"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d231"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d232"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d233"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d234"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d235"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d236"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d237"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d238"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d239"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d240"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d241"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d242"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d243"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d244"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d245"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d246"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1711533505842_187187394",
+      "id": "paragraph_1711533505842_187187394",
+      "dateCreated": "2024-03-27 12:58:25.842",
+      "dateStarted": "2024-03-27 12:58:29.618",
+      "dateFinished": "2024-03-27 12:58:31.149",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n### PageRank",
+      "user": "anonymous",
+      "dateUpdated": "2024-04-11 19:20:47.259",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003ePageRank\u003c/h3\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1711533528858_1679370933",
+      "id": "paragraph_1711533528858_1679370933",
+      "dateCreated": "2024-03-27 12:58:48.858",
+      "dateStarted": "2024-04-11 19:20:47.259",
+      "dateFinished": "2024-04-11 19:20:47.264",
+      "status": "FINISHED"
+    },
+    {
+      "text": "import org.graphframes.{examples,GraphFrame}\nval g: GraphFrame \u003d examples.Graphs.friends\n\n// Run PageRank until convergence to tolerance \"tol\".\nval results \u003d g.pageRank.resetProbability(0.15).tol(0.01).run()\n// Display resulting pageranks and final edge weights\n// Note that the displayed pagerank may be truncated, e.g., missing the E notation.\n// In Spark 1.5+, you can use show(truncate\u003dfalse) to avoid truncation.\nresults.vertices.select(\"id\", \"pagerank\").show()\nresults.edges.select(\"src\", \"dst\", \"weight\").show()\n\n// Run PageRank for a fixed number of iterations.\nval results2 \u003d g.pageRank.resetProbability(0.15).maxIter(10).run()\n\n// Run PageRank personalized for vertex \"a\"\nval results3 \u003d g.pageRank.resetProbability(0.15).maxIter(10).sourceId(\"a\").run()\n\n// Run PageRank personalized for vertex [\"a\", \"b\", \"c\", \"d\"] in parallel\nval results4 \u003d g.parallelPersonalizedPageRank.resetProbability(0.15).maxIter(10).sourceIds(Array(\"a\", \"b\", \"c\", \"d\")).run()",
+      "user": "anonymous",
+      "dateUpdated": "2024-03-27 13:00:09.366",
+      "progress": 21,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---+-------------------+\n| id|           pagerank|\n+---+-------------------+\n|  a|0.44910633706538744|\n|  b|  2.655507832863289|\n|  c| 2.6878300011606218|\n|  d| 0.3283606792049851|\n|  e|0.37085233187676075|\n|  f| 0.3283606792049851|\n|  g| 0.1799821386239711|\n+---+-------------------+\n\n+---+---+------+\n|src|dst|weight|\n+---+---+------+\n|  a|  b|   0.5|\n|  a|  e|   0.5|\n|  b|  c|   1.0|\n|  c|  b|   1.0|\n|  d|  a|   1.0|\n|  e|  d|   0.5|\n|  e|  f|   0.5|\n|  f|  c|   1.0|\n+---+---+------+\n\nimport org.graphframes.{examples, GraphFrame}\n\u001b[1m\u001b[34mg\u001b[0m: \u001b[1m\u001b[32morg.graphframes.GraphFrame\u001b[0m \u003d GraphFrame(v:[id: string, name: string ... 1 more field], e:[src: string, dst: string ... 1 more field])\n\u001b[1m\u001b[34mresults\u001b[0m: \u001b[1m\u001b[32morg.graphframes.GraphFrame\u001b[0m \u003d GraphFrame(v:[id: string, name: string ... 2 more fields], e:[src: string, dst: string ... 2 more fields])\n\u001b[1m\u001b[34mresults2\u001b[0m: \u001b[1m\u001b[32morg.graphframes.GraphFrame\u001b[0m \u003d GraphFrame(v:[id: string, name: string ... 2 more fields], e:[src: string, dst: string ... 2 more fields])\n\u001b[1m\u001b[34mresults3\u001b[0m: \u001b[1m\u001b[32morg.graphframes.GraphFrame\u001b[0m \u003d GraphFrame(v:[id: string, name: string ... 2 more fields], e:[src: string, dst: string ... 2 more fields])\n\u001b[1m\u001b[34mresults4\u001b[0m: \u001b[1m\u001b[32morg.graphframes.GraphFrame\u001b[0m \u003d GraphFra...\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d247"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d248"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d249"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d250"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d251"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d252"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d253"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d254"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d255"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d256"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d257"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d258"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d259"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d260"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d261"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d262"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d263"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d264"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d265"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d266"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d267"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d268"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d269"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d270"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d271"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d272"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d273"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d274"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d275"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d276"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d277"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d278"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d279"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d280"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d281"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d282"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d283"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d284"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d285"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d286"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d287"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d288"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d289"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d290"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d291"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d292"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d293"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d294"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d295"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d296"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d297"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d298"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d299"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d300"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d301"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d302"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d303"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d304"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d305"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d306"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d307"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d308"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d309"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d310"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d311"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d312"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d313"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d314"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d315"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d316"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d317"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d318"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d319"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d320"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d321"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d322"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d323"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d324"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d325"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d326"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d327"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d328"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d329"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d330"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d331"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d332"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d333"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d334"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d335"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d336"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d337"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d338"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d339"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d340"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d341"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d342"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d343"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d344"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d345"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d346"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d347"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d348"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d349"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d350"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d351"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d352"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d353"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d354"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d355"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d356"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d357"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d358"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1711533551873_590300010",
+      "id": "paragraph_1711533551873_590300010",
+      "dateCreated": "2024-03-27 12:59:11.873",
+      "dateStarted": "2024-03-27 13:00:09.368",
+      "dateFinished": "2024-03-27 13:00:18.264",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n#### Shortest paths",
+      "user": "anonymous",
+      "dateUpdated": "2024-04-11 19:20:53.097",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch4\u003eShortest paths\u003c/h4\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1711533632937_819155048",
+      "id": "paragraph_1711533632937_819155048",
+      "dateCreated": "2024-03-27 13:00:32.937",
+      "dateStarted": "2024-04-11 19:20:53.098",
+      "dateFinished": "2024-04-11 19:20:53.102",
+      "status": "FINISHED"
+    },
+    {
+      "text": "import org.graphframes.{examples,GraphFrame}\nval g: GraphFrame \u003d examples.Graphs.friends\n\nval results \u003d g.shortestPaths.landmarks(Seq(\"a\", \"d\")).run()\nresults.select(\"id\", \"distances\").show()",
+      "user": "anonymous",
+      "dateUpdated": "2024-03-27 13:00:46.120",
+      "progress": 2,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---+----------------+\n| id|       distances|\n+---+----------------+\n|  a|{d -\u003e 2, a -\u003e 0}|\n|  b|              {}|\n|  c|              {}|\n|  d|{d -\u003e 0, a -\u003e 1}|\n|  e|{d -\u003e 1, a -\u003e 2}|\n|  f|              {}|\n|  g|              {}|\n+---+----------------+\n\nimport org.graphframes.{examples, GraphFrame}\n\u001b[1m\u001b[34mg\u001b[0m: \u001b[1m\u001b[32morg.graphframes.GraphFrame\u001b[0m \u003d GraphFrame(v:[id: string, name: string ... 1 more field], e:[src: string, dst: string ... 1 more field])\n\u001b[1m\u001b[34mresults\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [id: string, name: string ... 2 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d359"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d360"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d361"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d362"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d363"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d364"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d365"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d366"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d367"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d368"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d369"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d370"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d371"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d372"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d373"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d374"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d375"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d376"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d377"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d378"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d379"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d380"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1711533642944_111993228",
+      "id": "paragraph_1711533642944_111993228",
+      "dateCreated": "2024-03-27 13:00:42.944",
+      "dateStarted": "2024-03-27 13:00:46.122",
+      "dateFinished": "2024-03-27 13:00:47.481",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n#### Triangle count",
+      "user": "anonymous",
+      "dateUpdated": "2024-04-11 19:20:58.735",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch4\u003eTriangle count\u003c/h4\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1711533681970_1247101656",
+      "id": "paragraph_1711533681970_1247101656",
+      "dateCreated": "2024-03-27 13:01:21.970",
+      "dateStarted": "2024-04-11 19:20:58.735",
+      "dateFinished": "2024-04-11 19:20:58.740",
+      "status": "FINISHED"
+    },
+    {
+      "text": "import org.graphframes.{examples,GraphFrame}\nval g: GraphFrame \u003d examples.Graphs.friends\n\nval results \u003d g.triangleCount.run()\nresults.select(\"id\", \"count\").show()",
+      "user": "anonymous",
+      "dateUpdated": "2024-03-27 13:01:35.975",
+      "progress": 100,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---+-----+\n| id|count|\n+---+-----+\n|  a|    1|\n|  b|    0|\n|  c|    0|\n|  d|    1|\n|  e|    1|\n|  f|    0|\n|  g|    0|\n+---+-----+\n\nimport org.graphframes.{examples, GraphFrame}\n\u001b[1m\u001b[34mg\u001b[0m: \u001b[1m\u001b[32morg.graphframes.GraphFrame\u001b[0m \u003d GraphFrame(v:[id: string, name: string ... 1 more field], e:[src: string, dst: string ... 1 more field])\n\u001b[1m\u001b[34mresults\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [count: bigint, id: string ... 2 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d381"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d382"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d383"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d384"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d385"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d386"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d387"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d388"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d389"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d390"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d391"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d392"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d393"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d394"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d395"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d396"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d397"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d398"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d399"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d400"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d401"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d402"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d403"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1711533665965_973869825",
+      "id": "paragraph_1711533665965_973869825",
+      "dateCreated": "2024-03-27 13:01:05.965",
+      "dateStarted": "2024-03-27 13:01:35.977",
+      "dateFinished": "2024-03-27 13:01:37.941",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n## Saving and loading GraphFrames",
+      "user": "anonymous",
+      "dateUpdated": "2024-04-11 19:21:04.178",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eSaving and loading GraphFrames\u003c/h2\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1711533728013_993947851",
+      "id": "paragraph_1711533728013_993947851",
+      "dateCreated": "2024-03-27 13:02:08.013",
+      "dateStarted": "2024-04-11 19:21:04.178",
+      "dateFinished": "2024-04-11 19:21:04.183",
+      "status": "FINISHED"
+    },
+    {
+      "text": "import org.graphframes.{examples,GraphFrame}\nval g: GraphFrame \u003d examples.Graphs.friends\n\n// Save vertices and edges as Parquet to some location.\ng.vertices.write.mode(\"overwrite\").parquet(\"vertices\")\ng.edges.write.mode(\"overwrite\").parquet(\"edges\")\n\n// Load the vertices and edges back.\nval sameV \u003d spark.read.parquet(\"vertices\")\nval sameE \u003d spark.read.parquet(\"edges\")\n\n// Create an identical GraphFrame.\nval sameG \u003d GraphFrame(sameV, sameE)",
+      "user": "anonymous",
+      "dateUpdated": "2024-03-27 13:03:12.118",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import org.graphframes.{examples, GraphFrame}\n\u001b[1m\u001b[34mg\u001b[0m: \u001b[1m\u001b[32morg.graphframes.GraphFrame\u001b[0m \u003d GraphFrame(v:[id: string, name: string ... 1 more field], e:[src: string, dst: string ... 1 more field])\n\u001b[1m\u001b[34msameV\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [id: string, name: string ... 1 more field]\n\u001b[1m\u001b[34msameE\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [src: string, dst: string ... 1 more field]\n\u001b[1m\u001b[34msameG\u001b[0m: \u001b[1m\u001b[32morg.graphframes.GraphFrame\u001b[0m \u003d GraphFrame(v:[id: string, name: string ... 1 more field], e:[src: string, dst: string ... 1 more field])\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d404"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d405"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d406"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d407"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1711533734017_1975848437",
+      "id": "paragraph_1711533734017_1975848437",
+      "dateCreated": "2024-03-27 13:02:14.017",
+      "dateStarted": "2024-03-27 13:03:12.120",
+      "dateFinished": "2024-03-27 13:03:12.916",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n## Message passing via AggregateMessages",
+      "user": "anonymous",
+      "dateUpdated": "2024-04-11 19:21:10.237",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eMessage passing via AggregateMessages\u003c/h2\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1711533811062_815827527",
+      "id": "paragraph_1711533811062_815827527",
+      "dateCreated": "2024-03-27 13:03:31.062",
+      "dateStarted": "2024-04-11 19:21:10.237",
+      "dateFinished": "2024-04-11 19:21:10.241",
+      "status": "FINISHED"
+    },
+    {
+      "text": "import org.graphframes.{examples,GraphFrame}\nimport org.graphframes.lib.AggregateMessages\nval g: GraphFrame \u003d examples.Graphs.friends\n\n// We will use AggregateMessages utilities later, so name it \"AM\" for short.\nval AM \u003d AggregateMessages\n\n// For each user, sum the ages of the adjacent users.\nval msgToSrc \u003d AM.dst(\"age\")\nval msgToDst \u003d AM.src(\"age\")\nval agg \u003d { g.aggregateMessages\n  .sendToSrc(msgToSrc)  // send destination user\u0027s age to source\n  .sendToDst(msgToDst)  // send source user\u0027s age to destination\n  .agg(sum(AM.msg).as(\"summedAges\")) } // sum up ages, stored in AM.msg column\n  \nagg.show()",
+      "user": "anonymous",
+      "dateUpdated": "2024-03-27 13:04:17.431",
+      "progress": 100,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---+----------+\n| id|summedAges|\n+---+----------+\n|  a|        97|\n|  b|        94|\n|  c|       108|\n|  f|        62|\n|  e|        99|\n|  d|        66|\n+---+----------+\n\nimport org.graphframes.{examples, GraphFrame}\nimport org.graphframes.lib.AggregateMessages\n\u001b[1m\u001b[34mg\u001b[0m: \u001b[1m\u001b[32morg.graphframes.GraphFrame\u001b[0m \u003d GraphFrame(v:[id: string, name: string ... 1 more field], e:[src: string, dst: string ... 1 more field])\n\u001b[1m\u001b[34mAM\u001b[0m: \u001b[1m\u001b[32morg.graphframes.lib.AggregateMessages.type\u001b[0m \u003d org.graphframes.lib.AggregateMessages$@1a204b8c\n\u001b[1m\u001b[34mmsgToSrc\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Column\u001b[0m \u003d dst[age]\n\u001b[1m\u001b[34mmsgToDst\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Column\u001b[0m \u003d src[age]\n\u001b[1m\u001b[34magg\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [id: string, summedAges: bigint]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d408"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d409"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d410"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d411"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1711533831078_1643340089",
+      "id": "paragraph_1711533831078_1643340089",
+      "dateCreated": "2024-03-27 13:03:51.078",
+      "dateStarted": "2024-03-27 13:04:11.154",
+      "dateFinished": "2024-03-27 13:04:11.723",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n## GraphX-GraphFrame conversions",
+      "user": "anonymous",
+      "dateUpdated": "2024-04-11 19:21:15.880",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eGraphX-GraphFrame conversions\u003c/h2\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1711533882113_899938504",
+      "id": "paragraph_1711533882113_899938504",
+      "dateCreated": "2024-03-27 13:04:42.113",
+      "dateStarted": "2024-04-11 19:21:15.880",
+      "dateFinished": "2024-04-11 19:21:15.885",
+      "status": "FINISHED"
+    },
+    {
+      "text": "import org.apache.spark.graphx.Graph\nimport org.apache.spark.sql.Row\nimport org.graphframes.{examples,GraphFrame}\nval g: GraphFrame \u003d examples.Graphs.friends\n\n// Convert to GraphX\nval gx: Graph[Row, Row] \u003d g.toGraphX",
+      "user": "anonymous",
+      "dateUpdated": "2024-03-27 13:08:33.984",
+      "progress": 12,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import org.apache.spark.graphx.Graph\nimport org.apache.spark.sql.Row\nimport org.graphframes.{examples, GraphFrame}\n\u001b[1m\u001b[34mg\u001b[0m: \u001b[1m\u001b[32morg.graphframes.GraphFrame\u001b[0m \u003d GraphFrame(v:[id: string, name: string ... 1 more field], e:[src: string, dst: string ... 1 more field])\n\u001b[1m\u001b[34mgx\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.graphx.Graph[org.apache.spark.sql.Row,org.apache.spark.sql.Row]\u001b[0m \u003d org.apache.spark.graphx.impl.GraphImpl@21908\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d433"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d434"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d435"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d436"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d437"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d438"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d439"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1711533887114_1185385219",
+      "id": "paragraph_1711533887114_1185385219",
+      "dateCreated": "2024-03-27 13:04:47.114",
+      "dateStarted": "2024-03-27 13:08:33.987",
+      "dateFinished": "2024-03-27 13:08:34.441",
+      "status": "FINISHED"
+    }
+  ],
+  "name": "GraphFrames",
+  "id": "2JD8AHT8M",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}

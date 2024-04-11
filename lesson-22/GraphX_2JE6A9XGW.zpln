@@ -1,0 +1,1759 @@
+{
+  "paragraphs": [
+    {
+      "text": "import org.apache.spark._\nimport org.apache.spark.graphx._\nimport org.apache.spark.rdd.RDD",
+      "user": "anonymous",
+      "dateUpdated": "2024-03-27 20:45:07.692",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import org.apache.spark._\nimport org.apache.spark.graphx._\nimport org.apache.spark.rdd.RDD\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1698046534881_165316345",
+      "id": "paragraph_1661089034099_1688413289",
+      "dateCreated": "2023-10-23 10:35:34.881",
+      "dateStarted": "2024-03-27 20:45:07.695",
+      "dateFinished": "2024-03-27 20:45:07.855",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n# Создаём граф",
+      "user": "anonymous",
+      "dateUpdated": "2023-10-23 11:30:43.262",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9.0,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch1\u003eСоздаём граф\u003c/h1\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1698046534881_1863659792",
+      "id": "paragraph_1661089077847_1035871494",
+      "dateCreated": "2023-10-23 10:35:34.881",
+      "dateStarted": "2023-10-23 11:30:43.262",
+      "dateFinished": "2023-10-23 11:30:43.279",
+      "status": "FINISHED"
+    },
+    {
+      "text": "// Create an RDD for the vertices\nval users: RDD[(VertexId, (String, String))] \u003d\n  sc.parallelize(Seq((3L, (\"rxin\", \"student\")), (7L, (\"jgonzal\", \"postdoc\")),\n                       (5L, (\"franklin\", \"prof\")), (2L, (\"istoica\", \"prof\")),\n                       (4L, (\"peter\", \"student\"))))\n\n// Create an RDD for edges\nval relationships: RDD[Edge[String]] \u003d\n  sc.parallelize(Seq(Edge(3L, 7L, \"collab\"),    Edge(5L, 3L, \"advisor\"),\n                       Edge(2L, 5L, \"colleague\"), Edge(5L, 7L, \"pi\"),\n                       Edge(4L, 0L, \"student\"),   Edge(5L, 0L, \"colleague\")))\n\n// Define a default user in case there are relationship with missing user\nval defaultUser \u003d (\"John Doe\", \"Missing\")\n\n// Build the initial Graph\nval graph \u003d Graph(users, relationships, defaultUser)\n",
+      "user": "anonymous",
+      "dateUpdated": "2024-03-27 20:46:12.556",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34musers\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[(org.apache.spark.graphx.VertexId, (String, String))]\u001b[0m \u003d ParallelCollectionRDD[2190] at parallelize at \u003cconsole\u003e:57\n\u001b[1m\u001b[34mrelationships\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[org.apache.spark.graphx.Edge[String]]\u001b[0m \u003d ParallelCollectionRDD[2191] at parallelize at \u003cconsole\u003e:63\n\u001b[1m\u001b[34mdefaultUser\u001b[0m: \u001b[1m\u001b[32m(String, String)\u001b[0m \u003d (John Doe,Missing)\n\u001b[1m\u001b[34mgraph\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.graphx.Graph[(String, String),String]\u001b[0m \u003d org.apache.spark.graphx.impl.GraphImpl@6f1caa57\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1698046534881_788784132",
+      "id": "paragraph_1661089000312_1153335561",
+      "dateCreated": "2023-10-23 10:35:34.881",
+      "dateStarted": "2024-03-27 20:46:12.559",
+      "dateFinished": "2024-03-27 20:46:12.870",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n# Операции с графами",
+      "user": "anonymous",
+      "dateUpdated": "2023-10-23 11:30:56.558",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9.0,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch1\u003eОперации с графами\u003c/h1\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1698046534881_548127301",
+      "id": "paragraph_1661089104109_1529879391",
+      "dateCreated": "2023-10-23 10:35:34.881",
+      "dateStarted": "2023-10-23 11:30:56.558",
+      "dateFinished": "2023-10-23 11:30:56.563",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n## Information about the Graph",
+      "user": "anonymous",
+      "dateUpdated": "2023-10-23 11:31:06.952",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9.0,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eInformation about the Graph\u003c/h2\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1698046534881_1128420526",
+      "id": "paragraph_1661092107749_139776630",
+      "dateCreated": "2023-10-23 10:35:34.881",
+      "dateStarted": "2023-10-23 11:31:06.952",
+      "dateFinished": "2023-10-23 11:31:06.956",
+      "status": "FINISHED"
+    },
+    {
+      "text": "println(s\"numEdges: ${graph.numEdges}\\nnumVertices: ${graph.numVertices}\")",
+      "user": "anonymous",
+      "dateUpdated": "2024-03-27 20:46:34.985",
+      "progress": 33,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "numEdges: 6\nnumVertices: 6\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d161"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d162"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1698046534881_1735019272",
+      "id": "paragraph_1661153750748_1832840927",
+      "dateCreated": "2023-10-23 10:35:34.881",
+      "dateStarted": "2024-03-27 20:46:34.987",
+      "dateFinished": "2024-03-27 20:46:35.310",
+      "status": "FINISHED"
+    },
+    {
+      "text": "graph.inDegrees.collect",
+      "user": "anonymous",
+      "dateUpdated": "2024-03-27 13:39:38.595",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mres19\u001b[0m: \u001b[1m\u001b[32mArray[(org.apache.spark.graphx.VertexId, Int)]\u001b[0m \u003d Array((0,2), (3,1), (5,1), (7,2))\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d78"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1698046534881_1162401642",
+      "id": "paragraph_1661153791820_1620163059",
+      "dateCreated": "2023-10-23 10:35:34.881",
+      "dateStarted": "2024-03-27 13:39:38.599",
+      "dateFinished": "2024-03-27 13:39:38.767",
+      "status": "FINISHED"
+    },
+    {
+      "text": "graph.outDegrees.collect",
+      "user": "anonymous",
+      "dateUpdated": "2024-03-27 13:39:46.420",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mres20\u001b[0m: \u001b[1m\u001b[32mArray[(org.apache.spark.graphx.VertexId, Int)]\u001b[0m \u003d Array((2,1), (3,1), (4,1), (5,3))\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d79"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1698046534881_1132933983",
+      "id": "paragraph_1661153823499_757764137",
+      "dateCreated": "2023-10-23 10:35:34.881",
+      "dateStarted": "2024-03-27 13:39:46.422",
+      "dateFinished": "2024-03-27 13:39:46.632",
+      "status": "FINISHED"
+    },
+    {
+      "text": "graph.degrees.collect",
+      "user": "anonymous",
+      "dateUpdated": "2024-03-27 13:39:53.482",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mres21\u001b[0m: \u001b[1m\u001b[32mArray[(org.apache.spark.graphx.VertexId, Int)]\u001b[0m \u003d Array((0,2), (2,1), (3,2), (4,1), (5,4), (7,2))\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d80"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1698046534881_1817312398",
+      "id": "paragraph_1661154005506_433036728",
+      "dateCreated": "2023-10-23 10:35:34.881",
+      "dateStarted": "2024-03-27 13:39:53.485",
+      "dateFinished": "2024-03-27 13:39:53.768",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n## Views of the graph as collections",
+      "user": "anonymous",
+      "dateUpdated": "2023-10-23 11:31:27.099",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9.0,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eViews of the graph as collections\u003c/h2\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1698046534881_1239736124",
+      "id": "paragraph_1661154035250_1666550121",
+      "dateCreated": "2023-10-23 10:35:34.881",
+      "dateStarted": "2023-10-23 11:31:27.099",
+      "dateFinished": "2023-10-23 11:31:27.104",
+      "status": "FINISHED"
+    },
+    {
+      "text": "graph.vertices.collect.foreach(println)",
+      "user": "anonymous",
+      "dateUpdated": "2024-03-27 13:40:00.605",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "tableHide": false,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "(0,(John Doe,Missing))\n(2,(istoica,prof))\n(3,(rxin,student))\n(4,(peter,student))\n(5,(franklin,prof))\n(7,(jgonzal,postdoc))\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d81"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1698046534881_93812717",
+      "id": "paragraph_1661154063986_255624968",
+      "dateCreated": "2023-10-23 10:35:34.882",
+      "dateStarted": "2024-03-27 13:40:00.607",
+      "dateFinished": "2024-03-27 13:40:00.780",
+      "status": "FINISHED"
+    },
+    {
+      "text": "graph.vertices.collect",
+      "user": "anonymous",
+      "dateUpdated": "2024-03-27 13:40:08.604",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mres23\u001b[0m: \u001b[1m\u001b[32mArray[(org.apache.spark.graphx.VertexId, (String, String))]\u001b[0m \u003d Array((0,(John Doe,Missing)), (2,(istoica,prof)), (3,(rxin,student)), (4,(peter,student)), (5,(franklin,prof)), (7,(jgonzal,postdoc)))\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d82"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1698168986751_902731389",
+      "id": "paragraph_1698168986751_902731389",
+      "dateCreated": "2023-10-24 20:36:26.753",
+      "dateStarted": "2024-03-27 13:40:08.607",
+      "dateFinished": "2024-03-27 13:40:08.768",
+      "status": "FINISHED"
+    },
+    {
+      "text": "graph.edges.collect.foreach(println)",
+      "user": "anonymous",
+      "dateUpdated": "2024-03-27 13:45:00.108",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Edge(3,7,collab)\nEdge(5,3,advisor)\nEdge(2,5,colleague)\nEdge(5,7,pi)\nEdge(4,0,student)\nEdge(5,0,colleague)\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d83"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1698046534882_1037437671",
+      "id": "paragraph_1661154080251_172287776",
+      "dateCreated": "2023-10-23 10:35:34.882",
+      "dateStarted": "2024-03-27 13:45:00.111",
+      "dateFinished": "2024-03-27 13:45:00.275",
+      "status": "FINISHED"
+    },
+    {
+      "text": "graph.edges.collect",
+      "user": "anonymous",
+      "dateUpdated": "2024-03-27 13:45:09.182",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mres25\u001b[0m: \u001b[1m\u001b[32mArray[org.apache.spark.graphx.Edge[String]]\u001b[0m \u003d Array(Edge(3,7,collab), Edge(5,3,advisor), Edge(2,5,colleague), Edge(5,7,pi), Edge(4,0,student), Edge(5,0,colleague))\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d84"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1698169013810_894270470",
+      "id": "paragraph_1698169013810_894270470",
+      "dateCreated": "2023-10-24 20:36:53.810",
+      "dateStarted": "2024-03-27 13:45:09.184",
+      "dateFinished": "2024-03-27 13:45:09.330",
+      "status": "FINISHED"
+    },
+    {
+      "text": "graph.triplets.collect.foreach(println)",
+      "user": "anonymous",
+      "dateUpdated": "2024-03-27 13:45:18.151",
+      "progress": 50,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "((3,(rxin,student)),(7,(jgonzal,postdoc)),collab)\n((5,(franklin,prof)),(3,(rxin,student)),advisor)\n((2,(istoica,prof)),(5,(franklin,prof)),colleague)\n((5,(franklin,prof)),(7,(jgonzal,postdoc)),pi)\n((4,(peter,student)),(0,(John Doe,Missing)),student)\n((5,(franklin,prof)),(0,(John Doe,Missing)),colleague)\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d85"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1698046534882_152342220",
+      "id": "paragraph_1661154138444_1743203584",
+      "dateCreated": "2023-10-23 10:35:34.882",
+      "dateStarted": "2024-03-27 13:45:18.154",
+      "dateFinished": "2024-03-27 13:45:18.345",
+      "status": "FINISHED"
+    },
+    {
+      "text": "graph.triplets.collect",
+      "user": "anonymous",
+      "dateUpdated": "2024-03-27 13:45:26.544",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mres27\u001b[0m: \u001b[1m\u001b[32mArray[org.apache.spark.graphx.EdgeTriplet[(String, String),String]]\u001b[0m \u003d Array(((3,(rxin,student)),(7,(jgonzal,postdoc)),collab), ((5,(franklin,prof)),(3,(rxin,student)),advisor), ((2,(istoica,prof)),(5,(franklin,prof)),colleague), ((5,(franklin,prof)),(7,(jgonzal,postdoc)),pi), ((4,(peter,student)),(0,(John Doe,Missing)),student), ((5,(franklin,prof)),(0,(John Doe,Missing)),colleague))\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d86"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1698169079012_1769155716",
+      "id": "paragraph_1698169079012_1769155716",
+      "dateCreated": "2023-10-24 20:37:59.012",
+      "dateStarted": "2024-03-27 13:45:26.546",
+      "dateFinished": "2024-03-27 13:45:26.665",
+      "status": "FINISHED"
+    },
+    {
+      "text": "graph.triplets.map(\n  triplet \u003d\u003e triplet.srcAttr._1 + \" is the \" + triplet.attr + \" of \" + triplet.dstAttr._1\n).collect.foreach(println(_))",
+      "user": "anonymous",
+      "dateUpdated": "2024-03-27 13:45:33.896",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "rxin is the collab of jgonzal\nfranklin is the advisor of rxin\nistoica is the colleague of franklin\nfranklin is the pi of jgonzal\npeter is the student of John Doe\nfranklin is the colleague of John Doe\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d87"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1698046534882_43770723",
+      "id": "paragraph_1661157013883_994163650",
+      "dateCreated": "2023-10-23 10:35:34.882",
+      "dateStarted": "2024-03-27 13:45:33.897",
+      "dateFinished": "2024-03-27 13:45:34.049",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n## Structural Operators",
+      "user": "anonymous",
+      "dateUpdated": "2023-10-23 11:32:06.527",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9.0,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eStructural Operators\u003c/h2\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1698046534882_737934562",
+      "id": "paragraph_1661157355076_1337820703",
+      "dateCreated": "2023-10-23 10:35:34.882",
+      "dateStarted": "2023-10-23 11:32:06.527",
+      "dateFinished": "2023-10-23 11:32:06.531",
+      "status": "FINISHED"
+    },
+    {
+      "text": "// Remove missing vertices as well as the edges to connected to them\nval validGraph \u003d graph.subgraph(vpred \u003d (id, attr) \u003d\u003e attr._2 !\u003d \"Missing\")",
+      "user": "anonymous",
+      "dateUpdated": "2024-03-27 13:45:42.074",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mvalidGraph\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.graphx.Graph[(String, String),String]\u001b[0m \u003d org.apache.spark.graphx.impl.GraphImpl@5a2a2267\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1698046534882_947796084",
+      "id": "paragraph_1661157260812_1888575754",
+      "dateCreated": "2023-10-23 10:35:34.882",
+      "dateStarted": "2024-03-27 13:45:42.076",
+      "dateFinished": "2024-03-27 13:45:42.228",
+      "status": "FINISHED"
+    },
+    {
+      "text": "// The valid subgraph will disconnect users 4 and 5 by removing user 0\nvalidGraph.vertices.collect.foreach(println(_))",
+      "user": "anonymous",
+      "dateUpdated": "2024-03-27 13:45:49.714",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "(2,(istoica,prof))\n(3,(rxin,student))\n(4,(peter,student))\n(5,(franklin,prof))\n(7,(jgonzal,postdoc))\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d88"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1698046534882_196173616",
+      "id": "paragraph_1661157426813_1321542112",
+      "dateCreated": "2023-10-23 10:35:34.882",
+      "dateStarted": "2024-03-27 13:45:49.716",
+      "dateFinished": "2024-03-27 13:45:49.844",
+      "status": "FINISHED"
+    },
+    {
+      "text": "validGraph.triplets.map(\n  triplet \u003d\u003e triplet.srcAttr._1 + \" is the \" + triplet.attr + \" of \" + triplet.dstAttr._1\n).collect.foreach(println(_))",
+      "user": "anonymous",
+      "dateUpdated": "2024-03-27 13:45:57.101",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "rxin is the collab of jgonzal\nfranklin is the advisor of rxin\nistoica is the colleague of franklin\nfranklin is the pi of jgonzal\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d89"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1698046534882_828870952",
+      "id": "paragraph_1661157486516_1735064739",
+      "dateCreated": "2023-10-23 10:35:34.882",
+      "dateStarted": "2024-03-27 13:45:57.104",
+      "dateFinished": "2024-03-27 13:45:57.234",
+      "status": "FINISHED"
+    },
+    {
+      "text": "import org.apache.spark.graphx.EdgeDirection._\n\ngraph.collectNeighborIds(In).collect()",
+      "user": "anonymous",
+      "dateUpdated": "2024-03-27 20:59:02.976",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import org.apache.spark.graphx.EdgeDirection._\n\u001b[1m\u001b[34mres44\u001b[0m: \u001b[1m\u001b[32mArray[(org.apache.spark.graphx.VertexId, Array[org.apache.spark.graphx.VertexId])]\u001b[0m \u003d Array((0,Array(4, 5)), (2,Array()), (3,Array(5)), (4,Array()), (5,Array(2)), (7,Array(3, 5)))\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d163"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1711562176300_1969296210",
+      "id": "paragraph_1711562176300_1969296210",
+      "dateCreated": "2024-03-27 20:56:16.300",
+      "dateStarted": "2024-03-27 20:59:02.978",
+      "dateFinished": "2024-03-27 20:59:03.206",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n# Graph Algorithms",
+      "user": "anonymous",
+      "dateUpdated": "2023-10-23 11:32:26.462",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9.0,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch1\u003eGraph Algorithms\u003c/h1\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1698046534882_2012121129",
+      "id": "paragraph_1661162420058_877127757",
+      "dateCreated": "2023-10-23 10:35:34.882",
+      "dateStarted": "2023-10-23 11:32:26.462",
+      "dateFinished": "2023-10-23 11:32:26.465",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n## PageRank\n\nGraphX also includes an example social network dataset that we can run PageRank on. A set of users is given in ``data/graphx/users.txt``, and a set of relationships between users is given in ``data/graphx/followers.txt``. We compute the PageRank of each user as follows:",
+      "user": "anonymous",
+      "dateUpdated": "2023-10-23 11:32:36.195",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9.0,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003ePageRank\u003c/h2\u003e\n\u003cp\u003eGraphX also includes an example social network dataset that we can run PageRank on. A set of users is given in \u003ccode\u003edata/graphx/users.txt\u003c/code\u003e, and a set of relationships between users is given in \u003ccode\u003edata/graphx/followers.txt\u003c/code\u003e. We compute the PageRank of each user as follows:\u003c/p\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1698046534882_1489737344",
+      "id": "paragraph_1661162466003_1953830269",
+      "dateCreated": "2023-10-23 10:35:34.882",
+      "dateStarted": "2023-10-23 11:32:36.195",
+      "dateFinished": "2023-10-23 11:32:36.201",
+      "status": "FINISHED"
+    },
+    {
+      "text": "import org.apache.spark.graphx.GraphLoader\n\n// Load the edges as a graph\nval graph \u003d GraphLoader.edgeListFile(sc, \"/opt/spark/data/graphx/followers.txt\")\n\n// Run PageRank\nval ranks \u003d graph.pageRank(0.0001).vertices\n\n// Join the ranks with the usernames\nval users \u003d sc.textFile(\"/opt/spark/data/graphx/users.txt\").map { line \u003d\u003e\n  val fields \u003d line.split(\",\")\n  (fields(0).toLong, fields(1))\n}\nval ranksByUsername \u003d users.join(ranks).map {\n  case (id, (username, rank)) \u003d\u003e (username, rank)\n}\n\n// Print the result\nprintln(ranksByUsername.collect().mkString(\"\\n\"))",
+      "user": "anonymous",
+      "dateUpdated": "2024-03-27 13:46:06.954",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "tableHide": false,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "(justinbieber,0.15007622780470478)\n(matei_zaharia,0.7017164142469724)\n(ladygaga,1.3907556008752426)\n(BarackObama,1.4596227918476916)\n(jeresig,0.9998520559494657)\n(odersky,1.2979769092759237)\nimport org.apache.spark.graphx.GraphLoader\n\u001b[1m\u001b[34mgraph\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.graphx.Graph[Int,Int]\u001b[0m \u003d org.apache.spark.graphx.impl.GraphImpl@5cf3f33c\n\u001b[1m\u001b[34mranks\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.graphx.VertexRDD[Double]\u001b[0m \u003d VertexRDDImpl[1974] at RDD at VertexRDD.scala:57\n\u001b[1m\u001b[34musers\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[(Long, String)]\u001b[0m \u003d MapPartitionsRDD[1983] at map at \u003cconsole\u003e:50\n\u001b[1m\u001b[34mranksByUsername\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[(String, Double)]\u001b[0m \u003d MapPartitionsRDD[1987] at map at \u003cconsole\u003e:54\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d90"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d91"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d92"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d93"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d94"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d95"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d96"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d97"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d98"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d99"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d100"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d101"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d102"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d103"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d104"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d105"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d106"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d107"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d108"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d109"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d110"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d111"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d112"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d113"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d114"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d115"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d116"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d117"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d118"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d119"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d120"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d121"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d122"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d123"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d124"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d125"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d126"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d127"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d128"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d129"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d130"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d131"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d132"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d133"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d134"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d135"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d136"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d137"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d138"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d139"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d140"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d141"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d142"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d143"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d144"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d145"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d146"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d147"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1698046534882_521507208",
+      "id": "paragraph_1661162514278_566790536",
+      "dateCreated": "2023-10-23 10:35:34.882",
+      "dateStarted": "2024-03-27 13:46:06.957",
+      "dateFinished": "2024-03-27 13:46:10.379",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n## Connected Components\n\nGraphX contains an implementation of the algorithm in the ConnectedComponents object, and we compute the connected components of the example social network dataset from the PageRank section as follows:",
+      "user": "anonymous",
+      "dateUpdated": "2023-10-23 11:34:36.826",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9.0,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eConnected Components\u003c/h2\u003e\n\u003cp\u003eGraphX contains an implementation of the algorithm in the ConnectedComponents object, and we compute the connected components of the example social network dataset from the PageRank section as follows:\u003c/p\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1698046534882_743948356",
+      "id": "paragraph_1661162599261_1354922448",
+      "dateCreated": "2023-10-23 10:35:34.882",
+      "dateStarted": "2023-10-23 11:34:36.826",
+      "dateFinished": "2023-10-23 11:34:36.831",
+      "status": "FINISHED"
+    },
+    {
+      "text": "import org.apache.spark.graphx.GraphLoader\n\n// Load the graph as in the PageRank example\nval graph \u003d GraphLoader.edgeListFile(sc, \"/opt/spark/data/graphx/followers.txt\")\n\n// Find the connected components\nval cc \u003d graph.connectedComponents().vertices\n\n// Join the connected components with the usernames\nval users \u003d sc.textFile(\"/opt/spark/data/graphx/users.txt\").map { line \u003d\u003e\n  val fields \u003d line.split(\",\")\n  (fields(0).toLong, fields(1))\n}\nval ccByUsername \u003d users.join(cc).map {\n  case (id, (username, cc)) \u003d\u003e (username, cc)\n}\n\n// Print the result\nprintln(ccByUsername.collect().mkString(\"\\n\"))",
+      "user": "anonymous",
+      "dateUpdated": "2024-03-27 13:46:20.896",
+      "progress": 40,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "(justinbieber,1)\n(matei_zaharia,3)\n(ladygaga,1)\n(BarackObama,1)\n(jeresig,3)\n(odersky,3)\nimport org.apache.spark.graphx.GraphLoader\n\u001b[1m\u001b[34mgraph\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.graphx.Graph[Int,Int]\u001b[0m \u003d org.apache.spark.graphx.impl.GraphImpl@68d1ca05\n\u001b[1m\u001b[34mcc\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.graphx.VertexRDD[org.apache.spark.graphx.VertexId]\u001b[0m \u003d VertexRDDImpl[2020] at RDD at VertexRDD.scala:57\n\u001b[1m\u001b[34musers\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[(Long, String)]\u001b[0m \u003d MapPartitionsRDD[2037] at map at \u003cconsole\u003e:52\n\u001b[1m\u001b[34mccByUsername\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[(String, org.apache.spark.graphx.VertexId)]\u001b[0m \u003d MapPartitionsRDD[2041] at map at \u003cconsole\u003e:56\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d148"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d149"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d150"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d151"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d152"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1698046534882_860752676",
+      "id": "paragraph_1661162598597_2125890841",
+      "dateCreated": "2023-10-23 10:35:34.882",
+      "dateStarted": "2024-03-27 13:46:20.898",
+      "dateFinished": "2024-03-27 13:46:21.272",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n## Triangle Counting\n\nWe compute the triangle count of the social network dataset from the PageRank section. Note that TriangleCount requires the edges to be in canonical orientation (srcId \u003c dstId) and the graph to be partitioned using Graph.partitionBy.",
+      "user": "anonymous",
+      "dateUpdated": "2023-10-23 11:34:50.311",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9.0,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eTriangle Counting\u003c/h2\u003e\n\u003cp\u003eWe compute the triangle count of the social network dataset from the PageRank section. Note that TriangleCount requires the edges to be in canonical orientation (srcId \u0026lt; dstId) and the graph to be partitioned using Graph.partitionBy.\u003c/p\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1698046534882_251423089",
+      "id": "paragraph_1661162839887_23975299",
+      "dateCreated": "2023-10-23 10:35:34.882",
+      "dateStarted": "2023-10-23 11:34:50.311",
+      "dateFinished": "2023-10-23 11:34:50.316",
+      "status": "FINISHED"
+    },
+    {
+      "text": "import org.apache.spark.graphx.{GraphLoader, PartitionStrategy}\n\n// Load the edges in canonical order and partition the graph for triangle count\nval graph \u003d GraphLoader.edgeListFile(sc, \"/opt/spark/data/graphx/followers.txt\", true)\n  .partitionBy(PartitionStrategy.RandomVertexCut)\n  \n// Find the triangle count for each vertex\nval triCounts \u003d graph.triangleCount().vertices\n\n// Join the triangle counts with the usernames\nval users \u003d sc.textFile(\"/opt/spark/data/graphx/users.txt\").map { line \u003d\u003e\n  val fields \u003d line.split(\",\")\n  (fields(0).toLong, fields(1))\n}\nval triCountByUsername \u003d users.join(triCounts).map { case (id, (username, tc)) \u003d\u003e\n  (username, tc)\n}\n\n// Print the result\nprintln(triCountByUsername.collect().mkString(\"\\n\"))",
+      "user": "anonymous",
+      "dateUpdated": "2024-03-27 13:46:34.923",
+      "progress": 45,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "(justinbieber,0)\n(matei_zaharia,1)\n(ladygaga,0)\n(BarackObama,0)\n(jeresig,1)\n(odersky,1)\nimport org.apache.spark.graphx.{GraphLoader, PartitionStrategy}\n\u001b[1m\u001b[34mgraph\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.graphx.Graph[Int,Int]\u001b[0m \u003d org.apache.spark.graphx.impl.GraphImpl@65a24b81\n\u001b[1m\u001b[34mtriCounts\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.graphx.VertexRDD[Int]\u001b[0m \u003d VertexRDDImpl[2111] at RDD at VertexRDD.scala:57\n\u001b[1m\u001b[34musers\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[(Long, String)]\u001b[0m \u003d MapPartitionsRDD[2116] at map at \u003cconsole\u003e:55\n\u001b[1m\u001b[34mtriCountByUsername\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[(String, Int)]\u001b[0m \u003d MapPartitionsRDD[2120] at map at \u003cconsole\u003e:59\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d153"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d154"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1698046534882_920323985",
+      "id": "paragraph_1661162838652_920036354",
+      "dateCreated": "2023-10-23 10:35:34.883",
+      "dateStarted": "2024-03-27 13:46:34.925",
+      "dateFinished": "2024-03-27 13:46:35.274",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n# Pregel\n\nWe can use the Pregel operator to express computation such as single source shortest path in the following example.",
+      "user": "anonymous",
+      "dateUpdated": "2023-10-23 11:35:04.459",
+      "progress": 0,
+      "config": {
+        "lineNumbers": true,
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9.0,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch1\u003ePregel\u003c/h1\u003e\n\u003cp\u003eWe can use the Pregel operator to express computation such as single source shortest path in the following example.\u003c/p\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1698046534883_1253087841",
+      "id": "paragraph_1661157586833_1170724323",
+      "dateCreated": "2023-10-23 10:35:34.883",
+      "dateStarted": "2023-10-23 11:35:04.459",
+      "dateFinished": "2023-10-23 11:35:04.463",
+      "status": "FINISHED"
+    },
+    {
+      "text": "import org.apache.spark.graphx.{Graph, VertexId}\nimport org.apache.spark.graphx.util.GraphGenerators\n\n// A graph with edge attributes containing distances\nval graph: Graph[Long, Double] \u003d GraphGenerators.logNormalGraph(sc, numVertices \u003d 100).mapEdges(e \u003d\u003e e.attr.toDouble)\n\nval sourceId: VertexId \u003d 42 // The ultimate source\n\n// Initialize the graph such that all vertices except the root have distance infinity.\nval initialGraph \u003d graph.mapVertices((id, _) \u003d\u003e if (id \u003d\u003d sourceId) 0.0 else Double.PositiveInfinity)\n\nval sssp \u003d initialGraph.pregel(Double.PositiveInfinity)(\n  (id, dist, newDist) \u003d\u003e math.min(dist, newDist), // Vertex Program\n  triplet \u003d\u003e {  // Send Message\n    if (triplet.srcAttr + triplet.attr \u003c triplet.dstAttr) {\n      Iterator((triplet.dstId, triplet.srcAttr + triplet.attr))\n    } else {\n      Iterator.empty\n    }\n  },\n  (a, b) \u003d\u003e math.min(a, b) // Merge Message\n)\n\nprintln(sssp.vertices.collect.mkString(\"\\n\"))",
+      "user": "anonymous",
+      "dateUpdated": "2024-03-27 13:47:25.834",
+      "progress": 24,
+      "config": {
+        "lineNumbers": true,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "(96,2.0)\n(56,2.0)\n(16,1.0)\n(80,2.0)\n(48,1.0)\n(32,1.0)\n(0,2.0)\n(24,2.0)\n(64,2.0)\n(40,2.0)\n(72,2.0)\n(8,1.0)\n(88,2.0)\n(41,2.0)\n(81,2.0)\n(97,2.0)\n(25,2.0)\n(65,2.0)\n(73,1.0)\n(57,2.0)\n(33,2.0)\n(1,2.0)\n(89,2.0)\n(17,2.0)\n(9,1.0)\n(49,2.0)\n(34,2.0)\n(82,2.0)\n(66,2.0)\n(98,2.0)\n(50,2.0)\n(42,0.0)\n(74,2.0)\n(90,2.0)\n(18,2.0)\n(58,2.0)\n(26,2.0)\n(10,2.0)\n(2,2.0)\n(19,1.0)\n(59,1.0)\n(11,2.0)\n(35,2.0)\n(27,1.0)\n(75,2.0)\n(51,2.0)\n(83,2.0)\n(67,1.0)\n(3,2.0)\n(91,2.0)\n(43,2.0)\n(99,1.0)\n(84,1.0)\n(52,1.0)\n(4,1.0)\n(76,1.0)\n(28,2.0)\n(36,1.0)\n(92,2.0)\n(20,2.0)\n(12,2.0)\n(60,1.0)\n(44,2.0)\n(68,2.0)\n(13,2.0)\n(61,2.0)\n(21,2.0)\n(77,2.0)\n(53,2.0)\n(29,1.0)\n(93,2.0)\n(37,1.0)\n(45,2.0)\n(69,1.0)\n(85,2.0)\n(5,2.0)\n(22,2.0)\n(54,2.0)\n(46,2.0)\n(30,2.0)\n(14,2.0)\n(62,1.0)\n(6,2.0)\n(70,1.0)\n(38,2.0)\n(86,2.0)\n(78,1.0)\n(94,1.0)\n(39,2.0)\n(15,2.0)\n(47,2.0)\n(71,2.0)\n(55,2.0)\n(95,2.0)\n(79,2.0)\n(23,2.0)\n(63,2.0)\n(7,1.0)\n(31,2.0)\n(87,1.0)\nimport org.apache.spark.graphx.{Graph, VertexId}\nimport org.apache.spark.graphx.util.GraphGenerators\n\u001b[1m\u001b[34mgraph\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.graphx.Graph[Long,Double]\u001b[0m \u003d org.apache.spark.graphx.impl.GraphImpl@3f74e98a\n\u001b[1m\u001b[34msourceId\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.graphx.VertexId\u001b[0m \u003d 42\n\u001b[1m\u001b[34minitialGraph\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.graphx.Graph[Double,Double]\u001b[0m \u003d org.apache.spark.graphx.impl.GraphImpl@2cecb05c\n\u001b[1m\u001b[34msssp\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.graphx.Graph[Double,Double]\u001b[0m \u003d org.apache.spark.graphx.impl.GraphImpl@25ccc94b\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d155"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d156"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d157"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d158"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d159"
+            },
+            {
+              "jobUrl": "http://ubuntu:4040/jobs/job?id\u003d160"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1698046534883_1088218896",
+      "id": "paragraph_1661157632824_1893787653",
+      "dateCreated": "2023-10-23 10:35:34.883",
+      "dateStarted": "2024-03-27 13:47:25.836",
+      "dateFinished": "2024-03-27 13:47:26.510",
+      "status": "FINISHED"
+    }
+  ],
+  "name": "GraphX",
+  "id": "2JE6A9XGW",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}
