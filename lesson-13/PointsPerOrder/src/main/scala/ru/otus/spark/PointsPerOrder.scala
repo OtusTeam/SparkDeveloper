@@ -23,11 +23,11 @@ object PointsPerOrder {
     data.show()
 
     val pointAttribution = new PointAttribution
-    val pointAttributionUdf = udaf(pointAttribution)
+    val pointAttributionUdaf = udaf(pointAttribution)
 
     val pointDf = data
       .groupBy($"firstName", $"lastName", $"state")
-      .agg(sum("quantity"), pointAttributionUdf($"quantity").as("point"))
+      .agg(sum("quantity"), pointAttributionUdaf($"quantity").as("point"))
     pointDf.show()
 
     spark.stop()
