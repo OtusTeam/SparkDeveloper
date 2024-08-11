@@ -1,0 +1,54 @@
+services:
+   namenode:
+      image: apache/hadoop:3.3.5
+      container_name: namenode
+      hostname: namenode
+      command: ["hdfs", "namenode"]
+      ports:
+        - 9870:9870
+      environment:
+        - ENSURE_NAMENODE_DIR="/tmp/hadoop-root/dfs/name"
+        - HADOOP_HOME=/opt/hadoop
+        - CORE-SITE.XML_fs.default.name=hdfs://namenode
+        - CORE-SITE.XML_fs.defaultFS=hdfs://namenode
+        - HDFS-SITE.XML_dfs.namenode.rpc-address=namenode:8020
+        - HDFS-SITE.XML_dfs.replication=3
+
+   datanode1:
+      image: apache/hadoop:3.3.5
+      container_name: datanode1
+      hostname: datanode1
+      command: ["hdfs", "datanode"]
+      environment:
+        - ENSURE_NAMENODE_DIR="/tmp/hadoop-root/dfs/name"
+        - HADOOP_HOME=/opt/hadoop
+        - CORE-SITE.XML_fs.default.name=hdfs://namenode
+        - CORE-SITE.XML_fs.defaultFS=hdfs://namenode
+        - HDFS-SITE.XML_dfs.namenode.rpc-address=namenode:8020
+        - HDFS-SITE.XML_dfs.replication=3
+
+   datanode2:
+      image: apache/hadoop:3.3.5
+      container_name: datanode2
+      hostname: datanode2
+      command: ["hdfs", "datanode"]
+      environment:
+        - ENSURE_NAMENODE_DIR="/tmp/hadoop-root/dfs/name"
+        - HADOOP_HOME=/opt/hadoop
+        - CORE-SITE.XML_fs.default.name=hdfs://namenode
+        - CORE-SITE.XML_fs.defaultFS=hdfs://namenode
+        - HDFS-SITE.XML_dfs.namenode.rpc-address=namenode:8020
+        - HDFS-SITE.XML_dfs.replication=3
+
+   datanode3:
+      image: apache/hadoop:3.3.5
+      container_name: datanode3
+      hostname: datanode3
+      command: ["hdfs", "datanode"]
+      environment:
+        - ENSURE_NAMENODE_DIR="/tmp/hadoop-root/dfs/name"
+        - HADOOP_HOME=/opt/hadoop
+        - CORE-SITE.XML_fs.default.name=hdfs://namenode
+        - CORE-SITE.XML_fs.defaultFS=hdfs://namenode
+        - HDFS-SITE.XML_dfs.namenode.rpc-address=namenode:8020
+        - HDFS-SITE.XML_dfs.replication=3

@@ -3,6 +3,7 @@
 Материалы для курса [Spark Developer](https://otus.ru/lessons/spark/)
 
 - **01** [Что такое Spark](lesson-01)
+- **05** [Hadoop, HDFS](lesson-05)
 - **06** [Spark в Hadoop, YARN](lesson-06)
 - **10** [DataFrame](lesson-10)
 - **12** [RDD](lesson-12)

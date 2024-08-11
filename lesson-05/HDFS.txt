@@ -1,0 +1,56 @@
+# Демонстрация HDFS
+
+## Запускаем HDFS
+$ docker compose up -d
+$ docker compose ps -a
+
+## Веб-интерфейс
+http://localhost:9870
+
+##  Подключаемся к Namenode
+$ docker exec -ti namenode /bin/bash
+
+### Посмотрим на команды hdfs
+hdfs
+
+### Посмотрим корневую структуру папок hdfs
+hdfs dfs -ls /
+
+### Создадим локальный файл:
+cat > a.txt
+aaa bbb ccc
+^D (Control+D)
+
+### Создадим директорию
+hdfs dfs -mkdir -p /user/eas011/
+
+### Загрузим локальный a.txt в HDFS и проверим загрузку
+hdfs dfs -put a.txt /user/eas011/
+hdfs dfs -ls /user/eas011/
+hdfs dfs -cat /user/eas011/a.txt
+
+### Изменим файлик локально
+cat > a.txt
+fff
+ggg
+hhh
+^D (Control+D)
+cat a.txt
+
+### Перезапишем его в hdfs
+hdfs dfs -put a.txt /user/eas011/   // File already exists!
+hdfs dfs -put -f a.txt /user/eas011/ // Force file rewrite
+hdfs dfs -cat /user/eas011/a.txt
+
+## Посмотрим где лежит файлик
+hdfs fsck /user/eas011/a.txt -files -blocks -locations
+/user/eas011/a.txt 7 bytes, replicated: replication=3, 1 block(s):  Under replicated BP-54015084-172.18.0.6-1629173599639:blk_1073741835_1011
+
+##  Подключаемся на Datanode
+
+$ docker exec -ti datanode1 /bin/bash
+
+### Поищем где лежит файлик
+find . -name blk_1073741835
+cd <найденный_путь>
+cat blk_1073741835
