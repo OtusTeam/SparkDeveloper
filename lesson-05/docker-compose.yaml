@@ -19,8 +19,10 @@ services:
       container_name: datanode1
       hostname: datanode1
       command: ["hdfs", "datanode"]
+      ports:
+        - 9864:9864
       environment:
-        - ENSURE_NAMENODE_DIR="/tmp/hadoop-root/dfs/name"
+        - ENSURE_NAMENODE_DIR="/tmp/hadoop-root/dfs/data"
         - HADOOP_HOME=/opt/hadoop
         - CORE-SITE.XML_fs.default.name=hdfs://namenode
         - CORE-SITE.XML_fs.defaultFS=hdfs://namenode
@@ -32,8 +34,10 @@ services:
       container_name: datanode2
       hostname: datanode2
       command: ["hdfs", "datanode"]
+      ports:
+        - 9865:9864
       environment:
-        - ENSURE_NAMENODE_DIR="/tmp/hadoop-root/dfs/name"
+        - ENSURE_NAMENODE_DIR="/tmp/hadoop-root/dfs/data"
         - HADOOP_HOME=/opt/hadoop
         - CORE-SITE.XML_fs.default.name=hdfs://namenode
         - CORE-SITE.XML_fs.defaultFS=hdfs://namenode
@@ -45,8 +49,10 @@ services:
       container_name: datanode3
       hostname: datanode3
       command: ["hdfs", "datanode"]
+      ports:
+        - 9866:9864
       environment:
-        - ENSURE_NAMENODE_DIR="/tmp/hadoop-root/dfs/name"
+        - ENSURE_NAMENODE_DIR="/tmp/hadoop-root/dfs/data"
         - HADOOP_HOME=/opt/hadoop
         - CORE-SITE.XML_fs.default.name=hdfs://namenode
         - CORE-SITE.XML_fs.defaultFS=hdfs://namenode
