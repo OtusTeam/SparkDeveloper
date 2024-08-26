@@ -5,6 +5,7 @@
 - **01** [Что такое Spark](lesson-01)
 - **05** [Hadoop, HDFS](lesson-05)
 - **06** [Spark в Hadoop, YARN](lesson-06)
+- **09** [Spark в Kubernetes](lesson-09)
 - **10** [DataFrame](lesson-10)
 - **12** [RDD](lesson-12)
 - **13** [UDF и UDAF](lesson-13)
