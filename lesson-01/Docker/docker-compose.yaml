@@ -1,0 +1,59 @@
+services:
+  master:
+    image: apache/spark:3.5.0
+    container_name: master
+    hostname: master
+    command: /opt/spark/bin/spark-class org.apache.spark.deploy.master.Master
+    ports:
+      - "8080:8080"
+      - "7077:7077"
+      - "15002:15002"
+    volumes:
+      - ./conf:/opt/spark/conf
+
+  slave1:
+    image: apache/spark:3.5.0
+    container_name: slave1
+    hostname: slave1
+    environment:
+      - SPARK_MASTER_HOST=master
+    command: /opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://master:7077
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./conf:/opt/spark/conf
+
+  slave2:
+    image: apache/spark:3.5.0
+    container_name: slave2
+    hostname: slave1
+    environment:
+      - SPARK_MASTER_HOST=master
+    command: /opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://master:7077
+    ports:
+      - "8082:8081"
+    volumes:
+      - ./conf:/opt/spark/conf
+
+  slave3:
+    image: apache/spark:3.5.0
+    container_name: slave3
+    hostname: slave1
+    environment:
+      - SPARK_MASTER_HOST=master
+    command: /opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://master:7077
+    ports:
+      - "8083:8081"
+    volumes:
+      - ./conf:/opt/spark/conf
+
+  almond:
+    image: almondsh/almond:latest
+    container_name: almond
+    hostname: almond
+    ports:
+      - "8888:8888"
+      - "4040:4040"
+    volumes:
+      - ./work:/home/jovyan/work
+      - ./cache:/home/jovyan/.cache

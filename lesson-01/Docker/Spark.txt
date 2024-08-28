@@ -1,0 +1,19 @@
+# Демонстрация Spark
+
+## Запускаем Spark
+$ docker compose up -d
+$ docker compose ps -a
+
+## Веб-интерфейс:
+- Spark Master http://localhost:8080
+- Almond http://localhost:8888
+
+## Находим URL с токеном для подключения к Almond
+$ docker exec almond jupyter server list
+
+Currently running servers:
+http://almond:8888/?token=9ae0baf5df9896900f7400d7f9e79a08b0c3813443a981c7 :: /home/jovyan
+
+## Копируем URL, меняем almond на localhost и открываем его.
+
+## Открываем ноутбук work/HelloSpark.ipynb и последовательно выполняем ячейки.
