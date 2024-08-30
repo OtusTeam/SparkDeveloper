@@ -2,6 +2,7 @@ package ru.otus.spark
 
 import org.apache.spark.{SparkConf, SparkContext}
 import io.circe.parser._
+import org.apache.spark.rdd.RDD
 import java.io.{File, PrintWriter}
 import scala.util.Random
 
@@ -13,29 +14,34 @@ object SparkRDDAPI {
     val sc   = new SparkContext(conf)
 
     //1 - Создание RDD
-    val data          = Seq("Spark", "Scala", "Java")
-    val collectionRDD = sc.parallelize(data, 2)
-    val studentsRDD   = sc.parallelize(Student.getStudentsSample)
-    val fileRDD       = sc.textFile(args(0))
+    val data                       = Seq("Spark", "Scala", "Java")
+    val collectionRDD: RDD[String] = sc.parallelize(data, 2)
+    val studentsRDD: RDD[Student]  = sc.parallelize(Student.getStudentsSample)
+    val fileRDD: RDD[String]       = sc.textFile(args(0))
 
     //2 - Операции
+    println("Операции")
     collectionRDD.foreach(println)
 
     // Filter
-    println("Filter John count: ", studentsRDD.filter(_.name == "John").count)
+    println("\nFilter")
+    println(s"Filter John count: ${studentsRDD.filter(_.name == "John").count}")
     println(
-      "Filter Java course count: ",
-      studentsRDD.filter(student => student.courses.contains(Course("Scala"))).count
+      s"Filter Java course count: ${studentsRDD.filter(student => student.courses.contains(Course("Scala"))).count}"
     )
 
     // Map
+    println("\nMap")
     studentsRDD.map(_.copy(name = "ModifiedName")).collect.foreach(println)
+    println("\nParse JSON")
     fileRDD.map(parse).take(5).foreach(println)
 
     // Sort
+    println("\nSort")
     studentsRDD.sortBy(_.surname).collect.foreach(println)
 
     // ForEachPartition
+    println("\nForEachPartition")
     studentsRDD.foreachPartition(part => {
       val randomFileName = new Random().nextInt()
       val pw             = new PrintWriter(new File(s"random-file-$randomFileName.txt"))
@@ -46,8 +52,9 @@ object SparkRDDAPI {
     })
 
     //3 - Самописное партицирование
-    val keyedRDD       = studentsRDD.keyBy(_.id)
-    val partitionedRDD = keyedRDD.partitionBy(new CustomPartitioner)
+    println("\nСамописное партицирование")
+    val keyedRDD: RDD[(Int, Student)]       = studentsRDD.keyBy(_.id)
+    val partitionedRDD: RDD[(Int, Student)] = keyedRDD.partitionBy(new CustomPartitioner)
     println(partitionedRDD.map(_._1).glom().collect().map(arr => arr.mkString("|")).mkString(", "))
   }
 }

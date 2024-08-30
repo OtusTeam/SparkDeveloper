@@ -4,7 +4,6 @@ import org.apache.spark.Partitioner
 
 import java.util.Random
 
-
 class CustomPartitioner extends Partitioner {
   def numPartitions: Int = 3
 

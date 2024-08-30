@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>io.get-coursier</groupId>
+  <artifactId>class-path-util_2.12</artifactId>
+  <version>0.1.4</version>
+  <url>https://github.com/coursier/class-path-util</url>
+  <description>class-path-util_2.12</description>
+  <name>class-path-util_2.12</name>
+  <organization>
+    <name>io.get-coursier</name>
+    <url>https://github.com/coursier/class-path-util</url>
+  </organization>
+  <licenses>
+    <license>
+      <name>Apache-2.0</name>
+      <url>https://spdx.org/licenses/Apache-2.0.html</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <scm>
+    <url>https://github.com/coursier/class-path-util.git</url>
+    <connection>scm:git:github.com/coursier/class-path-util.git</connection>
+    <developerConnection>scm:git:git@github.com:coursier/class-path-util.git</developerConnection>
+  </scm>
+  <developers>
+    <developer>
+      <id>Alex Archambault</id>
+      <name></name>
+      <url>https://github.com/alexarchambault</url>
+    </developer>
+  </developers>
+  <dependencies>
+    <dependency>
+      <groupId>org.scala-lang</groupId>
+      <artifactId>scala-library</artifactId>
+      <version>2.12.17</version>
+    </dependency>
+  </dependencies>
+</project>

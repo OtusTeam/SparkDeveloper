@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project 
+xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
+    <name>ammonite-spark_2.12</name>
+    <groupId>sh.almond</groupId>
+    <artifactId>ammonite-spark_2.12</artifactId>
+    <packaging>jar</packaging>
+    <description>ammonite-spark</description>
+    <version>0.14.0-RC8</version>
+    <url>https://github.com/alexarchambault/ammonite-spark.git</url>
+    <licenses>
+        <license>
+            <name>MIT</name>
+            <url>https://spdx.org/licenses/MIT.html</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <scm>
+        <connection>scm:git:git://github.com/alexarchambault/ammonite-spark.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com:alexarchambault/ammonite-spark.git</developerConnection>
+        <url>https://github.com/alexarchambault/ammonite-spark</url>
+    </scm>
+    <developers>
+        <developer>
+            <id>alexarchambault</id>
+            <name>Alex Archambault</name>
+            <url>https://github.com/alexarchambault</url>
+        </developer>
+    </developers>
+    <properties> </properties>
+    <dependencies>
+        <dependency>
+            <groupId>io.get-coursier</groupId>
+            <artifactId>class-path-util_2.12</artifactId>
+            <version>0.1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-server</artifactId>
+            <version>9.4.51.v20230217</version>
+        </dependency>
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+            <version>2.12.11</version>
+        </dependency>
+        <dependency>
+            <groupId>sh.almond.tmp.ammonite</groupId>
+            <artifactId>ammonite-repl-api_2.12.11</artifactId>
+            <version>3.0.0-M0-41-26a93d9c</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-sql_2.12</artifactId>
+            <version>2.4.0</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+</project>
