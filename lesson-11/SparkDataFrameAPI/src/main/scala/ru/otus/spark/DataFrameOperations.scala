@@ -10,10 +10,11 @@ object DataFrameOperations extends SparkSessionWrapper {
   private val customerDf: DataFrame = fromFile()
 
   def basicOperations(): Unit = {
+    println("\ncustomerDf.printSchema:")
     customerDf.printSchema()
-    customerDf.head
 
     //Select
+    println("\ncustomerDf.select:")
     customerDf.select("Birthdate", "Country").show(10)
     customerDf.select(col("Country")).show(10)
     customerDf.select('Country).show(10)
@@ -22,18 +23,21 @@ object DataFrameOperations extends SparkSessionWrapper {
     customerDf.withColumnRenamed("Birthdate", "Date").show(10)
 
     //Filter
+    println("\ncustomerDf.filter:")
     customerDf.filter("Country = 'Norway'").show(10)
     customerDf.where('Country === "Iceland").show(10)
 
     //Sort
+    println("\ncustomerDf.sort:")
     customerDf.sort('CustomerID.desc).show(10)
     customerDf.orderBy("CustomerID").show(10)
 
     //Repartition
-    println("Num partitions: ", customerDf.rdd.getNumPartitions)
+    println("\ncustomerDf.repartition:")
+    println(s"Num partitions: ${customerDf.rdd.getNumPartitions}")
     val repartitionedDf = customerDf.repartition(5, col("Country"))
-    println("New num partitions: ", repartitionedDf.rdd.getNumPartitions)
-    println("Num partitions after coalesce: ", repartitionedDf.coalesce(1).rdd.getNumPartitions)
+    println(s"New num partitions: ${repartitionedDf.rdd.getNumPartitions}")
+    println(s"Num partitions after coalesce: ${repartitionedDf.coalesce(1).rdd.getNumPartitions}")
   }
 
   def functions(): Unit = {
@@ -50,7 +54,6 @@ object DataFrameOperations extends SparkSessionWrapper {
 
   def join(): Unit = {
     customerDf.printSchema()
-    customerDf.head
 
     val retailDf = spark.read
       .format("json")
@@ -58,7 +61,6 @@ object DataFrameOperations extends SparkSessionWrapper {
       .load("src/main/resources/retail_data.json")
 
     retailDf.printSchema
-    retailDf.head
 
     customerDf.join(retailDf, "CustomerID").show(10)
   }
