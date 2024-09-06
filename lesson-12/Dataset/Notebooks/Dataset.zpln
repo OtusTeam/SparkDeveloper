@@ -3,21 +3,21 @@
     {
       "text": "%md\n## Create Dataset",
       "user": "anonymous",
-      "dateUpdated": "2024-09-03T15:38:35+0300",
+      "dateUpdated": "2024-09-06T12:46:04+0300",
       "progress": 0,
       "config": {
         "lineNumbers": true,
         "tableHide": false,
         "editorSetting": {
           "language": "markdown",
-          "editOnDblClick": false,
+          "editOnDblClick": true,
           "completionKey": "TAB",
           "completionSupport": false
         },
         "colWidth": 12,
         "editorMode": "ace/mode/markdown",
         "fontSize": 9,
-        "editorHide": true,
+        "editorHide": false,
         "results": {},
         "enabled": true
       },
@@ -40,30 +40,30 @@
       "jobName": "paragraph_1725292609255_1517080081",
       "id": "paragraph_1725292609255_1517080081",
       "dateCreated": "2024-09-02T18:56:49+0300",
-      "dateStarted": "2024-09-03T15:38:35+0300",
-      "dateFinished": "2024-09-03T15:38:35+0300",
+      "dateStarted": "2024-09-06T12:46:04+0300",
+      "dateFinished": "2024-09-06T12:46:04+0300",
       "status": "FINISHED",
       "focus": true,
-      "$$hashKey": "object:442"
+      "$$hashKey": "object:498"
     },
     {
       "text": "%md\n### Из коллекции",
       "user": "anonymous",
-      "dateUpdated": "2024-09-03T15:38:35+0300",
+      "dateUpdated": "2024-09-06T12:46:04+0300",
       "progress": 0,
       "config": {
         "lineNumbers": true,
         "tableHide": false,
         "editorSetting": {
           "language": "markdown",
-          "editOnDblClick": false,
+          "editOnDblClick": true,
           "completionKey": "TAB",
           "completionSupport": false
         },
         "colWidth": 12,
         "editorMode": "ace/mode/markdown",
         "fontSize": 9,
-        "editorHide": true,
+        "editorHide": false,
         "results": {},
         "enabled": true
       },
@@ -86,15 +86,15 @@
       "jobName": "paragraph_1725292764380_1361055939",
       "id": "paragraph_1725292764380_1361055939",
       "dateCreated": "2024-09-02T18:59:24+0300",
-      "dateStarted": "2024-09-03T15:38:35+0300",
-      "dateFinished": "2024-09-03T15:38:35+0300",
+      "dateStarted": "2024-09-06T12:46:04+0300",
+      "dateFinished": "2024-09-06T12:46:04+0300",
       "status": "FINISHED",
-      "$$hashKey": "object:443"
+      "$$hashKey": "object:499"
     },
     {
       "text": "case class Person(name: String, age: Long)",
       "user": "anonymous",
-      "dateUpdated": "2024-09-03T15:38:46+0300",
+      "dateUpdated": "2024-09-06T12:46:04+0300",
       "progress": 0,
       "config": {
         "lineNumbers": true,
@@ -130,18 +130,17 @@
       "jobName": "paragraph_1725292582075_1956181485",
       "id": "paragraph_1725292582075_1956181485",
       "dateCreated": "2024-09-02T18:56:22+0300",
-      "dateStarted": "2024-09-03T15:38:46+0300",
-      "dateFinished": "2024-09-03T15:39:00+0300",
+      "dateStarted": "2024-09-06T12:46:04+0300",
+      "dateFinished": "2024-09-06T12:46:04+0300",
       "status": "FINISHED",
-      "$$hashKey": "object:444"
+      "$$hashKey": "object:500"
     },
     {
       "text": "val data = Seq(Person(\"Andy\", 32L), Person(\"Mike\", 25L), Person(\"Piter\", 40L))",
       "user": "anonymous",
-      "dateUpdated": "2024-09-03T15:39:04+0300",
+      "dateUpdated": "2024-09-06T12:46:04+0300",
       "progress": 0,
       "config": {
-        "editorMode": "ace/mode/scala",
         "lineNumbers": true,
         "editorSetting": {
           "language": "scala",
@@ -149,10 +148,12 @@
           "completionKey": "TAB",
           "completionSupport": true
         },
+        "editorMode": "ace/mode/scala",
         "colWidth": 12,
         "fontSize": 9,
-        "enabled": true,
-        "results": {}
+        "editorHide": false,
+        "results": {},
+        "enabled": true
       },
       "settings": {
         "params": {},
@@ -173,15 +174,15 @@
       "jobName": "paragraph_1725365416528_1713551009",
       "id": "paragraph_1725365416528_1713551009",
       "dateCreated": "2024-09-03T15:10:16+0300",
-      "dateStarted": "2024-09-03T15:39:04+0300",
-      "dateFinished": "2024-09-03T15:39:04+0300",
+      "dateStarted": "2024-09-06T12:46:04+0300",
+      "dateFinished": "2024-09-06T12:46:05+0300",
       "status": "FINISHED",
-      "$$hashKey": "object:445"
+      "$$hashKey": "object:501"
     },
     {
       "text": "val ds = data.toDS()\nds.show",
       "user": "anonymous",
-      "dateUpdated": "2024-09-03T15:39:12+0300",
+      "dateUpdated": "2024-09-06T12:46:05+0300",
       "progress": 0,
       "config": {
         "lineNumbers": true,
@@ -217,18 +218,17 @@
       "jobName": "paragraph_1725292599393_1241732547",
       "id": "paragraph_1725292599393_1241732547",
       "dateCreated": "2024-09-02T18:56:39+0300",
-      "dateStarted": "2024-09-03T15:39:12+0300",
-      "dateFinished": "2024-09-03T15:39:14+0300",
+      "dateStarted": "2024-09-06T12:46:05+0300",
+      "dateFinished": "2024-09-06T12:46:05+0300",
       "status": "FINISHED",
-      "$$hashKey": "object:446"
+      "$$hashKey": "object:502"
     },
     {
       "text": "val ds2 = spark.createDataset(data)\nds2.show",
       "user": "anonymous",
-      "dateUpdated": "2024-09-03T15:39:20+0300",
+      "dateUpdated": "2024-09-06T12:46:05+0300",
       "progress": 0,
       "config": {
-        "editorMode": "ace/mode/scala",
         "lineNumbers": true,
         "editorSetting": {
           "language": "scala",
@@ -236,10 +236,12 @@
           "completionKey": "TAB",
           "completionSupport": true
         },
+        "editorMode": "ace/mode/scala",
         "colWidth": 12,
         "fontSize": 9,
-        "enabled": true,
-        "results": {}
+        "editorHide": false,
+        "results": {},
+        "enabled": true
       },
       "settings": {
         "params": {},
@@ -260,18 +262,17 @@
       "jobName": "paragraph_1725365511537_155015905",
       "id": "paragraph_1725365511537_155015905",
       "dateCreated": "2024-09-03T15:11:51+0300",
-      "dateStarted": "2024-09-03T15:39:20+0300",
-      "dateFinished": "2024-09-03T15:39:20+0300",
+      "dateStarted": "2024-09-06T12:46:05+0300",
+      "dateFinished": "2024-09-06T12:46:05+0300",
       "status": "FINISHED",
-      "$$hashKey": "object:447"
+      "$$hashKey": "object:503"
     },
     {
       "text": "ds.schema",
       "user": "anonymous",
-      "dateUpdated": "2024-09-03T15:39:28+0300",
+      "dateUpdated": "2024-09-06T12:46:05+0300",
       "progress": 0,
       "config": {
-        "editorMode": "ace/mode/scala",
         "lineNumbers": true,
         "editorSetting": {
           "language": "scala",
@@ -279,10 +280,12 @@
           "completionKey": "TAB",
           "completionSupport": true
         },
+        "editorMode": "ace/mode/scala",
         "colWidth": 12,
         "fontSize": 9,
-        "enabled": true,
-        "results": {}
+        "editorHide": false,
+        "results": {},
+        "enabled": true
       },
       "settings": {
         "params": {},
@@ -293,7 +296,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "\u001b[1m\u001b[34mres3\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.types.StructType\u001b[0m = StructType(StructField(name,StringType,true),StructField(age,LongType,false))\n"
+            "data": "\u001b[1m\u001b[34mres38\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.types.StructType\u001b[0m = StructType(StructField(name,StringType,true),StructField(age,LongType,false))\n"
           }
         ]
       },
@@ -303,15 +306,15 @@
       "jobName": "paragraph_1725365879407_512107433",
       "id": "paragraph_1725365879407_512107433",
       "dateCreated": "2024-09-03T15:17:59+0300",
-      "dateStarted": "2024-09-03T15:39:28+0300",
-      "dateFinished": "2024-09-03T15:39:28+0300",
+      "dateStarted": "2024-09-06T12:46:05+0300",
+      "dateFinished": "2024-09-06T12:46:05+0300",
       "status": "FINISHED",
-      "$$hashKey": "object:448"
+      "$$hashKey": "object:504"
     },
     {
       "text": "ds.schema.equals(ds2.schema)",
       "user": "anonymous",
-      "dateUpdated": "2024-09-03T15:39:35+0300",
+      "dateUpdated": "2024-09-06T12:46:05+0300",
       "progress": 0,
       "config": {
         "lineNumbers": true,
@@ -337,7 +340,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "\u001b[1m\u001b[34mres4\u001b[0m: \u001b[1m\u001b[32mBoolean\u001b[0m = true\n"
+            "data": "\u001b[1m\u001b[34mres39\u001b[0m: \u001b[1m\u001b[32mBoolean\u001b[0m = true\n"
           }
         ]
       },
@@ -347,29 +350,29 @@
       "jobName": "paragraph_1725292671337_590746389",
       "id": "paragraph_1725292671337_590746389",
       "dateCreated": "2024-09-02T18:57:51+0300",
-      "dateStarted": "2024-09-03T15:39:35+0300",
-      "dateFinished": "2024-09-03T15:39:35+0300",
+      "dateStarted": "2024-09-06T12:46:05+0300",
+      "dateFinished": "2024-09-06T12:46:06+0300",
       "status": "FINISHED",
-      "$$hashKey": "object:449"
+      "$$hashKey": "object:505"
     },
     {
       "text": "%md\n### Из внешнего источника",
       "user": "anonymous",
-      "dateUpdated": "2024-09-03T15:38:35+0300",
+      "dateUpdated": "2024-09-06T12:46:06+0300",
       "progress": 0,
       "config": {
         "lineNumbers": true,
         "tableHide": false,
         "editorSetting": {
           "language": "markdown",
-          "editOnDblClick": false,
+          "editOnDblClick": true,
           "completionKey": "TAB",
           "completionSupport": false
         },
         "colWidth": 12,
         "editorMode": "ace/mode/markdown",
         "fontSize": 9,
-        "editorHide": true,
+        "editorHide": false,
         "results": {},
         "enabled": true
       },
@@ -392,18 +395,17 @@
       "jobName": "paragraph_1725292774267_1691780100",
       "id": "paragraph_1725292774267_1691780100",
       "dateCreated": "2024-09-02T18:59:34+0300",
-      "dateStarted": "2024-09-03T15:38:35+0300",
-      "dateFinished": "2024-09-03T15:38:35+0300",
+      "dateStarted": "2024-09-06T12:46:06+0300",
+      "dateFinished": "2024-09-06T12:46:06+0300",
       "status": "FINISHED",
-      "$$hashKey": "object:450"
+      "$$hashKey": "object:506"
     },
     {
       "text": "val sparkHome = sys.env.get(\"SPARK_HOME\").get\nval path = s\"$sparkHome/examples/src/main/resources/people.json\"\nval peopleDF = spark.read.json(path)\nval peopleDS = peopleDF.as[Person]",
       "user": "anonymous",
-      "dateUpdated": "2024-09-03T15:42:30+0300",
+      "dateUpdated": "2024-09-06T12:46:06+0300",
       "progress": 0,
       "config": {
-        "editorMode": "ace/mode/scala",
         "lineNumbers": true,
         "editorSetting": {
           "language": "scala",
@@ -411,10 +413,12 @@
           "completionKey": "TAB",
           "completionSupport": true
         },
+        "editorMode": "ace/mode/scala",
         "colWidth": 12,
         "fontSize": 9,
-        "enabled": true,
-        "results": {}
+        "editorHide": false,
+        "results": {},
+        "enabled": true
       },
       "settings": {
         "params": {},
@@ -438,8 +442,8 @@
           "group": "spark",
           "values": [
             {
-              "jobUrl": "http://ubuntu:4040/jobs/job?id=2",
-              "$$hashKey": "object:1308"
+              "jobUrl": "http://ubuntu:4040/jobs/job?id=14",
+              "$$hashKey": "object:2571"
             }
           ],
           "interpreterSettingId": "spark"
@@ -449,18 +453,17 @@
       "jobName": "paragraph_1725367235311_789814636",
       "id": "paragraph_1725367235311_789814636",
       "dateCreated": "2024-09-03T15:40:35+0300",
-      "dateStarted": "2024-09-03T15:42:30+0300",
-      "dateFinished": "2024-09-03T15:42:31+0300",
+      "dateStarted": "2024-09-06T12:46:06+0300",
+      "dateFinished": "2024-09-06T12:46:06+0300",
       "status": "FINISHED",
-      "$$hashKey": "object:451"
+      "$$hashKey": "object:507"
     },
     {
       "text": "%sh\ncat /opt/spark/examples/src/main/resources/people.json",
       "user": "anonymous",
-      "dateUpdated": "2024-09-03T15:42:53+0300",
+      "dateUpdated": "2024-09-06T12:46:06+0300",
       "progress": 0,
       "config": {
-        "editorMode": "ace/mode/sh",
         "lineNumbers": true,
         "editorSetting": {
           "language": "sh",
@@ -468,10 +471,12 @@
           "completionKey": "TAB",
           "completionSupport": false
         },
+        "editorMode": "ace/mode/sh",
         "colWidth": 12,
         "fontSize": 9,
-        "enabled": true,
-        "results": {}
+        "editorHide": false,
+        "results": {},
+        "enabled": true
       },
       "settings": {
         "params": {},
@@ -492,18 +497,17 @@
       "jobName": "paragraph_1725367338143_1774842107",
       "id": "paragraph_1725367338143_1774842107",
       "dateCreated": "2024-09-03T15:42:18+0300",
-      "dateStarted": "2024-09-03T15:42:53+0300",
-      "dateFinished": "2024-09-03T15:42:55+0300",
+      "dateStarted": "2024-09-06T12:46:06+0300",
+      "dateFinished": "2024-09-06T12:46:06+0300",
       "status": "FINISHED",
-      "$$hashKey": "object:452"
+      "$$hashKey": "object:508"
     },
     {
       "text": "peopleDS.show()",
       "user": "anonymous",
-      "dateUpdated": "2024-09-03T15:43:02+0300",
+      "dateUpdated": "2024-09-06T12:46:06+0300",
       "progress": 0,
       "config": {
-        "editorMode": "ace/mode/scala",
         "lineNumbers": true,
         "editorSetting": {
           "language": "scala",
@@ -511,10 +515,12 @@
           "completionKey": "TAB",
           "completionSupport": true
         },
+        "editorMode": "ace/mode/scala",
         "colWidth": 12,
         "fontSize": 9,
-        "enabled": true,
-        "results": {}
+        "editorHide": false,
+        "results": {},
+        "enabled": true
       },
       "settings": {
         "params": {},
@@ -538,8 +544,8 @@
           "group": "spark",
           "values": [
             {
-              "jobUrl": "http://ubuntu:4040/jobs/job?id=3",
-              "$$hashKey": "object:1394"
+              "jobUrl": "http://ubuntu:4040/jobs/job?id=15",
+              "$$hashKey": "object:2622"
             }
           ],
           "interpreterSettingId": "spark"
@@ -549,15 +555,15 @@
       "jobName": "paragraph_1725367360323_1049837488",
       "id": "paragraph_1725367360323_1049837488",
       "dateCreated": "2024-09-03T15:42:40+0300",
-      "dateStarted": "2024-09-03T15:43:02+0300",
-      "dateFinished": "2024-09-03T15:43:02+0300",
+      "dateStarted": "2024-09-06T12:46:06+0300",
+      "dateFinished": "2024-09-06T12:46:06+0300",
       "status": "FINISHED",
-      "$$hashKey": "object:453"
+      "$$hashKey": "object:509"
     },
     {
       "text": "%md\n## Основные операции",
       "user": "anonymous",
-      "dateUpdated": "2024-09-03T15:45:39+0300",
+      "dateUpdated": "2024-09-06T12:46:06+0300",
       "progress": 0,
       "config": {
         "lineNumbers": true,
@@ -571,7 +577,7 @@
         "editorMode": "ace/mode/markdown",
         "colWidth": 12,
         "fontSize": 9,
-        "editorHide": true,
+        "editorHide": false,
         "results": {},
         "enabled": true
       },
@@ -594,15 +600,15 @@
       "jobName": "paragraph_1725367430333_18203062",
       "id": "paragraph_1725367430333_18203062",
       "dateCreated": "2024-09-03T15:43:50+0300",
-      "dateStarted": "2024-09-03T15:45:39+0300",
-      "dateFinished": "2024-09-03T15:45:39+0300",
+      "dateStarted": "2024-09-06T12:46:06+0300",
+      "dateFinished": "2024-09-06T12:46:06+0300",
       "status": "FINISHED",
-      "$$hashKey": "object:454"
+      "$$hashKey": "object:510"
     },
     {
       "text": "val names = ds.map(_.name)\nnames.show",
       "user": "anonymous",
-      "dateUpdated": "2024-09-03T15:47:06+0300",
+      "dateUpdated": "2024-09-06T12:46:07+0300",
       "progress": 0,
       "config": {
         "lineNumbers": true,
@@ -615,12 +621,22 @@
         "editorMode": "ace/mode/scala",
         "colWidth": 12,
         "fontSize": 9,
+        "editorHide": false,
         "results": {},
         "enabled": true
       },
       "settings": {
         "params": {},
         "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-----+\n|value|\n+-----+\n| Andy|\n| Mike|\n|Piter|\n+-----+\n\n\u001b[1m\u001b[34mnames\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[String]\u001b[0m = [value: string]\n"
+          }
+        ]
       },
       "apps": [],
       "runtimeInfos": {
@@ -631,12 +647,12 @@
           "group": "spark",
           "values": [
             {
-              "jobUrl": "http://ubuntu:4040/jobs/job?id=4",
-              "$$hashKey": "object:1936"
+              "jobUrl": "http://ubuntu:4040/jobs/job?id=16",
+              "$$hashKey": "object:2679"
             },
             {
-              "jobUrl": "http://ubuntu:4040/jobs/job?id=5",
-              "$$hashKey": "object:1937"
+              "jobUrl": "http://ubuntu:4040/jobs/job?id=17",
+              "$$hashKey": "object:2680"
             }
           ],
           "interpreterSettingId": "spark"
@@ -646,22 +662,15 @@
       "jobName": "paragraph_1725367465447_898920778",
       "id": "paragraph_1725367465447_898920778",
       "dateCreated": "2024-09-03T15:44:25+0300",
+      "dateStarted": "2024-09-06T12:46:07+0300",
+      "dateFinished": "2024-09-06T12:46:07+0300",
       "status": "FINISHED",
-      "$$hashKey": "object:456",
-      "dateFinished": "2024-09-03T15:47:07+0300",
-      "dateStarted": "2024-09-03T15:47:06+0300",
-      "results": {
-        "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "TEXT",
-            "data": "+-----+\n|value|\n+-----+\n| Andy|\n| Mike|\n|Piter|\n+-----+\n\n\u001b[1m\u001b[34mnames\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[String]\u001b[0m = [value: string]\n"
-          }
-        ]
-      }
+      "$$hashKey": "object:511"
     },
     {
+      "text": "val age30 = ds.filter(_.age > 30)\nage30.show",
       "user": "anonymous",
+      "dateUpdated": "2024-09-06T12:46:07+0300",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -673,12 +682,22 @@
         "colWidth": 12,
         "editorMode": "ace/mode/scala",
         "fontSize": 9,
+        "editorHide": false,
         "results": {},
         "enabled": true
       },
       "settings": {
         "params": {},
         "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-----+---+\n| name|age|\n+-----+---+\n| Andy| 32|\n|Piter| 40|\n+-----+---+\n\n\u001b[1m\u001b[34mage30\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[Person]\u001b[0m = [name: string, age: bigint]\n"
+          }
+        ]
       },
       "apps": [],
       "runtimeInfos": {
@@ -689,12 +708,12 @@
           "group": "spark",
           "values": [
             {
-              "jobUrl": "http://ubuntu:4040/jobs/job?id=8",
-              "$$hashKey": "object:2239"
+              "jobUrl": "http://ubuntu:4040/jobs/job?id=18",
+              "$$hashKey": "object:2729"
             },
             {
-              "jobUrl": "http://ubuntu:4040/jobs/job?id=9",
-              "$$hashKey": "object:2240"
+              "jobUrl": "http://ubuntu:4040/jobs/job?id=19",
+              "$$hashKey": "object:2730"
             }
           ],
           "interpreterSettingId": "spark"
@@ -704,25 +723,15 @@
       "jobName": "paragraph_1725367663937_1181448316",
       "id": "paragraph_1725367663937_1181448316",
       "dateCreated": "2024-09-03T15:47:43+0300",
+      "dateStarted": "2024-09-06T12:46:07+0300",
+      "dateFinished": "2024-09-06T12:46:07+0300",
       "status": "FINISHED",
-      "focus": true,
-      "$$hashKey": "object:2040",
-      "text": "val age30 = ds.filter(_.age > 30)\nage30.show",
-      "dateUpdated": "2024-09-03T15:48:20+0300",
-      "dateFinished": "2024-09-03T15:48:20+0300",
-      "dateStarted": "2024-09-03T15:48:20+0300",
-      "results": {
-        "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "TEXT",
-            "data": "+-----+---+\n| name|age|\n+-----+---+\n| Andy| 32|\n|Piter| 40|\n+-----+---+\n\n\u001b[1m\u001b[34mage30\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[Person]\u001b[0m = [name: string, age: bigint]\n"
-          }
-        ]
-      }
+      "$$hashKey": "object:512"
     },
     {
+      "text": "val df1 = ds.select(col(\"name\"), expr(\"age + 1\"))\ndf1.show",
       "user": "anonymous",
+      "dateUpdated": "2024-09-06T12:46:07+0300",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -734,6 +743,7 @@
         "colWidth": 12,
         "editorMode": "ace/mode/scala",
         "fontSize": 9,
+        "editorHide": false,
         "results": {},
         "enabled": true
       },
@@ -741,19 +751,6 @@
         "params": {},
         "forms": {}
       },
-      "apps": [],
-      "runtimeInfos": {},
-      "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1725378812055_1291487685",
-      "id": "paragraph_1725378812055_1291487685",
-      "dateCreated": "2024-09-03T18:53:32+0300",
-      "status": "FINISHED",
-      "focus": true,
-      "$$hashKey": "object:2382",
-      "text": "val df1 = ds.select(col(\"name\"), expr(\"age + 1\"))\ndf1.show",
-      "dateUpdated": "2024-09-03T19:00:35+0300",
-      "dateFinished": "2024-09-03T19:00:35+0300",
-      "dateStarted": "2024-09-03T19:00:35+0300",
       "results": {
         "code": "SUCCESS",
         "msg": [
@@ -762,10 +759,22 @@
             "data": "+-----+---------+\n| name|(age + 1)|\n+-----+---------+\n| Andy|       33|\n| Mike|       26|\n|Piter|       41|\n+-----+---------+\n\n\u001b[1m\u001b[34mdf1\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [name: string, (age + 1): bigint]\n"
           }
         ]
-      }
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1725378812055_1291487685",
+      "id": "paragraph_1725378812055_1291487685",
+      "dateCreated": "2024-09-03T18:53:32+0300",
+      "dateStarted": "2024-09-06T12:46:07+0300",
+      "dateFinished": "2024-09-06T12:46:07+0300",
+      "status": "FINISHED",
+      "$$hashKey": "object:513"
     },
     {
+      "text": "val jsonDS = ds.toJSON\njsonDS.show(false)",
       "user": "anonymous",
+      "dateUpdated": "2024-09-06T12:46:07+0300",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -777,12 +786,22 @@
         "colWidth": 12,
         "editorMode": "ace/mode/scala",
         "fontSize": 9,
+        "editorHide": false,
         "results": {},
         "enabled": true
       },
       "settings": {
         "params": {},
         "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-------------------------+\n|value                    |\n+-------------------------+\n|{\"name\":\"Andy\",\"age\":32} |\n|{\"name\":\"Mike\",\"age\":25} |\n|{\"name\":\"Piter\",\"age\":40}|\n+-------------------------+\n\n\u001b[1m\u001b[34mjsonDS\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[String]\u001b[0m = [value: string]\n"
+          }
+        ]
       },
       "apps": [],
       "runtimeInfos": {
@@ -793,12 +812,12 @@
           "group": "spark",
           "values": [
             {
-              "jobUrl": "http://ubuntu:4040/jobs/job?id=12",
-              "$$hashKey": "object:2362"
+              "jobUrl": "http://ubuntu:4040/jobs/job?id=20",
+              "$$hashKey": "object:2804"
             },
             {
-              "jobUrl": "http://ubuntu:4040/jobs/job?id=13",
-              "$$hashKey": "object:2363"
+              "jobUrl": "http://ubuntu:4040/jobs/job?id=21",
+              "$$hashKey": "object:2805"
             }
           ],
           "interpreterSettingId": "spark"
@@ -808,38 +827,27 @@
       "jobName": "paragraph_1725367634071_332677000",
       "id": "paragraph_1725367634071_332677000",
       "dateCreated": "2024-09-03T15:47:14+0300",
+      "dateStarted": "2024-09-06T12:46:07+0300",
+      "dateFinished": "2024-09-06T12:46:08+0300",
       "status": "FINISHED",
-      "focus": true,
-      "$$hashKey": "object:1946",
-      "text": "ds.toJSON.show(false)",
-      "dateUpdated": "2024-09-03T16:14:25+0300",
-      "dateFinished": "2024-09-03T16:14:25+0300",
-      "dateStarted": "2024-09-03T16:14:25+0300",
-      "results": {
-        "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "TEXT",
-            "data": "+-------------------------+\n|value                    |\n+-------------------------+\n|{\"name\":\"Andy\",\"age\":32} |\n|{\"name\":\"Mike\",\"age\":25} |\n|{\"name\":\"Piter\",\"age\":40}|\n+-------------------------+\n\n"
-          }
-        ]
-      }
+      "$$hashKey": "object:514"
     },
     {
       "user": "anonymous",
       "progress": 0,
       "config": {
-        "colWidth": 12,
-        "fontSize": 9,
-        "enabled": true,
-        "results": {},
         "editorSetting": {
           "language": "scala",
           "editOnDblClick": false,
           "completionKey": "TAB",
           "completionSupport": true
         },
-        "editorMode": "ace/mode/scala"
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "editorHide": false,
+        "results": {},
+        "enabled": true
       },
       "settings": {
         "params": {},
@@ -851,9 +859,9 @@
       "jobName": "paragraph_1725367612490_872134729",
       "id": "paragraph_1725367612490_872134729",
       "dateCreated": "2024-09-03T15:46:52+0300",
-      "status": "READY",
-      "focus": true,
-      "$$hashKey": "object:1802"
+      "status": "FINISHED",
+      "$$hashKey": "object:515",
+      "dateUpdated": "2024-09-06T12:46:08+0300"
     }
   ],
   "name": "Dataset",
