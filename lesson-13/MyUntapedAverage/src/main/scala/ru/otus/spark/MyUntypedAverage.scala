@@ -1,8 +1,7 @@
 package ru.otus.spark
 
-import org.apache.spark.sql.expressions.UserDefinedFunction
 import org.apache.spark.sql.functions.udaf
-import org.apache.spark.sql.{DataFrame, SparkSession}
+import org.apache.spark.sql.SparkSession
 
 object MyUntypedAverage {
   def main(args: Array[String]): Unit = {
@@ -13,14 +12,28 @@ object MyUntypedAverage {
 
     import spark.implicits._
 
-    val data: DataFrame = Seq(("Michael", 3000), ("Andy", 4500), ("Justin", 3500), ("Berta", 4000))
-      .toDF("name", "salary")
+    val data = Seq(
+      ("Michael", 1, 3000),
+      ("Michael", 2, 6000),
+      ("Andy", 1, 4500),
+      ("Andy", 2, 2500),
+      ("Justin", 3, 3500),
+      ("Berta", 3, 4000)
+    )
+      .toDF("name", "depId", "salary")
     data.show()
 
-    val myAverageUdf: UserDefinedFunction = udaf(new MyAverage)
+    val myAverageUDAF = udaf(new MyAverage)
 
-    val result: DataFrame = data.agg(myAverageUdf($"salary").as("average_salary"))
-    result.show()
+    val result1 = data
+      .groupBy("depId")
+      .agg(myAverageUDAF($"salary").as("average_salary"))
+    result1.show()
+
+    val result2 = data
+      .groupBy($"name")
+      .agg(myAverageUDAF($"salary").as("average_salary"))
+    result2.show()
 
     spark.stop()
   }

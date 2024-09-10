@@ -4,7 +4,7 @@ import org.apache.spark.sql.{Encoder, Encoders}
 import org.apache.spark.sql.expressions.Aggregator
 
 class PointAttribution extends Aggregator[Int, Buffer, Int] {
-  val MAX_POINT_PER_ORDER = 3
+  private val MAX_POINT_PER_ORDER = 3
   // Начальное значение. Должно соответствовать свойству: любое b + zero = b
   def zero: Buffer = Buffer(0)
   // Объединение двух значений в новое значение.

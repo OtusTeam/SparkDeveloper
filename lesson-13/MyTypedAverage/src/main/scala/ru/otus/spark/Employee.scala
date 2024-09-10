@@ -1,3 +1,3 @@
 package ru.otus.spark
 
-case class Employee(name: String, salary: Long)
+case class Employee(name: String, depId: Int, salary: Long)
