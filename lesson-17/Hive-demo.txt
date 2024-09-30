@@ -1,0 +1,49 @@
+git clone https://github.com/Marcel-Jan/docker-hadoop-spark.git
+cd docker-hadoop-spark
+docker compose up -d
+# HDFS
+docker cp breweries.csv namenode:breweries.csv
+docker exec -it namenode bash
+hdfs dfs -mkdir -p /data/openbeer/breweries
+hdfs dfs -put breweries.csv /data/openbeer/breweries/breweries.csv
+exit
+# Hive
+docker exec -it hive-server bash
+hiveserver2
+netstat -anp | grep 10000
+beeline -u jdbc:hive2://localhost:10000 -n root
+!connect jdbc:hive2://127.0.0.1:10000 scott tiger
+show databases;
+show tables;
+CREATE EXTERNAL TABLE IF NOT EXISTS breweries(
+    NUM INT,
+    NAME CHAR(100),
+    CITY CHAR(100),
+    STATE CHAR(100),
+    ID INT )
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+STORED AS TEXTFILE
+location '/data/openbeer/breweries';
+show tables;
+select name from breweries limit 10;
+^D
+exit
+# Spark
+docker cp conf/hive-site.xml spark-master://spark/conf/hive-site.xml
+docker exec -it spark-master bash
+/spark/bin/pyspark --master spark://spark-master:7077
+spark = SparkSession \
+    .builder \
+    .appName("Python Spark SQL Hive integration example") \
+    .config("spark.sql.warehouse.dir", "hdfs://namenode:9000/user/hive/warehouse") \
+    .enableHiveSupport() \
+    .getOrCreate()
+brewfile = spark.read.option("inferSchema", True).option("header", True).csv("hdfs://namenode:9000/data/openbeer/breweries/breweries.csv")
+brewfile.show()
+brewfile.write.mode("overwrite").saveAsTable("breweries")
+spark.sql("show tables").show()
+spark.sql("SELECT * FROM breweries").show()
+^D
+exit
+
