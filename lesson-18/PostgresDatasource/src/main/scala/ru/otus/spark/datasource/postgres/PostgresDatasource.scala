@@ -42,7 +42,8 @@ class DefaultSource extends TableProvider {
       properties: util.Map[String, String]
   ): Table = new PostgresTable(
     properties.get("tableName")
-  ) // TODO: Error handling
+
+  )
 }
 
 class PostgresTable(val name: String) extends SupportsRead with SupportsWrite {
@@ -80,7 +81,9 @@ class PostgresScanBuilder(options: CaseInsensitiveStringMap)
       options.get("user"),
       options.get("password"),
       options.get("tableName")
-    )
+    ),
+    options.get("partitionSize", 10)
+
   )
 }
 
@@ -93,8 +96,13 @@ class PostgresScan(connectionProperties: ConnectionProperties)
 
   override def toBatch: Batch = this
 
-  override def planInputPartitions(): Array[InputPartition] = Array(
-    new PostgresPartition
+  override def planInputPartitions(): Array[InputPartition] = {
+    // Чтение в несколько партиций
+    val partitions: Array[InputPartition] = (1 to 3).map { _ =>
+      new PostgresPartition
+    }.toArray
+    partitions
+  }
   )
 
   override def createReaderFactory(): PartitionReaderFactory =
