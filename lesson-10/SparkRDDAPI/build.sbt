@@ -2,7 +2,7 @@ ThisBuild / organization := "ru.otus.spark"
 ThisBuild / version := "1.0"
 ThisBuild / scalaVersion := "2.12.18"
 
-val sparkVersion = "3.5.3"
+val sparkVersion = "3.5.5"
 val circeVersion = "0.14.9"
 
 ThisBuild / libraryDependencies ++= Seq(
