@@ -149,3 +149,4 @@ fabric.properties
 lesson-13/data/train.csv
 lesson-13/Notebooks/data/train.csv
 lesson-17/jars/postgresql-42.7.2.jar
+lesson-22/SparkNeo4j/data/*
