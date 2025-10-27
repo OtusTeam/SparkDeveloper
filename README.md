@@ -4,6 +4,7 @@
 
 - **01** [Что такое Spark](lesson-01)
 - **05** [Hadoop, HDFS](lesson-05)
+- **07** [HiveQL](lesson-07)
 - **08** [Spark в Hadoop, YARN](lesson-08)
 - **09** [Spark в Kubernetes](lesson-09)
 - **10** [RDD](lesson-10)

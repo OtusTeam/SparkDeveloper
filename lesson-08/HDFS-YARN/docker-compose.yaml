@@ -1,0 +1,85 @@
+services:
+   namenode:
+      image: apache/hadoop:3.4.1
+      container_name: namenode
+      hostname: namenode
+      command: ["hdfs", "namenode"]
+      ports:
+        - 9870:9870
+      env_file:
+        - ./config
+#      environment:
+#        - ENSURE_NAMENODE_DIR="/tmp/hadoop-hadoop/dfs/name" # For first start to format dfs
+      volumes:
+        - ./data/namenode:/tmp/hadoop-hadoop/dfs/name
+
+   datanode1:
+      image: apache/hadoop:3.4.1
+      container_name: datanode1
+      hostname: datanode1
+      command: ["hdfs", "datanode"]
+      ports:
+        - 9864:9864
+      env_file:
+        - ./config      
+      volumes:
+        - ./data/datanode1:/tmp/hadoop-hadoop/dfs/data
+
+   datanode2:
+      image: apache/hadoop:3.4.1
+      container_name: datanode2
+      hostname: datanode2
+      command: ["hdfs", "datanode"]
+      ports:
+        - 9865:9864
+      env_file:
+        - ./config      
+      volumes:
+        - ./data/datanode2:/tmp/hadoop-hadoop/dfs/data
+
+   datanode3:
+      image: apache/hadoop:3.4.1
+      container_name: datanode3
+      hostname: datanode3
+      command: ["hdfs", "datanode"]
+      ports:
+        - 9866:9864
+      env_file:
+        - ./config      
+      volumes:
+        - ./data/datanode3:/tmp/hadoop-hadoop/dfs/data
+
+   resourcemanager:
+      image: apache/hadoop:3.4.1
+      container_name: resourcemanager
+      hostname: resourcemanager
+      command: ["yarn", "resourcemanager"]
+      ports:
+        - 8088:8088
+      env_file:
+        - ./config
+
+   nodemanager1:
+      image: apache/hadoop:3.4.1
+      container_name: nodemanager1
+      hostname: nodemanager1
+      command: ["yarn", "nodemanager"]
+      env_file:
+        - ./config
+
+   nodemanager2:
+      image: apache/hadoop:3.4.1
+      container_name: nodemanager2
+      hostname: nodemanager2
+      command: ["yarn", "nodemanager"]
+      env_file:
+        - ./config
+
+   nodemanager3:
+      image: apache/hadoop:3.4.1
+      container_name: nodemanager3
+      hostname: nodemanager3
+      command: ["yarn", "nodemanager"]
+      env_file:
+        - ./config
+

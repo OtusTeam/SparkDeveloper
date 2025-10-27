@@ -1,0 +1,412 @@
+-- Создаём таблицы, загружаем данные
+CREATE TABLE IF NOT EXISTS employee (
+  name string,
+  work_place ARRAY<string>,
+  gender_age STRUCT<gender:string,age:int>,
+  skills_score MAP<string,int>,
+  depart_title MAP<STRING,ARRAY<STRING>>
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '|'
+COLLECTION ITEMS TERMINATED BY ','
+MAP KEYS TERMINATED BY ':'
+STORED AS TEXTFILE;
+
+LOAD DATA INPATH '/tmp/data/employee.txt' OVERWRITE INTO TABLE employee;
+
+--
+CREATE TABLE IF NOT EXISTS employee_hr
+(
+  name string,
+  employee_id int,
+  sin_number string,
+  start_date date
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '|'
+STORED AS TEXTFILE;
+
+LOAD DATA INPATH '/tmp/data/employee_hr.txt' OVERWRITE INTO TABLE employee_hr;
+
+--
+CREATE TABLE IF NOT EXISTS employee_contract
+(
+  name string,
+  dept_num int,
+  employee_id int,
+  salary int,
+  type string,
+  start_date date
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '|'
+STORED AS TEXTFILE;
+
+LOAD DATA INPATH '/tmp/data/employee_contract.txt' OVERWRITE INTO TABLE employee_contract;
+
+-- Create Table As SELECT (CTAS) with Common Table Expression (CTE)
+CREATE TABLE cte_employee AS
+WITH r1 AS (SELECT name FROM r2 WHERE name = 'Michael'),
+    r2 AS (SELECT name FROM employee WHERE gender_age.gender= 'Male'),
+    r3 AS (SELECT name FROM employee WHERE gender_age.gender= 'Female')
+SELECT * FROM r1 UNION ALL select * FROM r3;
+
+SHOW TABLES;
+SHOW TABLES '*emp*';
+
+
+-- Запросы
+-- SELECT
+SELECT * FROM employee;
+
+--Query the ARRAY in the table
+SELECT work_place FROM employee;
+SELECT work_place[0] AS col_1, work_place[1] AS col_2, work_place[2] AS col_3 FROM employee;
+
+--Query the STRUCT in the table
+SELECT gender_age FROM employee;
+SELECT gender_age.gender, gender_age.age FROM employee;
+
+--Query the MAP in the table
+SELECT skills_score FROM employee;
+
+SELECT
+    name
+    , skills_score['DB'] AS DB
+    , skills_score['Perl'] AS Perl
+    , skills_score['Python'] AS Python
+    , skills_score['Sales'] as Sales
+    , skills_score['HR'] as HR
+FROM employee;
+
+SELECT depart_title FROM employee;
+
+SELECT
+    name
+    , depart_title['Product'] AS Product
+    , depart_title['Test'] AS Test
+    , depart_title['COE'] AS COE
+    , depart_title['Sales'] AS Sales
+FROM employee;
+
+SELECT
+    name
+    , depart_title['Product'][0] AS product_col0
+    , depart_title['Test'][0] AS test_col0
+FROM employee;
+
+-- Select with UDF, IF, and CASE WHEN
+SELECT
+    CASE
+        WHEN gender_age.gender = 'Female'
+            THEN 'Ms.'
+            ELSE 'Mr.'
+    END as title,
+    name,
+    IF (array_contains(work_place, 'New York'), 'US', 'CA') as country
+FROM employee;
+
+-- Nest SELECT after the FROM
+SELECT name, gender_age.gender AS gender
+FROM (
+    SELECT *
+    FROM employee
+    WHERE gender_age.gender = 'Male'
+) t1;
+
+-- Filter with in
+SELECT name FROM employee WHERE gender_age.age in (27, 30);
+
+-- Subquery in
+SELECT name, gender_age.gender AS gender
+FROM employee a
+WHERE a.name IN (SELECT name FROM employee WHERE gender_age.gender = 'Male');
+
+-- Subquery exists
+SELECT name, gender_age.gender AS gender
+FROM employee a
+WHERE EXISTS (SELECT * FROM employee b WHERE a.gender_age.gender = b.gender_age.gender AND b.gender_age.gender = 'Male');
+
+-- ORDER, SORT
+SELECT name FROM employee ORDER BY name DESC;
+SELECT name FROM employee SORT BY name DESC;
+
+-- Aggregation without GROUP BY columns
+SELECT count(*) as rowcnt1, count(1) AS rowcnt2 FROM employee;
+
+-- Aggregation with GROUP BY columns
+SELECT gender_age.gender, count(*) AS row_cnt
+FROM employee
+GROUP BY gender_age.gender;
+
+-- Multiple aggregate functions are called in the same SELECT
+SELECT gender_age.gender, AVG(gender_age.age) AS avg_age, count(*) AS row_cnt
+FROM employee
+GROUP BY gender_age.gender;
+
+-- Aggregate functions are used with CASE WHEN
+SELECT sum(CASE WHEN gender_age.gender = 'Male' THEN gender_age.age ELSE 0 END)/count(CASE WHEN gender_age.gender = 'Male' THEN 1 ELSE NULL END) AS male_age_avg
+FROM employee;
+
+-- Aggregate functions are used with COALESCE and IF
+SELECT
+    sum(coalesce(gender_age.age,0)) AS age_sum,
+    sum(if(gender_age.gender = 'Female',gender_age.age,0)) AS female_age_sum
+FROM employee;
+
+-- Use max/min struct
+SELECT
+    gender_age.gender,
+    max(struct(gender_age.age, name)).col1 as age,
+    max(struct(gender_age.age, name)).col2 as name
+FROM employee
+GROUP BY gender_age.gender;
+
+-- Use subquery to select unique value before aggregations for better performance
+SELECT count(*) AS gender_uni_cnt FROM (SELECT distinct gender_age.gender FROM employee) a;
+
+-- window aggregate functions
+SELECT
+    name,
+    dept_num as deptno,
+    salary,
+    count(*) OVER (PARTITION BY dept_num) as cnt,
+    sum(salary) OVER(PARTITION BY dept_num ORDER BY dept_num) as sum1,
+    sum(salary) OVER(ORDER BY dept_num) as sum2
+FROM employee_contract
+ORDER BY deptno, name;
+
+-- window sorting functions
+SELECT
+    name,
+    dept_num as deptno,
+    salary,
+    row_number() OVER () as rnum,
+    rank() OVER (PARTITION BY dept_num ORDER BY salary) as rk,
+    dense_rank() OVER (PARTITION BY dept_num ORDER BY salary) as drk,
+    percent_rank() OVER(PARTITION BY dept_num ORDER BY salary) as prk,
+    ntile(4) OVER(PARTITION BY dept_num ORDER BY salary) as ntile
+FROM employee_contract
+ORDER BY deptno, name;
+
+-- window analytics function
+SELECT
+    name,
+    dept_num as deptno,
+    salary,
+    round(cume_dist() OVER (PARTITION BY dept_num ORDER BY salary), 2) as cume,
+    lead(salary, 2) OVER (PARTITION BY dept_num ORDER BY salary) as lead,
+    lag(salary, 2, 0) OVER (PARTITION BY dept_num ORDER BY salary) as lag,
+    first_value(salary) OVER (PARTITION BY dept_num ORDER BY salary) as fval,
+    last_value(salary) OVER (PARTITION BY dept_num ORDER BY salary) as lvalue,
+    last_value(salary) OVER (PARTITION BY dept_num ORDER BY salary RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) AS lvalue2
+FROM employee_contract
+ORDER BY deptno, salary;
+
+-- window expression preceding and following
+SELECT
+    name,
+    dept_num as dno,
+    salary AS sal,
+    max(salary) OVER (PARTITION BY dept_num ORDER BY name ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) win1,
+    max(salary) OVER (PARTITION BY dept_num ORDER BY name ROWS BETWEEN 2 PRECEDING AND UNBOUNDED FOLLOWING) win2,
+    max(salary) OVER (PARTITION BY dept_num ORDER BY name ROWS BETWEEN 1 PRECEDING AND 2 FOLLOWING) win3,
+    max(salary) OVER (PARTITION BY dept_num ORDER BY name ROWS BETWEEN 2 PRECEDING AND 1 PRECEDING) win4,
+    max(salary) OVER (PARTITION BY dept_num ORDER BY name ROWS BETWEEN 1 FOLLOWING AND 2 FOLLOWING) win5,
+    max(salary) OVER (PARTITION BY dept_num ORDER BY name ROWS 2 PRECEDING) win6,
+    max(salary) OVER (PARTITION BY dept_num ORDER BY name ROWS UNBOUNDED PRECEDING) win7
+FROM employee_contract
+ORDER BY dno, name;
+
+-- window expression current_row
+SELECT
+    name,
+    dept_num as dno,
+    salary AS sal,
+    max(salary) OVER (PARTITION BY dept_num ORDER BY name ROWS BETWEEN CURRENT ROW AND CURRENT ROW) win8,
+    max(salary) OVER (PARTITION BY dept_num ORDER BY name ROWS BETWEEN CURRENT ROW AND 1 FOLLOWING) win9,
+    max(salary) OVER (PARTITION BY dept_num ORDER BY name ROWS BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING) win10,
+    max(salary) OVER (PARTITION BY dept_num ORDER BY name ROWS BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING) win11,
+    max(salary) OVER (PARTITION BY dept_num ORDER BY name ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) win12,
+    max(salary) OVER (PARTITION BY dept_num ORDER BY name ROWS BETWEEN UNBOUNDED PRECEDING AND 1 FOLLOWING) win13,
+    max(salary) OVER (PARTITION BY dept_num ORDER BY name ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) win14
+FROM employee_contract
+ORDER BY dno, name;
+
+-- window reference
+SELECT
+    name,
+    dept_num,
+    salary,
+    MAX(salary) OVER w1 AS win1,
+    MAX(salary) OVER w2 AS win2,
+    MAX(salary) OVER w3 AS win3
+FROM employee_contract
+WINDOW
+w1 as (PARTITION BY dept_num ORDER BY name ROWS BETWEEN 2 PRECEDING AND CURRENT ROW),
+w2 as w3,
+w3 as (PARTITION BY dept_num ORDER BY name ROWS BETWEEN 1 PRECEDING AND 2 FOLLOWING);
+
+
+-- Table Partitioning
+-- Create partition table DDL
+CREATE TABLE IF NOT EXISTS employee_partitioned
+(
+  name string,
+  work_place ARRAY<string>,
+  gender_age STRUCT<gender:string,age:int>,
+  skills_score MAP<string,int>,
+  depart_title MAP<STRING,ARRAY<STRING>>
+)
+PARTITIONED BY (year INT, month INT)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '|'
+COLLECTION ITEMS TERMINATED BY ','
+MAP KEYS TERMINATED BY ':';
+
+-- Check partition table structure
+DESC employee_partitioned;
+
+-- Load data to the partition
+INSERT INTO TABLE employee_partitioned PARTITION (year=2018, month=12) SELECT * FROM employee;
+
+
+-- Table bucketing
+-- Prepare data for bucket table
+CREATE TABLE IF NOT EXISTS employee_id
+(
+  name string,
+  employee_id int,
+  work_place ARRAY<string>,
+  gender_age STRUCT<gender:string,age:int>,
+  skills_score MAP<string,int>,
+  depart_title MAP<STRING,ARRAY<STRING>>
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '|'
+COLLECTION ITEMS TERMINATED BY ','
+MAP KEYS TERMINATED BY ':'
+STORED AS TEXTFILE;
+
+LOAD DATA INPATH '/tmp/data/employee_id.txt' OVERWRITE INTO TABLE employee_id;
+
+-- Create bucket table
+CREATE TABLE IF NOT EXISTS employee_id_buckets
+(
+  name string,
+  employee_id int,
+  work_place ARRAY<string>,
+  gender_age STRUCT<gender:string,age:int>,
+  skills_score MAP<string,int>,
+  depart_title MAP<STRING,ARRAY<STRING>>
+)
+CLUSTERED BY (employee_id) INTO 2 BUCKETS
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '|'
+COLLECTION ITEMS TERMINATED BY ','
+MAP KEYS TERMINATED BY ':';
+
+-- set map.reduce.tasks = 2;
+-- set hive.enforce.bucketing = true;
+
+INSERT OVERWRITE TABLE employee_id_buckets SELECT * FROM employee_id;
+
+
+-- JOIN
+-- Equal JOIN between two tables
+SELECT emp.name, emph.sin_number
+FROM employee emp
+JOIN employee_hr emph ON emp.name = emph.name;
+
+-- Join with complex expression - conditional join
+SELECT emp.name, emph.sin_number
+FROM employee emp
+JOIN employee_hr emph
+ON IF(emp.name = 'Will', '1', emp.name) = CASE WHEN emph.name = 'Will' THEN '0' ELSE emph.name END;
+
+-- Use Where to limit the output of join
+SELECT emp.name, emph.sin_number
+FROM employee emp
+JOIN employee_hr emph ON emp.name = emph.name
+WHERE emp.name = 'Will';
+
+-- JOIN between more tables
+SELECT emp.name, empi.employee_id, emph.sin_number
+FROM employee emp
+JOIN employee_hr emph ON emp.name = emph.name
+JOIN employee_id empi ON emp.name = empi.name;
+
+-- Self join is used when the data in the table has nest logic
+SELECT emp.name
+FROM employee emp
+JOIN employee emp_b ON emp.name = emp_b.name;
+
+-- Left JOIN
+SELECT emp.name, emph.sin_number
+FROM employee emp
+LEFT JOIN employee_hr emph ON emp.name = emph.name;
+
+-- Right JOIN
+SELECT emp.name, emph.sin_number
+FROM employee emp
+RIGHT JOIN employee_hr emph ON emp.name = emph.name;
+
+-- Full OUTER JOIN
+SELECT emp.name, emph.sin_number
+FROM employee emp
+FULL JOIN employee_hr emph ON emp.name = emph.name;
+
+-- CROSS JOIN in different ways
+SELECT emp.name, emph.sin_number
+FROM employee emp
+CROSS JOIN employee_hr emph;
+
+SELECT emp.name, emph.sin_number
+FROM employee emp
+JOIN employee_hr emph;
+
+SELECT emp.name, emph.sin_number
+FROM employee emp
+JOIN employee_hr emph on 1=1;
+
+-- unequal JOIN
+SELECT emp.name, emph.sin_number
+FROM employee emp
+CROSS JOIN employee_hr emph
+WHERE emp.name <> emph.name;
+
+-- LEFT SEMI JOIN
+SELECT a.name
+FROM employee a
+WHERE EXISTS (SELECT * FROM employee_id b WHERE a.name = b.name);
+
+SELECT a.name
+FROM employee a
+LEFT SEMI JOIN employee_id b
+ON a.name = b.name;
+
+
+-- UNION
+-- UNION ALL including duplications
+SELECT a.name as nm FROM employee a
+UNION ALL
+SELECT b.name as nm FROM employee_hr b;
+
+-- Order with UNION
+SELECT a.name as nm FROM employee a
+UNION ALL
+SELECT b.name as nm FROM employee_hr b
+ORDER BY nm;
+
+-- Table employee implements INTERCEPT employee_hr
+SELECT a.name
+FROM employee a
+JOIN employee_hr b
+ON a.name = b.name;
+
+-- Table employee implements MINUS employee_hr
+SELECT a.name
+FROM employee a
+LEFT JOIN employee_hr b
+ON a.name = b.name
+WHERE b.name IS NULL;

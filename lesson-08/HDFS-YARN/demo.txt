@@ -1,0 +1,19 @@
+# Демонстрация HDFS и YARN
+
+## Запускаем HDFS и YARN
+$ docker compose up -d
+$ docker compose ps -a
+
+## HDFS 
+### Веб-интерфейс Namenode
+http://localhost:9870
+
+## YARN
+### Веб-интерфейс ResourceManager
+http://localhost:8088
+
+### Запускаем задание MapReduce
+$ docker exec -ti resourcemanager /bin/bash
+
+yarn jar share/hadoop/mapreduce/hadoop-mapreduce-examples-3.4.1.jar pi 10 15
+

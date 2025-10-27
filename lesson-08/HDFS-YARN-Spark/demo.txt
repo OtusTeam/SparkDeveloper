@@ -1,0 +1,18 @@
+# Демонстрация HDFS и YARN
+
+## Запускаем HDFS и YARN
+$ docker compose up -d
+$ docker compose ps -a
+
+## HDFS 
+### Веб-интерфейс Namenode
+http://localhost:9870
+
+## YARN
+### Веб-интерфейс ResourceManager
+http://localhost:8088
+
+## Spark
+### Запускаем приложение Spark
+$ docker exec -ti resourcemanager /opt/spark/bin/spark-submit --master yarn --class org.apache.spark.examples.SparkPi /opt/spark/examples/jars/spark-examples_2.12-3.5.4.jar
+
