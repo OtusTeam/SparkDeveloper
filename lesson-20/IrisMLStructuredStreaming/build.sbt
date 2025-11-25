@@ -4,8 +4,8 @@ version := "1.0"
 
 scalaVersion := "2.12.12"
 
-lazy val sparkVersion = "3.4.1"
-lazy val kafkaVersion = "3.4.0"
+lazy val sparkVersion = "3.5.6"
+lazy val kafkaVersion = "3.2.0"
 
 libraryDependencies ++= Seq(
   "com.typesafe"      % "config"                    % "1.4.2",
