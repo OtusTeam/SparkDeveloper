@@ -11,6 +11,7 @@
 - **11** [DataFrame](lesson-11)
 - **12** [Dataset, SparkSQL](lesson-12)
 - **13** [UDF и UDAF](lesson-13)
+- **16** [Файлы и их форматы](lesson-16)
 - **17** [Базы данных, Hive](lesson-17)
 - **18** [Собственный источник данных](lesson-18)
 - **19** [Kafka](lesson-19)
