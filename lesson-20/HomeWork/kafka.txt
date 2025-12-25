@@ -5,24 +5,24 @@ docker compose up -d
 docker compose ps -a
 
 3) Создаём топик "books"
-docker exec kafka kafka-topics --create --topic books --bootstrap-server localhost:29092
+docker exec kafka kafka-topics --create --topic books --bootstrap-server kafka:9092
 
 4) Проверяем топики
-docker exec kafka kafka-topics --list --bootstrap-server localhost:9092
+docker exec kafka kafka-topics --list --bootstrap-server kafka:9092
 
 5) Работаем с Kafka
-Брокер Kafka доступен как localhost:29092
+Брокер Kafka доступен как kafka:9092
 
 3) Создаём топик "test"
-docker exec kafka kafka-topics --create --topic test --bootstrap-server localhost:29092
+docker exec kafka kafka-topics --create --topic test --bootstrap-server kafka:9092
 
 6) Записываем в топик "test", key отделяется от value символом ,
-docker exec -ti kafka kafka-console-producer --topic test --bootstrap-server localhost:29092 --property parse.key=true --property key.separator=,
+docker exec -ti kafka kafka-console-producer --topic test --bootstrap-server kafka:9092 --property parse.key=true --property key.separator=,
 
 7) Читаем из топика "test" с начала, выводим ключ и смещение
-docker exec -ti kafka kafka-console-consumer --topic test --bootstrap-server localhost:29092 --from-beginning --property print.offset=true --property print.key=true
+docker exec -ti kafka kafka-console-consumer --topic test --bootstrap-server kafka:9092 --from-beginning --property print.offset=true --property print.key=true
 
 6) Останавливаем Kafka
-docker compose stop
+docker compose down
 docker container prune -f
 docker volume prune -f
