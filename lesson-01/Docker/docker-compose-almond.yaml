@@ -1,6 +1,6 @@
 services:
   master:
-    image: apache/spark:3.3.3
+    image: apache/spark:3.5.6
     container_name: master
     hostname: master
     command: /opt/spark/bin/spark-class org.apache.spark.deploy.master.Master
@@ -13,7 +13,7 @@ services:
       - ./work/data:/data
 
   slave1:
-    image: apache/spark:3.3.3
+    image: apache/spark:3.5.6
     container_name: slave1
     hostname: slave1
     environment:
@@ -23,11 +23,10 @@ services:
       - 8081:8081
     volumes:
       - ./spark/conf:/opt/spark/conf
-      - ./spark/work:/opt/spark/work
       - ./work/data:/data
 
   slave2:
-    image: apache/spark:3.3.3
+    image: apache/spark:3.5.6
     container_name: slave2
     hostname: slave1
     environment:
@@ -37,11 +36,10 @@ services:
       - 8082:8081
     volumes:
       - ./spark/conf:/opt/spark/conf
-      - ./spark/work:/opt/spark/work
       - ./work/data:/data
 
   slave3:
-    image: apache/spark:3.3.3
+    image: apache/spark:3.5.6
     container_name: slave3
     hostname: slave1
     environment:
@@ -51,16 +49,17 @@ services:
       - 8083:8081
     volumes:
       - ./spark/conf:/opt/spark/conf
-      - ./spark/work:/opt/spark/work
       - ./work/data:/data
 
-  python:
-    image: jupyter/pyspark-notebook:python-3.8
-    container_name: python
-    hostname: python
+  almond:
+    image: almondsh/almond:latest
+    container_name: almond
+    hostname: almond
     ports:
       - 8888:8888
       - 4040:4040
     volumes:
       - ./work:/home/jovyan/work
       - ./work/data:/data
+      - ./cache:/home/jovyan/.cache
+
