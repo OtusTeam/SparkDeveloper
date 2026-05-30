@@ -11,6 +11,7 @@ http://localhost:10002/
 $ docker exec -ti hiveserver2 beeline -u 'jdbc:hive2://localhost:10000/'
 
 -- Создаём таблицы, загружаем данные
+DROP TABLE IF EXISTS employee;
 CREATE TABLE IF NOT EXISTS employee (
   name string,
   work_place ARRAY<string>,
@@ -27,6 +28,7 @@ STORED AS TEXTFILE;
 LOAD DATA INPATH '/data/employee.txt' OVERWRITE INTO TABLE employee;
 
 --
+DROP TABLE IF EXISTS employee_hr;
 CREATE TABLE IF NOT EXISTS employee_hr
 (
   name string,
@@ -41,6 +43,7 @@ STORED AS TEXTFILE;
 LOAD DATA INPATH '/data/employee_hr.txt' OVERWRITE INTO TABLE employee_hr;
 
 --
+DROP TABLE IF EXISTS employee_contract;
 CREATE TABLE IF NOT EXISTS employee_contract
 (
   name string,
@@ -57,6 +60,7 @@ STORED AS TEXTFILE;
 LOAD DATA INPATH '/data/employee_contract.txt' OVERWRITE INTO TABLE employee_contract;
 
 -- Create Table As SELECT (CTAS) with Common Table Expression (CTE)
+DROP TABLE IF NOT EXISTS cte_employee;
 CREATE TABLE cte_employee AS
 WITH r1 AS (SELECT name FROM r2 WHERE name = 'Michael'),
     r2 AS (SELECT name FROM employee WHERE gender_age.gender= 'Male'),
@@ -125,6 +129,11 @@ FROM (
     FROM employee
     WHERE gender_age.gender = 'Male'
 ) t1;
+
+
+SELECT name, gender_age.gender AS gender
+FROM employee
+WHERE gender_age.gender = 'Male';
 
 -- Filter with in
 SELECT name FROM employee WHERE gender_age.age in (27, 30);
