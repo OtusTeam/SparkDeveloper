@@ -1,6 +1,6 @@
 services:
   postgres:
-    image: postgres
+    image: docker.io/library/postgres:18.3
     restart: unless-stopped
     container_name: postgres
     hostname: postgres
@@ -8,15 +8,13 @@ services:
       POSTGRES_DB: 'metastore_db'
       POSTGRES_USER: 'hive'
       POSTGRES_PASSWORD: 'password'
-    ports:
-      - '5432:5432'
     volumes:
-      - hive-db:/var/lib/postgresql
+      - ./postgres/data:/var/lib/postgresql
     networks:
       - hive
 
   metastore:
-    image: apache/hive:4.0.1
+    image: docker.io/apache/hive:4.2.0
     depends_on:
       - postgres
     restart: unless-stopped
@@ -32,13 +30,13 @@ services:
     ports:
         - '9083:9083'
     volumes:
-        - warehouse:/opt/hive/data/warehouse
+        - ./warehouse:/opt/hive/data/warehouse
         - ./postgres/postgresql-42.7.3.jar:/opt/hive/lib/postgres.jar
     networks:
       - hive
 
   hiveserver2:
-    image: apache/hive:4.0.1
+    image: docker.io/apache/hive:4.2.0
     depends_on:
       - metastore
     restart: unless-stopped
@@ -55,14 +53,10 @@ services:
       - '10002:10002'
     volumes:
       - ./conf:/hive_custom_conf
-      - warehouse:/opt/hive/data/warehouse
+      - ./warehouse:/opt/hive/data/warehouse
       - ./data:/data
     networks:
       - hive
-
-volumes:
-  hive-db:
-  warehouse:
 
 networks:
   hive:
