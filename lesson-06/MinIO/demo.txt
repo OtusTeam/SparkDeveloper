@@ -1,0 +1,25 @@
+$ docker pull quay.io/minio/minio:RELEASE.2025-05-24T17-08-30Z
+
+$ docker run -d \
+-p 9000:9000 -p 9001:9001 \
+-v $PWD/minio:/data \
+--name "myminio" \
+-e MINIO_ROOT_USER=admin \
+-e MINIO_ROOT_PASSWORD=password \
+-e MINIO_ADDRESS=:9000 \
+-e MINIO_CONSOLE_ADDRESS=:9090 \
+quay.io/minio/minio:RELEASE.2025-05-24T17-08-30Z minio server /data
+
+$ curl --progress-bar -L https://dl.min.io/aistor/mc/release/linux-amd64/mc -o mc
+$ chmod +x ./mc
+$ ./mc --version
+$ ./mc alias set myminio http://localhost:9000 admin password
+$ ./mc mb myminio/data
+
+$ cat > file.txt << EOF
+aaa
+bbb
+ccc
+EOF
+
+$ ./mc cp file.txt myminio/data
