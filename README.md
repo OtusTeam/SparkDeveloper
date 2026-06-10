@@ -7,7 +7,7 @@
 - **06** [Распределенные файловые системы](lesson-06)
 - **07** [Spark в Hadoop, YARN](lesson-07)
 - **08** [Spark в Kubernetes](lesson-08)
-- **10** [RDD](lesson-10)
+- **09** [RDD](lesson-09)
 - **11** [DataFrame](lesson-11)
 - **12** [Dataset, SparkSQL](lesson-12)
 - **13** [UDF и UDAF](lesson-13)
