@@ -3,11 +3,10 @@ services:
       image: apache/hadoop:3.4.1
       container_name: namenode
       hostname: namenode
-      command: ["hdfs", "namenode"]
+      command: bash -c "if [ ! -d /tmp/hadoop-root/dfs/name/current ]; then hdfs namenode -format -force; fi && hdfs namenode"
       ports:
         - 9870:9870
       environment:
-        - ENSURE_NAMENODE_DIR="/tmp/hadoop-hadoop/dfs/name" # For first start to format dfs
         - HADOOP_HOME=/opt/hadoop
         - CORE-SITE.XML_fs.default.name=hdfs://namenode
         - CORE-SITE.XML_fs.defaultFS=hdfs://namenode
