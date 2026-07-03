@@ -1,0 +1,184 @@
+services:
+  jupyter:
+    image: quay.io/jupyter/pyspark-notebook:2024-10-14
+    depends_on:
+      lakekeeper:
+        condition: service_healthy
+      initialwarehouse:
+        condition: service_completed_successfully
+      trino:
+        condition: service_healthy
+      starrocks:
+        condition: service_healthy
+    command: start-notebook.sh --NotebookApp.token=''
+    volumes:
+      - ./notebooks:/home/jovyan/examples/
+    networks:
+      iceberg_net:
+    ports:
+      - "8888:8888"
+
+  lakekeeper:
+    image: ${LAKEKEEPER_TEST__SERVER_IMAGE:-quay.io/lakekeeper/catalog:latest-main}
+    pull_policy: always
+    environment:
+      - LAKEKEEPER__PG_ENCRYPTION_KEY=This-is-NOT-Secure!
+      - LAKEKEEPER__PG_DATABASE_URL_READ=postgresql://postgres:postgres@db:5432/postgres
+      - LAKEKEEPER__PG_DATABASE_URL_WRITE=postgresql://postgres:postgres@db:5432/postgres
+      - LAKEKEEPER__DEBUG__LOG_REQUEST_BODIES=true
+      - RUST_LOG=trace,axum=trace,sqlx=trace,lakekeeper=trace
+    command: ["serve"]
+    healthcheck:
+      test: ["CMD", "/home/nonroot/lakekeeper", "healthcheck"]
+      interval: 1s
+      timeout: 10s
+      retries: 3
+      start_period: 3s
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      db:
+        condition: service_healthy
+      seaweedfs:
+        condition: service_healthy
+    networks:
+      iceberg_net:
+    ports:
+      - "8181:8181"
+
+  migrate:
+    image: ${LAKEKEEPER_TEST__SERVER_IMAGE:-quay.io/lakekeeper/catalog:latest-main}
+    pull_policy: always
+    environment:
+      - LAKEKEEPER__PG_ENCRYPTION_KEY=This-is-NOT-Secure!
+      - LAKEKEEPER__PG_DATABASE_URL_READ=postgresql://postgres:postgres@db:5432/postgres
+      - LAKEKEEPER__PG_DATABASE_URL_WRITE=postgresql://postgres:postgres@db:5432/postgres
+      - RUST_LOG=info
+    restart: "no"
+    command: ["migrate"]
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      iceberg_net:
+
+  bootstrap:
+    image: curlimages/curl
+    depends_on:
+      lakekeeper:
+        condition: service_healthy
+    restart: "no"
+    command:
+      - -w
+      - "%{http_code}"
+      - "-X"
+      - "POST"
+      - "-v"
+      - "http://lakekeeper:8181/management/v1/bootstrap"
+      - "-H"
+      - "Content-Type: application/json"
+      - "--data"
+      - '{"accept-terms-of-use": true}'
+      - "-o"
+      - "/dev/null"
+      # - "--fail-with-body"
+    networks:
+      iceberg_net:
+
+  initialwarehouse:
+    image: curlimages/curl
+    depends_on:
+      lakekeeper:
+        condition: service_healthy
+      bootstrap:
+        condition: service_completed_successfully
+      seaweedfs:
+        condition: service_healthy
+    restart: "no"
+    command:
+      - -w
+      - "%{http_code}"
+      - "-X"
+      - "POST"
+      - "-v"
+      - "http://lakekeeper:8181/management/v1/warehouse"
+      - "-H"
+      - "Content-Type: application/json"
+      - "--data"
+      - "@create-default-warehouse.json"
+      - "-o"
+      - "/dev/null"
+      # - "--fail-with-body"
+    volumes:
+      - ./create-default-warehouse.json:/home/curl_user/create-default-warehouse.json
+    networks:
+      iceberg_net:
+
+  db:
+    image: postgres:17
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -p 5432 -d postgres"]
+      interval: 2s
+      timeout: 10s
+      retries: 2
+      start_period: 10s
+    networks:
+      iceberg_net:
+
+  seaweedfs:
+    image: chrislusf/seaweedfs:4.36
+    # `mini` is SeaweedFS' single-process dev mode (master + volume + filer + S3).
+    # -bucket pre-creates the `examples` bucket, and the IAM config enables STS so
+    # Lakekeeper can vend short-lived credentials to query engines.
+    command:
+      - mini
+      - -dir=/data
+      - -bucket=examples
+      - -s3.config=/etc/seaweedfs/iam.json
+      - -s3.iam.config=/etc/seaweedfs/iam.json
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8333/status"]
+      interval: 2s
+      timeout: 10s
+      retries: 2
+      start_period: 15s
+    volumes:
+      - ./seaweedfs-iam.json:/etc/seaweedfs/iam.json:ro
+    networks:
+      iceberg_net:
+    ports:
+      - "8333:8333"
+
+  trino:
+    image: trinodb/trino:476
+    environment:
+      - CATALOG_MANAGEMENT=dynamic
+    healthcheck:
+      test: ["CMD", "curl", "-I", "http://localhost:8080/v1/status"]
+      interval: 2s
+      timeout: 10s
+      retries: 2
+      start_period: 10s
+    ports:
+      - "9999:8080"
+    networks:
+      - iceberg_net
+
+  starrocks:
+    image: starrocks/allin1-ubuntu:4.0.1
+    healthcheck:
+      test: ["CMD", "curl", "-I", "http://starrocks:8030/api/health"]
+      interval: 2s
+      timeout: 10s
+      retries: 2
+      start_period: 30s
+    ports:
+      - "9030:9030"
+      - "8030:8030"
+    networks:
+      - iceberg_net
+
+networks:
+  iceberg_net:

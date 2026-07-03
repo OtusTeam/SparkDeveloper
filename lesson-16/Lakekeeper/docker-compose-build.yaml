@@ -1,0 +1,24 @@
+# Builds the docker image locally instead of pulling the latest tag from quay.io.
+# Use by running the following command from the root folder:
+# docker compose -f examples/minimal/docker-compose.yaml -f examples/minimal/docker-compose-build.yaml up --build -d
+services:
+  lakekeeper:
+    image: localhost/lakekeeper-local:latest
+    build:
+      context: ../../
+      dockerfile: docker/full.Dockerfile
+    environment:
+      - LAKEKEEPER__ALLOW_ORIGIN="*"
+    ports:
+      # metrics
+      - "1234:9000"
+  migrate:
+    image: localhost/lakekeeper-local:latest
+    pull_policy: never
+  db:
+    ports:
+      - "2345:5432"
+  seaweedfs:
+    ports:
+      # SeaweedFS filer UI (host 8889 to avoid colliding with Jupyter on 8888).
+      - "8889:8888"

@@ -13,6 +13,7 @@
 - **12** [SparkSQL](lesson-12)
 - **13** [UDF и UDAF](lesson-13)
 - **15** [Файлы и их форматы](lesson-15)
+- **16** [Apache Iceberg](lesson-16)
 - **17** [Базы данных, Hive](lesson-17)
 - **18** [Собственный источник данных](lesson-18)
 - **19** [Kafka](lesson-19)
